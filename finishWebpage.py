@@ -1,5 +1,4 @@
-import re as regex
-
+#I use a website maker to produce the HTML, this script automatically edits elements of the webpage the site maker doesnt let me do
 pages = [
     ["Shop.html", "shop.js"],
     ["Home.html", ""],
@@ -15,8 +14,7 @@ with open("Shop.html", "r") as shop:
         if('<a href="https://example.com/' in element):
             css = element.split('"')[3]
             itemName = element.split('/')[3]
-            newElement = f"                <button onClick='addToCart(\"{itemName}\")' class=\"{css}\">Add to Cart</button>"
-            newShop[index] = newElement
+            newShop[index] = f"                <button onClick='addToCart(\"{itemName}\")' class=\"{css}\">Add to Cart</button>"
     
     newShop = "\n".join(newShop)
 
@@ -32,6 +30,10 @@ for pageInfo in pages:
         for index, element in enumerate(newPage):
             if("<footer class=" in element):
                 newPage = newPage[0:index-2]
+
+                if(script != ""):
+                    newPage.append(f"    <script src=\"{script}\"></script>")
+
                 newPage.append("  </body>\n</html>")
                 newPage = ("\n".join(newPage))
     
