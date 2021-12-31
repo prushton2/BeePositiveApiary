@@ -34,5 +34,11 @@
     min-height: 41px;
   }
 }.u-section-2 .u-sheet-1 {
-  min-height: 597px;
+  min-height: 65px;
+}
+
+.u-section-2 .u-text-1 {
+  margin: 15px auto;
+}.u-section-3 .u-sheet-1 {
+  min-height: 500px;
 }

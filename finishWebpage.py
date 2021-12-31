@@ -2,15 +2,15 @@
 import re
 
 pages = [
-    ["Shop.html", "shop.js"],
-    ["Checkout.html", ""],
-    ["Home.html", ""],
-    ["index.html", ""],
+    ["Shop.html", ["shop.js"]],
+    ["Checkout.html", ["itemInfo.js", "checkout.js"]],
+    ["Home.html", [""]],
+    ["index.html", [""]],
 ]
 
 for pageInfo in pages:
     name = pageInfo[0]
-    script = pageInfo[1]
+    scripts = pageInfo[1]
 
     with open(name, "r") as page:
         newPage = page.read().split("\n")
@@ -29,8 +29,9 @@ for pageInfo in pages:
             if("<footer class=" in element):
                 newPage = newPage[0:index-2]
 
-                if(script != ""):
-                    newPage.append(f"    <script src=\"{script}\"></script>")
+                for script in scripts:
+                    if(script != ""):
+                        newPage.append(f"    <script src=\"{script}\"></script>")
 
                 newPage.append("  </body>\n</html>")
         
