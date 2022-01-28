@@ -3,7 +3,7 @@ import re
 
 pages = [
     ["Shop.html", ["shop.js"]],
-    ["Checkout.html", ["itemInfo.js", "checkout.js"]],
+    ["Checkout.html", ["nocors.js", "itemInfo.js", "checkout.js"]],
     ["Home.html", [""]],
     ["index.html", [""]],
 ]

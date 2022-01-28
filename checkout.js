@@ -1,4 +1,5 @@
 shoppingList = JSON.parse(localStorage.getItem("shoppingList"))
+dburl = "https://beepositiveapiarynodeserver.prushton.repl.co/"
 
 function getOccurrence(array, value) {
     count = 0;
@@ -16,6 +17,10 @@ function createAllHtml(array) {
         html += createHTML(products[element[0]], element[1])
     })
     return html
+}
+
+function buy() {
+    getURLWithoutCors(dburl+"add/"+JSON.stringify(countArray))
 }
 
 usedItems = []
