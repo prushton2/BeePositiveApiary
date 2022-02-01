@@ -1,6 +1,10 @@
-shoppingList = []
+shoppingList = {}
 function addToCart(item) {
-    shoppingList.push(item)
+    if(shoppingList[item] == undefined) {
+        shoppingList[item] = 1;
+    } else {
+        shoppingList[item] += 1;
+    }
 }
 
 function checkout() {
