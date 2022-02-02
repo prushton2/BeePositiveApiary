@@ -9,7 +9,7 @@ function buy() {
     }
 
     if(document.getElementById("email").value) {
-        username = document.getElementById("email").value
+        email = document.getElementById("email").value
     } else {
         document.getElementById("response").innerHTML = "Please enter your email"
         return;
