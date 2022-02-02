@@ -2,7 +2,7 @@ doc = document.getElementById("sec-214c")
 dburl = "https://beepositiveapiarynodeserver.prushton.repl.co/"
 
 renderpage = async() => {
-    orders = JSON.parse(await getURLWithoutCors(dburl+"get/"/*+document.getElementById("pswdinput").value+*/+"password/orders"))
+    orders = JSON.parse(await getURLWithoutCors(dburl+"get/"+document.getElementById("pswdinput").value+"/orders"))
     allHTML = ""
     for(var order in orders) {
         allHTML += createItemHTML(orders[order])
@@ -11,7 +11,8 @@ renderpage = async() => {
 }
 
 createItemHTML = (order) => {
-    html = `Order for ${order["name"]} placed on ${order["date"]}:<br>`
+    date = new Date(parseInt(order["date"]))
+    html = `Order for <b>${order["name"]}</b> placed on <b>${date.toString()}:</b><br>`
     order["items"] = JSON.parse(order["items"])
     for(var item in order["items"]) {
         html += `${order["items"][item]}x ${item}<br>`

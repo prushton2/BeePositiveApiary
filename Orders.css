@@ -39,7 +39,6 @@
 
 .u-section-2 .u-custom-html-1 {
   min-height: 31px;
-  height: auto;
   margin: 8px 8px 0 854px;
 }
 
@@ -54,6 +53,7 @@
 
 @media (max-width: 1199px) {
   .u-section-2 .u-custom-html-1 {
+    height: auto;
     margin-right: 0;
     margin-left: 662px;
   }
