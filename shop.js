@@ -1,10 +1,15 @@
-shoppingList = {}
+try {
+    shoppingList = JSON.parse(localStorage.getItem("shoppingList"))
+} catch {
+    shoppingList = {}
+}
 function addToCart(item) {
     if(shoppingList[item] == undefined) {
         shoppingList[item] = 1;
     } else {
         shoppingList[item] += 1;
     }
+    checkout()
 }
 
 function checkout() {
