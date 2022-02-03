@@ -40,7 +40,7 @@
 .u-section-2 .u-text-1 {
   margin: 15px auto;
 }.u-section-3 .u-sheet-1 {
-  min-height: 625px;
+  min-height: 144px;
 }.u-section-4 .u-sheet-1 {
   min-height: 79px;
 }
@@ -51,5 +51,5 @@
   text-transform: uppercase;
   font-size: 0.875rem;
   letter-spacing: 1px;
-  margin: 0 auto 37px;
+  margin: 17px auto 20px;
 }
