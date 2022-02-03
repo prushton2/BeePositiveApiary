@@ -3,11 +3,18 @@ try {
 } catch {
     shoppingList = {}
 }
+if(shoppingList == null) {
+    shoppingList = {}
+}
 function addToCart(item) {
-    if(shoppingList[item] == undefined) {
+    try {
+        if(shoppingList[item] == undefined) {
+            shoppingList[item] = 1;
+        } else {
+            shoppingList[item] += 1;
+        }
+    } catch {
         shoppingList[item] = 1;
-    } else {
-        shoppingList[item] += 1;
     }
     checkout()
 }
