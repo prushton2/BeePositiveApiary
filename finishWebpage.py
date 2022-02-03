@@ -3,11 +3,11 @@ import re
 
 pages = [
     ["Shop.html", ["shop.js"]],
-    ["Checkout.html", ["nocors.js", "itemInfo.js", "checkout.js"]],
-    ["Orders.html", ["nocors.js", "orders.js"]],
+    ["Checkout.html", ["itemInfo.js", "checkout.js"]],
+    ["Orders.html", ["orders.js"]],
     ["Home.html", [""]],
     ["index.html", [""]],
-    ["finalize.html", ["nocors.js", "finalize.js"]],
+    ["finalize.html", ["finalize.js"]],
 ]
 
 for pageInfo in pages:

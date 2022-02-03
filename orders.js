@@ -1,10 +1,11 @@
 doc = document.getElementById("sec-214c")
 dburl = "https://database.beepositiveapiary.com/"
+password = document.getElementById("pswdinput")
 
 renderpage = async() => {
     incomplete = ""
     complete = ""
-    orders = JSON.parse(await fetch(dburl+"get/"+document.getElementById("pswdinput").value+"/orders").then(data => {return data.text()}))
+    orders = JSON.parse(await fetch(`${dburl}get/${password.value}/orders`).then(data => {return data.text()}))
     for(var order in orders) {
         if(orders[order]["isComplete"]) {
             complete += createItemHTML(orders[order])
@@ -17,10 +18,11 @@ renderpage = async() => {
 
 createItemHTML = (order) => {
     date = new Date(parseInt(order["date"]))
+    html = `Order for <b>${order["name"]}</b> placed on <b>${date.toString()}:</b> <button onClick="markAsComplete(${order["id"]}, ${!order["isComplete"]})">Mark as ${order["isComplete"] ? "incomplete" : "complete"}</button>`
     if(order["isComplete"]) {
-        html = `Order for <b>${order["name"]}</b> placed on <b>${date.toString()}:</b> <button onClick="markAsIncomplete(${order["id"]})">Mark as incomplete</button><br>`
+        html += `<button onClick="deleteItem(${order["id"]})"> Delete Item</button><br>`
     } else {
-        html = `Order for <b>${order["name"]}</b> placed on <b>${date.toString()}:</b> <button onClick="markAsComplete(${order["id"]})">Mark as complete</button><br>`
+        html += '<br>'
     }
     
     order["items"] = JSON.parse(order["items"])
@@ -30,14 +32,17 @@ createItemHTML = (order) => {
     return html + "<br><br>"
 }
 
-renderpage()
 
-markAsComplete = async (i) => {
-    await fetch(`${dburl}complete/${i}/true`)
+markAsComplete = async (i, complete) => {
+    await fetch(`${dburl}complete/${password.value}/${i}/${complete}`)
     await renderpage()
 }
 
-markAsIncomplete = async (i) => {
-    await fetch(`${dburl}complete/${i}/false`)
+deleteItem = async(i) => {
+    let text = `Are you sure you would like to delete order ${i}?`;
+    if (confirm(text)) {
+        await fetch(`${dburl}delete/${password.value}/${i}`)
+        alert(`Item ${i} has been deleted`)
+    }
     await renderpage()
 }
