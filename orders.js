@@ -19,15 +19,18 @@ renderpage = async() => {
 createItemHTML = (order) => {
     date = new Date(parseInt(order["date"]))
     html = `Order for <b>${order["name"]}</b> placed on <b>${date.toString()}:</b> <button onClick="markAsComplete(${order["id"]}, ${!order["isComplete"]})">Mark as ${order["isComplete"] ? "incomplete" : "complete"}</button>`
+    order["items"] = JSON.parse(order["items"])
+    
     if(order["isComplete"]) {
         html += `<button onClick="deleteItem(${order["id"]})"> Delete Item</button><br>`
     } else {
         html += '<br>'
     }
+    html += `Total Cost: <b>$${getTotalCost(order["items"])}</b><br>`
+    html += `Order Contents:<br>`
     
-    order["items"] = JSON.parse(order["items"])
     for(var item in order["items"]) {
-        html += `${order["items"][item]}x ${item}<br>`
+        html += `&nbsp&nbsp&nbsp• ${order["items"][item]}x ${item}<br>`
     }
     return html + "<br><br>"
 }
@@ -45,4 +48,14 @@ deleteItem = async(i) => {
         alert(`Item ${i} has been deleted`)
     }
     await renderpage()
+}
+
+function getTotalCost(shoppingList) {
+    totalcost = 0;
+
+    for (var item in shoppingList) {
+        totalcost += shoppingList[item] * products[item]["price"]
+    }
+    return totalcost
+
 }

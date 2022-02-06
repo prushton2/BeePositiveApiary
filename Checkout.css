@@ -40,9 +40,16 @@
 .u-section-2 .u-text-1 {
   margin: 15px auto;
 }.u-section-3 .u-sheet-1 {
-  min-height: 144px;
+  min-height: 72px;
 }.u-section-4 .u-sheet-1 {
-  min-height: 79px;
+  min-height: 132px;
+}
+
+.u-section-4 .u-custom-html-1 {
+  height: auto;
+  min-height: 30px;
+  width: 87px;
+  margin: 20px auto 0;
 }
 
 .u-section-4 .u-btn-1 {
@@ -51,5 +58,5 @@
   text-transform: uppercase;
   font-size: 0.875rem;
   letter-spacing: 1px;
-  margin: 17px auto 20px;
+  margin: 20px auto;
 }
