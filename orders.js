@@ -16,7 +16,7 @@ renderpage = async() => {
     doc.innerHTML = `<div class="u-clearfix u-sheet u-sheet-1">Incomplete<br><br><br>${incomplete}<br><br><br>Complete<br><br><br>${complete}</div>`
 }
 
-createItemHTML = (order) => {
+function createItemHTML(order) {
     date = new Date(parseInt(order["date"]))
     html = `Order for <b>${order["name"]}</b> placed on <b>${date.toString()}:</b> <button onClick="markAsComplete(${order["id"]}, ${!order["isComplete"]})">Mark as ${order["isComplete"] ? "incomplete" : "complete"}</button>`
     order["items"] = JSON.parse(order["items"])
@@ -36,7 +36,7 @@ createItemHTML = (order) => {
 }
 
 
-markAsComplete = async (i, complete) => {
+markAsComplete = async(i, complete) => {
     await fetch(`${dburl}complete/${password.value}/${i}/${complete}`)
     await renderpage()
 }
