@@ -19,22 +19,13 @@ function gotofinalize() {
     window.location.href = "finalize.html"
 }
 
-function getTotalCost(shoppingList) {
-    totalcost = 0;
-
-    for (var item in shoppingList) {
-        totalcost += shoppingList[item] * products[item]["price"]
-    }
-    return totalcost
-}
-
 function updateShoppingList() {
     for(var key in shoppingList) {
         shoppingList[key] = parseInt(document.getElementById(`Count of ${key}`).value)
     }
     localStorage.setItem("shoppingList", JSON.stringify(shoppingList))
-    document.getElementById("totalCost").innerHTML = `$${getTotalCost(shoppingList)}`
+    document.getElementById("totalCost").innerHTML = `${getDisplayCost(shoppingList)}`
 }
 
 document.getElementById("sec-9fb3").innerHTML = `<div class="u-clearfix u-sheet u-sheet-1">${createAllHtml(shoppingList)}</div>`
-document.getElementById("totalCost").innerHTML = `$${getTotalCost(shoppingList)}`
+document.getElementById("totalCost").innerHTML = `${getDisplayCost(shoppingList)}`
