@@ -26,7 +26,7 @@ function createItemHTML(order) {
     } else {
         html += '<br>'
     }
-    html += `Total Cost: <b>$${getTotalCost(order["items"])}</b><br>`
+    html += `Total Cost: <b>${getDisplayCost(order["items"])}</b><br>`
     html += `Order Contents:<br>`
     
     for(var item in order["items"]) {
@@ -48,14 +48,4 @@ deleteItem = async(i) => {
         alert(`Item ${i} has been deleted`)
     }
     await renderpage()
-}
-
-function getTotalCost(shoppingList) {
-    totalcost = 0;
-
-    for (var item in shoppingList) {
-        totalcost += shoppingList[item] * products[item]["price"]
-    }
-    return totalcost
-
 }

@@ -13,3 +13,18 @@ products = {
     }
 
 }
+
+
+function getTotalCost(shoppingList) { // This function returns the precise int of the cost
+    totalcost = 0;
+
+    for (var item in shoppingList) {
+        totalcost += shoppingList[item] * products[item]["price"]
+    }
+    totalcost = Math.round(totalcost * 100) / 100
+    return totalcost
+}
+
+function getDisplayCost(shoppingList) { // This function gives back a string that looks more like a price to the user ($4.90 instead of 4.9)
+    return "$"+getTotalCost(shoppingList).toFixed(2)
+}
