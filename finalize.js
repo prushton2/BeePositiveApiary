@@ -1,4 +1,4 @@
-function buy() {
+buy = async() => {
 
     if(document.getElementById("name").value) { 
         username = document.getElementById("name").value
@@ -15,8 +15,7 @@ function buy() {
     }
 
     shoppingList = localStorage.getItem("shoppingList") // needs to stay as a string
-    response = fetch(`${dburl}add/${shoppingList}/${Date.now()}/${email}/${username}`).then(value => {return value})
-    
+    response = await fetch(`${dburl}add/${shoppingList}/${Date.now()}/${email}/${username}`).then(value => {return value.text()})
     response = JSON.parse(response)
     if(response["status"] == "200") {
         document.getElementById("response").innerHTML = "Order has been placed!"
