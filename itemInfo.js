@@ -1,3 +1,5 @@
+dburl = "https://database.beepositiveapiary.com/"
+
 products = {
     'Cuticle Salve': {
         "name"         :"Cuticle Salve",

@@ -1,5 +1,4 @@
 doc = document.getElementById("sec-214c")
-dburl = "https://database.beepositiveapiary.com/"
 password = document.getElementById("pswdinput")
 
 renderpage = async() => {
