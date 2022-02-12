@@ -7,7 +7,7 @@ pages = [
     ["Orders.html", ["itemInfo.js", "orders.js"]],
     ["Home.html", [""]],
     ["index.html", [""]],
-    ["finalize.html", ["finalize.js"]],
+    ["finalize.html", ["itemInfo.js", "finalize.js"]],
 ]
 
 for pageInfo in pages:
