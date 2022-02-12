@@ -19,9 +19,9 @@ function getTotalCost(shoppingList) { // This function returns the precise int o
     totalcost = 0;
 
     for (var item in shoppingList) {
-        totalcost += shoppingList[item] * products[item]["price"]
+        totalcost += shoppingList[item] * (products[item]["price"] * 100)
     }
-    totalcost = Math.round(totalcost * 100) / 100
+    totalcost /= 100
     return totalcost
 }
 
