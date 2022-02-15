@@ -23,7 +23,6 @@ renderpage = async(orderID, password) => {
     document.getElementById("totalCost").innerHTML = `${getDisplayCost(shoppingList)}`
 
     for(let item in order["items"]) {
-        console.log(item)
         html += createItemHTML(products[item], order["items"][item])
     }
     doc.innerHTML = `   <div class="u-clearfix u-sheet u-sheet-1"><b>Your Order:</b><br><br>${html}</div>`
