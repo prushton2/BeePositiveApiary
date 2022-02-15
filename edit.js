@@ -9,6 +9,12 @@ password = urlParams.get("pswd")
 
 renderpage = async(orderID, password) => {
     order = await fetch(`${dburl}getorder/${orderID}/${password}`).then(value => {return value.text()})
+    
+    if(JSON.parse(order)["status"] != "200") {
+        doc.innerHTML = `<div class="u-clearfix u-sheet u-sheet-1">Invalid Order</div>`
+        return
+    }
+    
     order = JSON.parse(order)["response"]
     order["items"] = JSON.parse(order["items"])
     shoppingList = order["items"]
@@ -35,8 +41,16 @@ function updateShoppingList() {
 }
 
 saveEdits = async() => {
-    response = await fetch(`${dburl}setorder/${orderID}/${password}/${JSON.stringify(shoppingList)}`).then(value => {return value.text()})
-    alert("Your changes have been saved")
+    try {
+        response = JSON.parse(await fetch(`${dburl}setorder/${orderID}/${password}/${JSON.stringify(shoppingList)}`).then(value => {return value.text()}))
+        if(response["status"] == "200") {
+            alert("Your changes have been saved")
+        } else {
+            throw SyntaxError
+        }
+    } catch {
+        alert("Your changes were not saved")
+    }
 }
 
 renderpage(orderID, password)
