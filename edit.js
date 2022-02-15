@@ -36,7 +36,7 @@ function updateShoppingList() {
 
 saveEdits = async() => {
     response = await fetch(`${dburl}setorder/${orderID}/${password}/${JSON.stringify(shoppingList)}`).then(value => {return value.text()})
-    console.log(response)
+    alert("Your changes have been saved")
 }
 
 renderpage(orderID, password)
