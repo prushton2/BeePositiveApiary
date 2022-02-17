@@ -39,6 +39,19 @@ function updateShoppingList() {
     document.getElementById("totalCost").innerHTML = `${getDisplayCost(shoppingList)}`
 }
 
+deleteOrder = async() => {
+    if(confirm("Are you sure you would like to delete this order?")) {
+        let response = JSON.parse(await fetch(`${dburl}delete/${password}/${orderID}`).then(value => {return value.text()}))
+        if(response["status"] == "200") {
+            alert("Order deleted")
+        } else {
+            alert("There was an issue deleting the order")
+        }
+    } else {
+        alert("Order NOT deleted")
+    }
+}
+
 saveEdits = async() => {
     try {
         response = JSON.parse(await fetch(`${dburl}setorder/${orderID}/${password}/${JSON.stringify(shoppingList)}`).then(value => {return value.text()}))
