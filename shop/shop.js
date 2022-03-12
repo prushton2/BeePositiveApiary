@@ -21,5 +21,5 @@ function addToCart(item) {
 
 function checkout() {
     localStorage.setItem("shoppingList", JSON.stringify(shoppingList))
-    window.location.href = "Checkout.html"
+    window.location.href = "../checkout/Checkout.html"
 }

@@ -1,5 +1,5 @@
  .u-section-1 {
-  background-image: linear-gradient(0deg, rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url("../images/shop.jpg");
+  background-image: linear-gradient(0deg, rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url("../images/shop-4.jpg");
   background-position: 50% 50%;
 }
 
@@ -46,7 +46,6 @@
 }
 
 .u-section-4 .u-custom-html-1 {
-  height: auto;
   min-height: 30px;
   width: 87px;
   margin: 20px auto 0;
@@ -59,4 +58,10 @@
   font-size: 0.875rem;
   letter-spacing: 1px;
   margin: 20px auto;
+}
+
+@media (max-width: 1199px) {
+  .u-section-4 .u-custom-html-1 {
+    height: auto;
+  }
 }
