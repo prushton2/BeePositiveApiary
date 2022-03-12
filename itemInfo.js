@@ -1,4 +1,4 @@
-dburl = "https://database.beepositiveapiary.com/"
+dburl = "https://BeePositiveApiaryNodeTestServer.prushton.repl.co/"
 
 products = {
     'Cuticle Salve': {
