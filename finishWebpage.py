@@ -45,6 +45,7 @@ for pageInfo in pages:
 
         for index, element in enumerate(newPage):
 
+            # replace all function URLs with their functions
             if('<a href="https://function/' in element):
                 css = element.split('"')[3]
                 function = element.split('/')[3]
@@ -53,7 +54,7 @@ for pageInfo in pages:
                 buttonText = re.split("<|>", element)[-3]
                 newPage[index] = f"<button onClick='{function}({parameters})' class=\"{css}\">{buttonText}</button>"
 
-
+            # Delete footer and insert script tags
             if("<footer class=" in element):
                 newPage = newPage[0:index-2]
 
@@ -67,8 +68,6 @@ for pageInfo in pages:
     
     with open(name, "w") as page:
         page.write(newPage)
-    # os.rename(name, renameTo)
-
 
 with open(indexSettings["indexPage"], "w") as page:
     redirectHTML = f"<!DOCTYPE HTML><head></head><body><script>window.location.href='{indexSettings['redirectPage']}';</script></body>"
