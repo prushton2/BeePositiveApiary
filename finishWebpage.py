@@ -30,14 +30,6 @@ pages = {
     }
 }
 
-# pages = [
-#     # ["shop/Shop.html", ["shop.js"]],
-#     # ["checkout/Checkout.html", ["../itemInfo.js", "checkout.js"]],
-#     # ["orders/Orders.html", ["../itemInfo.js", "orders.js"]],
-#     ["home/Home.html", [""]],
-#     ["finalize/Finalize.html", ["../itemInfo.js", "finalize.js"]],
-# ]
-
 indexSettings = {
     "indexPage": "index.html",
     "redirectPage": "home/Home.html"
@@ -59,7 +51,7 @@ for pageInfo in pages:
                 parameters = '"' + '\", \"'.join(element.split('/')[4:-2]) + '"'
                 parameters = "" if (parameters == '""' ) else parameters
                 buttonText = re.split("<|>", element)[-3]
-                newPage[index] = f"                <button onClick='{function}({parameters})' class=\"{css}\">{buttonText}</button>"
+                newPage[index] = f"<button onClick='{function}({parameters})' class=\"{css}\">{buttonText}</button>"
 
 
             if("<footer class=" in element):
@@ -67,9 +59,9 @@ for pageInfo in pages:
 
                 for script in scripts:
                     if(script != ""):
-                        newPage.append(f"    <script src=\"{script}\"></script>")
+                        newPage.append(f"<script src=\"{script}\"></script>")
 
-                newPage.append("  </body>\n</html>")
+                newPage.append("</body>\n</html>")
         
         newPage = ("\n".join(newPage))
     
@@ -79,5 +71,5 @@ for pageInfo in pages:
 
 
 with open(indexSettings["indexPage"], "w") as page:
-    redirectHTML = f"<!DOCTYPE HTML><head></head><body><script>window.location.href = '{indexSettings['redirectPage']}';</script></body>"
+    redirectHTML = f"<!DOCTYPE HTML><head></head><body><script>window.location.href='{indexSettings['redirectPage']}';</script></body>"
     page.write(redirectHTML)
