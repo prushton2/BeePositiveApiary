@@ -30,6 +30,29 @@ pages = {
     }
 }
 
+createFiles = {
+    0: {
+        "name": "checkout/index.html",
+        "content": "<!DOCTYPE HTML><head></head><body><script>window.location.href='Checkout.html';</script></body>" 
+    },
+    1: {
+        "name": "finalize/index.html",
+        "content": "<!DOCTYPE HTML><head></head><body><script>window.location.href='Finalize.html';</script></body>" 
+    },
+    2: {
+        "name": "home/index.html",
+        "content": "<!DOCTYPE HTML><head></head><body><script>window.location.href='Home.html';</script></body>" 
+    },
+    3: {
+        "name": "orders/index.html",
+        "content": "<!DOCTYPE HTML><head></head><body><script>window.location.href='Orders.html';</script></body>" 
+    },
+    4: {
+        "name": "shop/index.html",
+        "content": "<!DOCTYPE HTML><head></head><body><script>window.location.href='Shop.html';</script></body>" 
+    }
+}
+
 indexSettings = {
     "indexPage": "index.html",
     "redirectPage": "home/Home.html"
@@ -68,6 +91,11 @@ for pageInfo in pages:
     
     with open(name, "w") as page:
         page.write(newPage)
+
+for file in createFiles:
+    file = createFiles[file]
+    with open(file["name"], "w") as f:
+        f.write(file["content"])
 
 with open(indexSettings["indexPage"], "w") as page:
     redirectHTML = f"<!DOCTYPE HTML><head></head><body><script>window.location.href='{indexSettings['redirectPage']}';</script></body>"
