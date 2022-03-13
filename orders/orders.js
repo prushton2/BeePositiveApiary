@@ -4,8 +4,20 @@ password = document.getElementById("pswdinput")
 renderpage = async() => {
     incomplete = ""
     complete = ""
-    response = JSON.parse(await fetch(`${dburl}get/${password.value}/orders`).then(data => {return data.text()}))
-    orders = response["response"]
+    response = await fetch(`${dburl}/getOrders`, {
+        method: "POST",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            password:"devpassword"
+        })
+    }).then(data => {return data.text()})
+
+    orders = JSON.parse(response)["response"]
+    console.log(orders)
+
     for(var order in orders) {
         if(orders[order]["isComplete"]) {
             complete += createItemHTML(orders[order])
@@ -19,7 +31,7 @@ renderpage = async() => {
 function createItemHTML(order) {
     date = new Date(parseInt(order["date"]))
     html = `Order for <b>${order["name"]}</b> placed on <b>${date.toString()}:</b> <button onClick="markAsComplete('${order["id"]}', ${!order["isComplete"]})">Mark as ${order["isComplete"] ? "incomplete" : "complete"}</button>`
-    order["items"] = JSON.parse(order["items"])
+    order["items"] = {}//JSON.parse(order["items"])
     
     if(order["isComplete"]) {
         html += `<button onClick="deleteItem('${order["id"]}')"> Delete Item</button><br>`

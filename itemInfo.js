@@ -1,4 +1,4 @@
-dburl = "https://BeePositiveApiaryNodeTestServer.prushton.repl.co/"
+dburl = "http://localhost:3000"
 
 products = {
     'Cuticle Salve': {
