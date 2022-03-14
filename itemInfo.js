@@ -16,21 +16,14 @@ products = {
 
 }
 
-function convertSQLtoShoppingList(sql) { //This turns the SQL json response from the purchases table into a shoppinglist
-    shoppingList = {}
-    for(key in sql) {
-        shoppingList[sql[key]["orderID"]] = sql[key]["amount"]
-    }
-    return shoppingList
-}
-
 function getTotalCost(shoppingList) { // This function returns the precise int of the cost
     totalcost = 0;
-    for (var item in shoppingList) {
-        amount = shoppingList[item]
-        item = products[item]
-        totalcost += amount * (item["price"] * 100)
+    
+    for(item in shoppingList) {
+        item = shoppingList[item]
+        totalcost += item["amount"] * (products[item["productID"]]["price"] * 100)
     }
+
     totalcost /= 100
     return totalcost
 }

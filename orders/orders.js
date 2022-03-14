@@ -33,16 +33,16 @@ async function createItemHTML(order) {
             password:"devpassword",
             orderID: order["id"]
         })}).then(data => {return data.text()})
+    items = JSON.parse(items)["response"]
     
         
-    items = JSON.parse(items)["response"]
     
     if(order["isComplete"]) {
         html += `<button onClick="deleteItem('${order["id"]}')"> Delete Item</button><br>`
     } else {
         html += '<br>'
     }
-    html += `Total Cost: <b>${convertSQLtoShoppingList(getDisplayCost(items))}</b><br>`
+    html += `Total Cost: <b>${getDisplayCost(items)}</b><br>`
     html += `Order Contents:<br>`
     
     for(var item in items) { 
