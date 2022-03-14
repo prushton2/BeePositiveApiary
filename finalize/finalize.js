@@ -18,7 +18,7 @@ buy = async() => {
     response = await fetch(`${dburl}add/${shoppingList}/${Date.now()}/${email}/${username}`).then(value => {return value.text()})
     response = JSON.parse(response)
     if(response["status"] == "200") {
-        document.getElementById("response").innerHTML = `Order has been placed!<br>To edit your order, make sure to save <a href="https://www.BeePositiveApiary.com/Edit.html?ID=${response["response"]["ID"]}&pswd=${response["response"]["password"]}">this link</a>`
+        document.getElementById("response").innerHTML = `Order has been placed!`
     } else {
         document.getElementById("There was an error placing your order.")
     }
