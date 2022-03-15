@@ -1,21 +1,23 @@
 try {
     shoppingList = JSON.parse(localStorage.getItem("shoppingList"))
 } catch {
-    shoppingList = {}
+    shoppingList = {"Items":[]}
 }
 if(shoppingList == null) {
-    shoppingList = {}
+    shoppingList = {"Items":[]}
 }
 function addToCart(item) {
-    try {
-        if(shoppingList[item] == undefined) {
-            shoppingList[item] = 1;
-        } else {
-            shoppingList[item] += 1;
+    for(i in shoppingList["Items"]) {
+        if(shoppingList["Items"][i]["productID"] == item) {
+            shoppingList["Items"][i]["amount"] += 1;
+            checkout()
+            return;
         }
-    } catch {
-        shoppingList[item] = 1;
     }
+    shoppingList["Items"].push( {
+        "productID": item,
+        "amount": 1
+    })
     checkout()
 }
 
