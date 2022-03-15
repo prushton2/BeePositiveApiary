@@ -30,7 +30,7 @@ async function createItemHTML(order) {
     items = await fetch(`${dburl}/getPurchases`, {
         method: "POST", headers: {'Accept': 'application/json','Content-Type': 'application/json'},
         body: JSON.stringify({
-            password:"devpassword",
+            password: password.value,
             orderID: order["id"]
         })}).then(data => {return data.text()})
     items = JSON.parse(items)["response"]
@@ -54,7 +54,16 @@ async function createItemHTML(order) {
 
 
 markAsComplete = async(i, complete) => {
-    await fetch(`${dburl}complete/${password.value}/${i}/${complete}`)
+    response = await fetch(`${dburl}/complete`, {
+        method: "POST", headers: {"Accept": "applcation/json", "Content-Type": "application/json"},
+        body: JSON.stringify(
+            {
+                "password": password.value,
+                "orderID": i,
+                "completeStatus": complete
+            }
+        )
+    })
     await renderpage()
 }
 
