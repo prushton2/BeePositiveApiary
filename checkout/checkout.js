@@ -1,14 +1,15 @@
 shoppingList = JSON.parse(localStorage.getItem("shoppingList"))
 
 console.log(shoppingList)
-function createHTML(item, count) {
-    return `<div><div><label>${item["name"]}</label><br><label>${item["description"]}</label></div><div style='text-align: right;'><label>$${item["price"]}</label>&nbsp&nbsp&nbspx<input onchange="updateShoppingList()" id="Count of ${item["name"]}" value=${count}></div></div><br>`
+function createHTML(product, order) { // products[item], shoppingList[item]
+    return `<div><div><label>${product["name"]}</label><br><label>${product["description"]}</label></div><div style='text-align: right;'><label>$${product["price"]}</label>&nbsp&nbsp&nbspx<input onchange="updateShoppingList()" id="Count of ${order["productID"]}" value=${order["amount"]}></div></div><br>`
 }
 
 function createAllHtml(jsonobject) {
     html = ""
-    for(var key in jsonobject) {
-        html += createHTML(products[key], jsonobject[key])
+    for(var key in jsonobject["Items"]) {
+        key = jsonobject["Items"][key]["productID"]
+        html += createHTML(products[key], jsonobject["Items"][key])
     }
     return html
 }
@@ -20,13 +21,15 @@ function gotofinalize() {
 
 function updateShoppingList() {
     
-    
-    
-    
+    for(key in shoppingList["Items"]) {
+        item = shoppingList["Items"][key]
+        newAmount = document.getElementById(`Count of ${item["productID"]}`).value
+        shoppingList["Items"][key]["amount"] = parseInt(newAmount)
+    }
     
     localStorage.setItem("shoppingList", JSON.stringify(shoppingList))
-    // document.getElementById("totalCost").innerHTML = `${getDisplayCost(shoppingList)}`
+    document.getElementById("totalCost").innerHTML = `${getDisplayCost(shoppingList["Items"])}`
 }
 
 document.getElementById("sec-9fb3").innerHTML = `<div class="u-clearfix u-sheet u-sheet-1">${createAllHtml(shoppingList)}</div>`
-document.getElementById("totalCost").innerHTML = `${getDisplayCost(shoppingList)}`
+document.getElementById("totalCost").innerHTML = `${getDisplayCost(shoppingList["Items"])}`
