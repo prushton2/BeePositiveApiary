@@ -49,5 +49,5 @@ buy = async() => {
         document.getElementById("response").innerHTML = "There was an error placing your order."
     }
     
-    localStorage.setItem("shoppingList", "{}")
+    localStorage.removeItem("shoppingList")
 }
