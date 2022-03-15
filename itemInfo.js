@@ -1,26 +1,29 @@
+dburl = "http://localhost:3000"
+
 products = {
-    'Cuticle Salve': {
+    "0": {
         "name"         :"Cuticle Salve",
         "price"        :4.99,
         "unit"         :"item",
-        "description"  : ""
+        "description"  :""
     },
-    'Spa in a Jar': {
+    "1": {
         "name"         :"Spa in a Jar",
         "price"        :2.99,
         "unit"         :"item",
-        "description"  : "Spa"
+        "description"  :"Spa"
     }
 
 }
 
-
 function getTotalCost(shoppingList) { // This function returns the precise int of the cost
     totalcost = 0;
-
-    for (var item in shoppingList) {
-        totalcost += shoppingList[item] * (products[item]["price"] * 100)
+    
+    for(item in shoppingList) {
+        item = shoppingList[item]
+        totalcost += item["amount"] * (products[item["productID"]]["price"] * 100)
     }
+
     totalcost /= 100
     return totalcost
 }
