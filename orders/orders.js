@@ -38,7 +38,7 @@ async function createItemHTML(order) {
         
     
     if(order["isComplete"]) {
-        html += `<button onClick="deleteItem('${order["id"]}')"> Delete Item</button><br>`
+        html += `<button onClick="archiveItem('${order["id"]}', '${order["name"]}')"> Delete Item</button><br>`
     } else {
         html += '<br>'
     }
@@ -67,11 +67,17 @@ markAsComplete = async(i, complete) => {
     await renderpage()
 }
 
-deleteItem = async(i) => {
-    let text = `Are you sure you would like to delete order ${i}?`;
+archiveItem = async(id, name) => {
+    let text = `Are you sure you would like to archive ${name}'s order?\n (ID: ${id})`;
     if (confirm(text)) {
-        await fetch(`${dburl}delete/${password.value}/${i}`)
-        alert(`Item ${i} has been deleted`)
+        await fetch(`${dburl}/archive`, {
+            method: "POST", headers: {"Accept": "application/json", "Content-Type": "application/json"},
+            body: JSON.stringify({
+                "password": password.value,
+                "orderID": id
+            })
+        })
+        alert(`${name}'s order has been archived`)
     }
     await renderpage()
 }
