@@ -69,13 +69,12 @@ for pageInfo in pages:
         for index, element in enumerate(newPage):
 
             # replace all function URLs with their functions
-            if('<a href="https://function/' in element):
+            if('FUNCTION AS URL:' in element):
                 css = element.split('"')[3]
-                function = element.split('/')[3]
-                parameters = '"' + '\", \"'.join(element.split('/')[4:-2]) + '"'
-                parameters = "" if (parameters == '""' ) else parameters
+                function = re.split("(FUNCTION AS URL:)|(\" class)", element)[3]
                 buttonText = re.split("<|>", element)[-3]
-                newPage[index] = f"<button onClick='{function}({parameters})' class=\"{css}\">{buttonText}</button>"
+
+                newPage[index] = f"<button onClick=\"{function}\" class=\"{css}\">{buttonText}</button>"
 
             # Delete footer and insert script tags
             if("<footer class=" in element):

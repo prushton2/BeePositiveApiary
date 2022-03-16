@@ -36344,28 +36344,30 @@ a.u-link.u-text-hover-grey-90:hover {
 }
 
 .u-header .u-sheet-1 {
-  min-height: 76px;
+  min-height: 104px;
+}
+
+.u-header .u-text-1 {
+  margin: 10px auto 0;
+}
+
+.u-header .u-btn-1 {
+  border-style: none;
+  font-size: 0.9375rem;
+  margin: -32px 113px 0 auto;
+  padding: 0;
 }
 
 .u-header .u-menu-1 {
-  margin: 20px 44px 0 auto;
+  margin: 16px auto 10px;
 }
 
 .u-header .u-nav-2 {
   font-size: 1.25rem;
 }
-
-.u-header .u-text-1 {
-  margin: -30px auto 26px 89px;
-}
 @media (max-width: 1199px) {
-  .u-header .u-menu-1 {
-    margin-right: 44px;
-  }
-
-  .u-header .u-text-1 {
-    margin-top: -30px;
-    margin-left: 89px;
+  .u-header .u-btn-1 {
+    margin-right: 0;
   }
 }
 

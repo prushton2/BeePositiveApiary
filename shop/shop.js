@@ -7,16 +7,17 @@ if(shoppingList == null) {
     shoppingList = {"Items":[]}
 }
 function addToCart(item) {
+    amountToAdd = document.getElementById(`Count of ${item}`)
     for(i in shoppingList["Items"]) {
         if(shoppingList["Items"][i]["productID"] == item) {
-            shoppingList["Items"][i]["amount"] += 1;
+            shoppingList["Items"][i]["amount"] += parseInt(amountToAdd.value)
             checkout()
             return;
         }
     }
     shoppingList["Items"].push( {
         "productID": item,
-        "amount": 1
+        "amount": parseInt(amountToAdd.value)
     })
     checkout()
 }
