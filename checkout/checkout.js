@@ -8,8 +8,8 @@ function createHTML(product, order) { // products[item], shoppingList[item]
 function createAllHtml(jsonobject) {
     html = ""
     for(var key in jsonobject["Items"]) {
-        key = jsonobject["Items"][key]["productID"]
-        html += createHTML(products[key], jsonobject["Items"][key])
+        productID = jsonobject["Items"][key]["productID"]        
+        html += createHTML(products[productID], jsonobject["Items"][key])
     }
     return html
 }
