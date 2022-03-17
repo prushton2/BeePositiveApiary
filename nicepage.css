@@ -36348,7 +36348,7 @@ a.u-link.u-text-hover-grey-90:hover {
 }
 
 .u-header .u-menu-1 {
-  margin: 58px auto 0;
+  margin: 68px auto 0;
 }
 
 .u-header .u-nav-2 {
@@ -36357,17 +36357,21 @@ a.u-link.u-text-hover-grey-90:hover {
 
 .u-header .u-custom-html-1 {
   min-height: 81px;
-  margin: -94px 113px 0 977px;
+  margin: -104px 113px 0 977px;
 }
 
 .u-header .u-text-1 {
-  margin: -56px auto 56px;
+  margin: -66px auto 60px;
 }
 @media (max-width: 1199px) {
   .u-header .u-custom-html-1 {
     height: auto;
     margin-right: 13px;
     margin-left: 877px;
+  }
+
+  .u-header .u-text-1 {
+    margin-top: -56px;
   }
 }
 @media (max-width: 991px) {
