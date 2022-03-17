@@ -31,16 +31,6 @@ buy = async() => {
 
     shoppingList = JSON.parse(localStorage.getItem("shoppingList")) // needs to stay as a string
 
-    console.log({
-        "Order": {
-            "name": username,
-            "address": address,
-            "email": email,
-            "phoneNumber": phone
-        },
-        "Items": shoppingList["Items"]
-    })
-    return
 
     response = await fetch(`${dburl}/add`, 
         {method: "POST", headers: {'Accept': 'application/json','Content-Type': 'application/json'},
