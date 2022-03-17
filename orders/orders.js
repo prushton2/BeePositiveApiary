@@ -38,7 +38,7 @@ async function createItemHTML(order) {
         
     
     if(order["isComplete"]) {
-        html += `<button onClick="archiveItem('${order["id"]}', '${order["name"]}')"> Delete Item</button><br>`
+        html += `<button onClick="archiveItem('${order["id"]}', '${order["name"]}')">Archive Item</button><br>`
     } else {
         html += '<br>'
     }
