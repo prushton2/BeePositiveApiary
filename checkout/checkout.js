@@ -23,8 +23,14 @@ function updateShoppingList() {
     
     for(key in shoppingList["Items"]) {
         item = shoppingList["Items"][key]
-        newAmount = document.getElementById(`Count of ${item["productID"]}`).value
-        shoppingList["Items"][key]["amount"] = parseInt(newAmount)
+
+        newAmount = parseFloat(document.getElementById(`Count of ${item["productID"]}`).value)
+        
+        newAmount = setItemAmountToIncrement(item["productID"], newAmount)
+
+        document.getElementById(`Count of ${item["productID"]}`).value = newAmount
+
+        shoppingList["Items"][key]["amount"] = newAmount
     }
     
     localStorage.setItem("shoppingList", JSON.stringify(shoppingList))

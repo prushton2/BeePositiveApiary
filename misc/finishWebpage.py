@@ -10,7 +10,7 @@ pages = {
     },
     "honey":{
         "page": "shop/Honey.html",
-        "scripts": ["../itemInfo.js", "Honey.js"],
+        "scripts": ["../itemInfo.js", "shop.js"],
         "renameTo": "index.html"
     },
     "checkout":{
