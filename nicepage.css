@@ -36347,32 +36347,45 @@ a.u-link.u-text-hover-grey-90:hover {
   min-height: 104px;
 }
 
-.u-header .u-text-1 {
-  margin: 10px auto 0;
-}
-
-.u-header .u-btn-1 {
-  border-style: none;
-  font-size: 0.9375rem;
-  margin: -32px 113px 0 auto;
-  padding: 0;
-}
-
 .u-header .u-menu-1 {
-  margin: 16px auto 10px;
+  margin: 58px auto 0;
 }
 
 .u-header .u-nav-2 {
   font-size: 1.25rem;
 }
-@media (max-width: 1199px) {
-  .u-header .u-btn-1 {
-    margin-right: 0;
-  }
+
+.u-header .u-custom-html-1 {
+  min-height: 66px;
+  margin: -94px 113px 0 977px;
 }
 
-
-
+.u-header .u-text-1 {
+  margin: -56px auto 56px;
+}
+@media (max-width: 1199px) {
+  .u-header .u-custom-html-1 {
+    height: auto;
+    margin-right: 13px;
+    margin-left: 877px;
+  }
+}
+@media (max-width: 991px) {
+  .u-header .u-custom-html-1 {
+    margin-right: 0;
+    margin-left: 670px;
+  }
+}
+@media (max-width: 767px) {
+  .u-header .u-custom-html-1 {
+    margin-left: 490px;
+  }
+}
+@media (max-width: 575px) {
+  .u-header .u-custom-html-1 {
+    margin-left: 290px;
+  }
+}
  .u-footer {
   background-image: none;
 }

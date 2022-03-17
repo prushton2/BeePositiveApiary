@@ -5,7 +5,12 @@ import os
 pages = {
     "shop":{
         "page": "shop/Shop.html",
-        "scripts": ["shop.js"],
+        "scripts": ["../itemInfo.js", "shop.js"],
+        "renameTo": "index.html"
+    },
+    "honey":{
+        "page": "shop/Honey.html",
+        "scripts": ["../itemInfo.js", "Honey.js"],
         "renameTo": "index.html"
     },
     "checkout":{
@@ -20,7 +25,7 @@ pages = {
     },
     "home":{
         "page": "home/Home.html",
-        "scripts": [],
+        "scripts": ["../itemInfo.js"],
         "renameTo": "index.html"
     },
     "finalize":{

@@ -16,6 +16,17 @@ products = {
 
 }
 
+dropdown = document.getElementById("cartButton")
+cartContents = document.getElementById("cartButtonContents")
+dropdown.addEventListener("mouseover", (e) => {
+    html = ""
+    shoppingList = JSON.parse(localStorage.getItem("shoppingList"))
+    for(key in shoppingList["Items"]) {
+        html += `<a href="#">${shoppingList["Items"][key]["amount"]} ${products[shoppingList["Items"][key]["productID"]]["name"]}`
+    }
+    cartContents.innerHTML = html
+})
+
 function getTotalCost(shoppingList) { // This function returns the precise int of the cost
     totalcost = 0;
     
