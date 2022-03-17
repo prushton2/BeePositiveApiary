@@ -1,17 +1,29 @@
 dburl = "http://localhost:3000"
 
 products = {
-    "0": {
+    "100": {
         "name"         :"Cuticle Salve",
         "price"        :4.99,
         "unit"         :"item",
         "description"  :""
     },
-    "1": {
+    "101": {
         "name"         :"Spa in a Jar",
         "price"        :2.99,
         "unit"         :"item",
         "description"  :"Spa"
+    },
+    "200": {
+        "name"         :"Plain Honey",
+        "price"        :4.99,
+        "unit"         :"lb",
+        "description"  : "Plain honey"
+    },
+    "201": {
+        "name"         :"Cranberry Honey",
+        "price"        :4.99,
+        "unit"         :"lb",
+        "description"  : "Cranberry flavored honey"
     }
 
 }
