@@ -12,6 +12,7 @@
     <script class="u-script" type="text/javascript" src="../jquery.js" defer=""></script>
     <script class="u-script" type="text/javascript" src="../nicepage.js" defer=""></script>
     <meta name="generator" content="Nicepage 4.6.5, nicepage.com">
+    
     <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
     
     
@@ -26,7 +27,7 @@
     <meta property="og:description" content="">
     <meta property="og:type" content="website">
   </head>
-  <body class="u-body u-xl-mode"><header class="u-clearfix u-header u-header" id="sec-fcde"><div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
+  <body class="u-body u-xl-mode"><header class="u-clearfix u-header u-header" id="sec-fcde"><div class="u-clearfix u-sheet u-sheet-1">
         <nav class="u-menu u-menu-dropdown u-offcanvas u-menu-1">
           <div class="menu-collapse">
             <a class="u-button-style u-nav-link" href="#">
@@ -36,49 +37,112 @@
             </a>
           </div>
           <div class="u-custom-menu u-nav-container">
-            <ul class="u-nav u-unstyled"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="../home/Home.html">Home</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Shop.html">Shop</a>
+            <ul class="u-nav u-unstyled"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="../home/Home.html" style="padding: 10px 66px;">Home</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Honey.html" style="padding: 10px 66px;">Honey</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Shop.html" style="padding: 10px 66px;">Products From the Hive</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" style="padding: 10px 66px;">About us</a>
 </li></ul>
           </div>
           <div class="u-custom-menu u-nav-container-collapse">
             <div class="u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav">
               <div class="u-inner-container-layout u-sidenav-overflow">
                 <div class="u-menu-close"></div>
-                <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="../home/Home.html">Home</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Shop.html">Shop</a>
+                <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="../home/Home.html" style="padding: 10px 66px;">Home</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Honey.html" style="padding: 10px 66px;">Honey</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Shop.html" style="padding: 10px 66px;">Products From the Hive</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" style="padding: 10px 66px;">About us</a>
 </li></ul>
               </div>
             </div>
             <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
           </div>
         </nav>
-        <p class="u-text u-text-default u-text-1">Bee Positive Apiary<br>
+        <div class="u-clearfix u-custom-html u-custom-html-1">
+          <style> /* Dropdown Button */
+.dropbtn {
+  background-color: transparent;
+  color: black;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+}
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #ddd;}
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {display: block;}
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {background-color: #ddd;} </style>
+          <div class="dropdown">
+            <button id="cartButton" class="dropbtn">Cart</button>
+            <div class="dropdown-content">
+              <a>Cart</a>
+              <div id="cartButtonContents"></div>
+              <a href="../checkout/">Checkout</a>
+            </div>
+          </div>
+        </div>
+        <p class="u-text u-text-default u-text-1">
+          <span style="font-size: 1.5rem;">Bee Positive Apiary</span>
+          <br>
         </p>
       </div></header>
     <section class="u-align-center u-clearfix u-image u-shading u-section-1" src="" data-image-width="1600" data-image-height="800" id="sec-3fd9">
-      <div class="u-clearfix u-sheet u-sheet-1">
+      <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
         <h1 class="u-text u-text-default u-title u-text-1">Shop</h1>
       </div>
     </section>
     <section class="u-clearfix u-section-2" id="sec-b26f">
       <div class="u-clearfix u-sheet u-sheet-1">
-<button onClick='checkout()' class="u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-6 u-btn-1">Checkout</button>
-        </a>
-        <div class="u-list u-list-1">
-          <div class="u-repeater u-repeater-1">
-            <div class="u-container-style u-list-item u-repeater-item">
-              <div class="u-container-layout u-similar-container u-container-layout-1">
-                <p class="u-custom-item u-text u-text-default u-text-1">Cuticle Salve</p>
-                <img class="u-image u-image-default u-image-1" src="../images/PXL_20211224_1646136751.jpg" alt="" data-image-width="1588" data-image-height="1600">
-                <p class="u-custom-item u-text u-text-default u-text-2">Description</p>
-                <p class="u-custom-item u-text u-text-default u-text-3">Price</p>
-<button onClick='addToCart("0")' class="u-btn u-btn-round u-button-style u-custom-item u-hover-palette-1-light-1 u-palette-1-base u-radius-6 u-btn-2">Add to Cart</button>
-              </div>
+        <div class="u-container-style u-grey-5 u-group u-group-1">
+          <div class="u-container-layout u-valign-top u-container-layout-1">
+            <img class="u-image u-image-default u-image-1" src="../images/PXL_20211224_1646136751.jpg" alt="" data-image-width="1588" data-image-height="1600">
+            <p class="u-custom-item u-text u-text-default u-text-1">Spa in a Jar</p>
+            <p class="u-custom-item u-text u-text-2">Bunch of stuff in a jar</p>
+            <p class="u-custom-item u-text u-text-3">$2.99<br>
+            </p>
+            <div class="u-clearfix u-custom-html u-custom-html-1">
+              <input id="Count of 101" style="width: 75px;" value="1" type="number"> Quantity
             </div>
+<button onClick="addToCart('101')" class="u-btn u-btn-round u-button-style u-custom-item u-hover-palette-1-light-1 u-palette-1-base u-radius-6 u-btn-1">Add to Cart</button>
+          </div>
+        </div>
+        <div class="u-container-style u-grey-5 u-group u-group-2">
+          <div class="u-container-layout u-container-layout-2">
+            <img class="u-image u-image-default u-image-2" src="../images/PXL_20211224_1646136751.jpg" alt="" data-image-width="1588" data-image-height="1600">
+            <p class="u-custom-item u-text u-text-default u-text-4">Cuticle Salve</p>
+            <p class="u-custom-item u-text u-text-5">Description</p>
+            <p class="u-custom-item u-text u-text-6">$4.99<br>
+            </p>
+            <div class="u-clearfix u-custom-html u-custom-html-2">
+              <input id="Count of 100" style="width: 75px;" value="1" type="number"> Quantity
+            </div>
+<button onClick="addToCart('100')" class="u-btn u-btn-round u-button-style u-custom-item u-hover-palette-1-light-1 u-palette-1-base u-radius-6 u-btn-2">Add to Cart</button>
           </div>
         </div>
       </div>
     </section>
+<script src="../itemInfo.js"></script>
 <script src="shop.js"></script>
 </body>
 </html>
