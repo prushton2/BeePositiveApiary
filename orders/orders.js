@@ -64,7 +64,7 @@ async function createItemHTML(order, items, isArchived) {
     html = `Order for <b>${order["name"]}</b> placed on <b>${date}:</b>`
     
     if(!isArchived) {
-        `<button onClick="markAsComplete('${order["id"]}', ${!order["isComplete"]})">Mark as ${order["isComplete"] ? "incomplete" : "complete"}</button>`
+        html += `<button onClick="markAsComplete('${order["id"]}', ${!order["isComplete"]})">Mark as ${order["isComplete"] ? "incomplete" : "complete"}</button>`
     }
 
     if(order["isComplete"] && !isArchived) {
