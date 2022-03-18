@@ -1,9 +1,11 @@
 doc = document.getElementById("sec-214c")
 password = document.getElementById("pswdinput")
 
-renderpage = async() => {
+renderpage = async() => { //this function feels bloated, I want to shrink it down a bit
     incomplete = ""
     complete = ""
+    archived = ""
+
     response = await fetch(`${dburl}/getOrders`, {
         method: "POST",headers: {'Accept': 'application/json','Content-Type': 'application/json'},
         body: JSON.stringify({
@@ -13,31 +15,59 @@ renderpage = async() => {
     orders = JSON.parse(response)["response"]
 
     for(var order in orders) {
+
+        items = await fetch(`${dburl}/getPurchases`, {
+            method: "POST", headers: {'Accept': 'application/json','Content-Type': 'application/json'},
+            body: JSON.stringify({
+                password: password.value,
+                orderID: orders[order]["id"]
+            })}).then(data => {return data.text()})
+        items = JSON.parse(items)["response"]
+
         if(orders[order]["isComplete"]) {
-            complete += await createItemHTML(orders[order])
+            complete += await createItemHTML(orders[order], items, false)
         } else {
-            incomplete += await createItemHTML(orders[order])
+            incomplete += await createItemHTML(orders[order], items, false)
         }
     }
-    doc.innerHTML = `<div class="u-clearfix u-sheet u-sheet-1">Incomplete<br><br><br>${incomplete}<br><br><br>Complete<br><br><br>${complete}</div>`
+
+    response = await fetch(`${dburl}/getOrders`, {
+        method: "POST",headers: {'Accept': 'application/json','Content-Type': 'application/json'},
+        body: JSON.stringify({
+            password:"devpassword",
+            getArchived: true,
+        })}).then(data => {return data.text()})
+
+    orders = JSON.parse(response)["response"]
+
+    for(var order in orders) {
+
+        items = await fetch(`${dburl}/getPurchases`, {
+            method: "POST", headers: {'Accept': 'application/json','Content-Type': 'application/json'},
+            body: JSON.stringify({
+                password: password.value,
+                orderID: orders[order]["id"],
+                getArchived: true
+            })}).then(data => {return data.text()})
+        items = JSON.parse(items)["response"]
+
+        archived += await createItemHTML(orders[order], items, true)
+    }
+
+    doc.innerHTML = `<div class="u-clearfix u-sheet u-sheet-1">Incomplete<br><br><br>${incomplete}<br><br><br>Complete<br><br><br>${complete}Archived<br><br><br>${archived}</div>`
 }
 
-async function createItemHTML(order) {
+async function createItemHTML(order, items, isArchived) {
     date = new Date(parseInt(order["date"]))
     date = date.toString().split(" GMT")[0]
-    html = `Order for <b>${order["name"]}</b> placed on <b>${date}:</b> <button onClick="markAsComplete('${order["id"]}', ${!order["isComplete"]})">Mark as ${order["isComplete"] ? "incomplete" : "complete"}</button>`
     
-    items = await fetch(`${dburl}/getPurchases`, {
-        method: "POST", headers: {'Accept': 'application/json','Content-Type': 'application/json'},
-        body: JSON.stringify({
-            password: password.value,
-            orderID: order["id"]
-        })}).then(data => {return data.text()})
-    items = JSON.parse(items)["response"]
+    html = `Order for <b>${order["name"]}</b> placed on <b>${date}:</b>`
     
-        
-    
-    if(order["isComplete"]) {
+    if(!isArchived) {
+        `<button onClick="markAsComplete('${order["id"]}', ${!order["isComplete"]})">Mark as ${order["isComplete"] ? "incomplete" : "complete"}</button>`
+    }
+
+    if(order["isComplete"] && !isArchived) {
         html += `<button onClick="archiveItem('${order["id"]}', '${order["name"]}')">Archive Item</button><br>`
     } else {
         html += '<br>'
