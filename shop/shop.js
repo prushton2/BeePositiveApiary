@@ -5,7 +5,8 @@ try {
 } catch {
     shoppingList = {"Items":[]}
 }
-if(shoppingList == null) {
+
+if(shoppingList["Items"] == null || undefined) {
     shoppingList = {"Items":[]}
 }
 
@@ -20,12 +21,21 @@ function addToCart(item) {
             checkout()
             return;
         }
-    }   
-    // Create a new entry for the item in the shoppinglist if there isnt an entry already
-    shoppingList["Items"].push( {
-        "productID": item,
-        "amount": amountToAdd
-    })
+    }
+    try {
+        // Create a new entry for the item in the shoppinglist if there isnt an entry already
+        shoppingList["Items"].push( {
+            "productID": item,
+            "amount": amountToAdd
+        })
+    } catch {
+        if(confirm("There was an error adding items to your cart. Press Ok to clear your cart")) {
+            localStorage.setItem("shoppingList", '{"Items":[]}')
+            shoppingList = {"Items":[]}
+            alert("Your cart is cleared. Try adding the items again")
+        }
+        return
+    }
     checkout()
 }
 
