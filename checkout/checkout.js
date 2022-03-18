@@ -34,7 +34,7 @@ function updateShoppingList() {
     }
     
     localStorage.setItem("shoppingList", JSON.stringify(shoppingList))
-    document.getElementById("totalCost").innerHTML = `${getDisplayCost(shoppingList["Items"])}`
+    document.getElementById("totalCost").innerHTML = `${getTaxCalculation(shoppingList["Items"])}<br>Total Cost: ${getDisplayCost(shoppingList["Items"])}`
 }
 
 document.getElementById("CheckoutList").innerHTML = `<div class="u-clearfix u-sheet u-sheet-1">${createAllHtml(shoppingList)}</div>`
