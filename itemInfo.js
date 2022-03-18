@@ -1,5 +1,5 @@
 dburl = "http://localhost:3000"
-
+MassTax = 0.0625
 products = {
     "100": {
         "name"         :"Cuticle Salve",
@@ -43,7 +43,7 @@ dropdown.addEventListener("mouseover", (e) => {
     cartContents.innerHTML = html
 })
 
-function getTotalCost(shoppingList) { // This function returns the precise int of the cost of the given shoppinglist
+function getTotalCost(shoppingList) { // This function returns the precise int of the cost of the given shoppinglist as well as the tax
     totalcost = 0;
     
     for(item in shoppingList) {
@@ -65,6 +65,15 @@ function setItemAmountToIncrement(itemID, amount) {
     return amount
 }
 
-function getDisplayCost(shoppingList) { // This function gives back a string that looks more like a price to the user ($4.90 instead of 4.9)
-    return "$"+getTotalCost(shoppingList).toFixed(2)
+function getDisplayCost(shoppingList) { // This function gives back a string that looks more like a price to the user ($4.90 instead of 4.9) aswell as the tax calculation
+    totalCost = getTotalCost(shoppingList)
+    taxedCost = totalCost + (MassTax * totalcost)
+    
+    return "$"+taxedCost.toFixed(2)
+}
+
+function getTaxCalculation(shoppingList) { //This returns a display of the tax calculation being done without the total cost
+    totalCost = getTotalCost(shoppingList)
+    taxedCost = totalCost + (MassTax * totalcost)
+    return `\$${totalCost.toFixed(2)} Subtotal <br>+ ${MassTax}% Tax`
 }

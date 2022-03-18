@@ -2,7 +2,7 @@ shoppingList = JSON.parse(localStorage.getItem("shoppingList"))
 
 console.log(shoppingList)
 function createHTML(product, order) { // products[item], shoppingList[item]
-    return `<div><div><label>${product["name"]}</label><br><label>${product["description"]}</label></div><div style='text-align: right;'><label>$${product["price"]}</label>&nbsp&nbsp&nbspx<input onchange="updateShoppingList()" id="Count of ${order["productID"]}" value=${order["amount"]}></div></div><br>`
+    return    `<div> <label>${product["name"]}</label>  <div style='float:right; text-align: right;'><label>$${product["price"]}</label>&nbsp&nbsp&nbspx<input style="width: 75px;" type="number" step="any" onchange="updateShoppingList()" id="Count of ${order["productID"]}" value=${order["amount"]}></div></div><br>`
 }
 
 function createAllHtml(jsonobject) {
@@ -37,5 +37,5 @@ function updateShoppingList() {
     document.getElementById("totalCost").innerHTML = `${getDisplayCost(shoppingList["Items"])}`
 }
 
-document.getElementById("sec-9fb3").innerHTML = `<div class="u-clearfix u-sheet u-sheet-1">${createAllHtml(shoppingList)}</div>`
-document.getElementById("totalCost").innerHTML = `${getDisplayCost(shoppingList["Items"])}`
+document.getElementById("CheckoutList").innerHTML = `<div class="u-clearfix u-sheet u-sheet-1">${createAllHtml(shoppingList)}</div>`
+document.getElementById("totalCost").innerHTML = `${getTaxCalculation(shoppingList["Items"])}<br>Total Cost: ${getDisplayCost(shoppingList["Items"])}`
