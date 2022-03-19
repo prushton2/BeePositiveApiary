@@ -9,18 +9,21 @@ renderpage = async() => { //this function feels bloated, I want to shrink it dow
     response = await fetch(`${dburl}/getOrders`, {
         method: "POST",headers: {'Accept': 'application/json','Content-Type': 'application/json'},
         body: JSON.stringify({
-            password:"devpassword"
+            password: password.value,
+            getArchived: false
         })}).then(data => {return data.text()})
 
     orders = JSON.parse(response)["response"]
 
     for(var order in orders) {
+        console.log(orders[order])
 
         items = await fetch(`${dburl}/getPurchases`, {
             method: "POST", headers: {'Accept': 'application/json','Content-Type': 'application/json'},
             body: JSON.stringify({
                 password: password.value,
-                orderID: orders[order]["id"]
+                orderID: orders[order]["id"],
+                getArchived: false  
             })}).then(data => {return data.text()})
         items = JSON.parse(items)["response"]
 
@@ -34,7 +37,7 @@ renderpage = async() => { //this function feels bloated, I want to shrink it dow
     response = await fetch(`${dburl}/getOrders`, {
         method: "POST",headers: {'Accept': 'application/json','Content-Type': 'application/json'},
         body: JSON.stringify({
-            password:"devpassword",
+            password: password.value,
             getArchived: true,
         })}).then(data => {return data.text()})
 
