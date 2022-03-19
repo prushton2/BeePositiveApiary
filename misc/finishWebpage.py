@@ -3,34 +3,34 @@ import re
 import os
 
 pages = {
-    "shop":{
+    "shop":{ 
         "page": "shop/Shop.html",
-        "scripts": ["../itemInfo.js", "shop.js"],
+        "scripts": ["../script.js", "../itemInfo.js", "shop.js"],
         "renameTo": "index.html"
     },
     "honey":{
         "page": "shop/Honey.html",
-        "scripts": ["../itemInfo.js", "shop.js"],
+        "scripts": ["../script.js", "../itemInfo.js", "shop.js"],
         "renameTo": "index.html"
     },
     "checkout":{
         "page": "checkout/Checkout.html",
-        "scripts": ["../itemInfo.js", "checkout.js"],
+        "scripts": ["../script.js", "../itemInfo.js", "checkout.js"],
         "renameTo": "index.html"
     },
     "orders":{
         "page": "orders/Orders.html",
-        "scripts": ["../itemInfo.js", "orders.js"],
+        "scripts": ["../script.js", "../itemInfo.js", "orders.js"],
         "renameTo": "index.html"
     },
     "home":{
         "page": "home/Home.html",
-        "scripts": ["../itemInfo.js"],
+        "scripts": ["../script.js"],
         "renameTo": "index.html"
     },
     "finalize":{
         "page": "finalize/Finalize.html",
-        "scripts": ["../itemInfo.js", "finalize.js"],
+        "scripts": ["../script.js", "../itemInfo.js", "finalize.js"],
         "renameTo": "index.html"
     }
 }

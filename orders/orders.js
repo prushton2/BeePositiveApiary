@@ -6,26 +6,25 @@ renderpage = async() => { //this function feels bloated, I want to shrink it dow
     complete = ""
     archived = ""
 
-    response = await fetch(`${dburl}/getOrders`, {
-        method: "POST",headers: {'Accept': 'application/json','Content-Type': 'application/json'},
-        body: JSON.stringify({
-            password: password.value,
-            getArchived: false
-        })}).then(data => {return data.text()})
+    response = await httpRequest(`${dburl}/getOrders`, "POST", {
+        password: password.value,
+        getArchived: false
+    }, false)
 
-    orders = JSON.parse(response)["response"]
+    orders = response["response"]
+    if(orders == "Invalid Credentials") {
+        alert("Incorrect Password")
+        return
+    }
 
     for(var order in orders) {
-        console.log(orders[order])
 
-        items = await fetch(`${dburl}/getPurchases`, {
-            method: "POST", headers: {'Accept': 'application/json','Content-Type': 'application/json'},
-            body: JSON.stringify({
-                password: password.value,
-                orderID: orders[order]["id"],
-                getArchived: false  
-            })}).then(data => {return data.text()})
-        items = JSON.parse(items)["response"]
+        items = await httpRequest(`${dburl}/getPurchases`, "POST", {
+            password: password.value,
+            orderID: orders[order]["id"],
+            getArchived: false  
+        }, false)
+        items = items["response"]
 
         if(orders[order]["isComplete"]) {
             complete += await createItemHTML(orders[order], items, false)
@@ -34,25 +33,21 @@ renderpage = async() => { //this function feels bloated, I want to shrink it dow
         }
     }
 
-    response = await fetch(`${dburl}/getOrders`, {
-        method: "POST",headers: {'Accept': 'application/json','Content-Type': 'application/json'},
-        body: JSON.stringify({
-            password: password.value,
-            getArchived: true,
-        })}).then(data => {return data.text()})
+    response = await httpRequest(`${dburl}/getOrders`, "POST", {
+        password: password.value,
+        getArchived: true,
+    }, false)
 
-    orders = JSON.parse(response)["response"]
+    orders = response["response"]
 
     for(var order in orders) {
 
-        items = await fetch(`${dburl}/getPurchases`, {
-            method: "POST", headers: {'Accept': 'application/json','Content-Type': 'application/json'},
-            body: JSON.stringify({
-                password: password.value,
-                orderID: orders[order]["id"],
-                getArchived: true
-            })}).then(data => {return data.text()})
-        items = JSON.parse(items)["response"]
+        items = await httpRequest(`${dburl}/getPurchases`, "POST", {
+            password: password.value,
+            orderID: orders[order]["id"],
+            getArchived: true
+        }, false)
+        items = items["response"]
 
         archived += await createItemHTML(orders[order], items, true)
     }
