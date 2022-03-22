@@ -21,7 +21,6 @@ function addToCart(item) {
     for(i in shoppingList["Items"]) { //Look for the item if it is already in the shoppinglist.
         if(shoppingList["Items"][i]["productID"] == item) {
             shoppingList["Items"][i]["amount"] += amountToAdd //Add the amount to the existing item in the shoppingList and return
-            console.log("overwritten")
             checkout()
             return;
         }
@@ -45,5 +44,5 @@ function addToCart(item) {
 
 function checkout() { //save the shoppinglist and go to the checkout
     localStorage.setItem("shoppingList", JSON.stringify(shoppingList))
-    // window.location.href = "../checkout/Checkout.html"
+    window.location.href = "../checkout/Checkout.html"
 }
