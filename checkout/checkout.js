@@ -1,10 +1,15 @@
 shoppingList = JSON.parse(localStorage.getItem("shoppingList"))
 
 function createHTML(product, order) { // products[item], shoppingList[item]
-    return    `<div> <label>${product["name"]}</label>  <div style='float:right; text-align: right;'><label>$${product["price"]}</label>&nbsp&nbsp&nbspx<input style="width: 75px;" type="number" step="any" onchange="updateShoppingList()" id="Count of ${order["productID"]}" value=${order["amount"]}></div></div><br>`
+    return    `<div> <label>${product["name"]}</label>  <div style='float:right; text-align: right;'><label>$${product["price"]}</label>&nbsp&nbsp&nbspx<input style="width: 75px;" type="number" step="any" onchange="updateShoppingList()" id="Count of ${order["productID"]}" value=${order["amount"]}>${product["unit"]}</div></div><br>`
 }
 
-function createAllHtml(jsonobject) {
+function drawCheckout() {
+    document.getElementById("CheckoutList").innerHTML = `<div class="u-clearfix u-sheet u-sheet-1">${createAllHtml(shoppingList)}</div>`
+    document.getElementById("totalCost").innerHTML = `${getTaxCalculation(shoppingList["Items"])}<br>Total Cost: ${getDisplayCost(shoppingList["Items"])}`
+}
+
+function createAllHtml(jsonobject) { //takes in the shoppinglist
     html = ""
     for(var key in jsonobject["Items"]) {
         productID = jsonobject["Items"][key]["productID"]        
@@ -26,7 +31,6 @@ function updateShoppingList() {
         newAmount = parseFloat(document.getElementById(`Count of ${item["productID"]}`).value)
         
         newAmount = setItemAmountToIncrement(item["productID"], newAmount)
-        console.log(newAmount)
         if(newAmount <= 0) {
             shoppingList["Items"].splice(key, 1)
         } else {
@@ -36,9 +40,7 @@ function updateShoppingList() {
     }
     
     localStorage.setItem("shoppingList", JSON.stringify(shoppingList))
-    document.getElementById("CheckoutList").innerHTML = `<div class="u-clearfix u-sheet u-sheet-1">${createAllHtml(shoppingList)}</div>`
-    document.getElementById("totalCost").innerHTML = `${getTaxCalculation(shoppingList["Items"])}<br>Total Cost: ${getDisplayCost(shoppingList["Items"])}`
+    drawCheckout()
 }
 
-document.getElementById("CheckoutList").innerHTML = `<div class="u-clearfix u-sheet u-sheet-1">${createAllHtml(shoppingList)}</div>`
-document.getElementById("totalCost").innerHTML = `${getTaxCalculation(shoppingList["Items"])}<br>Total Cost: ${getDisplayCost(shoppingList["Items"])}`
+drawCheckout()
