@@ -4,14 +4,14 @@ products = {
     "100": {
         "name"         :"Cuticle Salve",
         "price"        :4.99,
-        "unit"         :"item",
+        "unit"         :"&nbsp&nbsp&nbsp",
         "description"  :"",
         "increment"    :1
     },
     "101": {
         "name"         :"Spa in a Jar",
         "price"        :2.99,
-        "unit"         :"item",
+        "unit"         :"&nbsp&nbsp&nbsp",
         "description"  :"Spa",
         "increment"    :1
     },
@@ -64,5 +64,5 @@ function getDisplayCost(shoppingList) { // This function gives back a string tha
 function getTaxCalculation(shoppingList) { //This returns a display of the tax calculation being done without the total cost
     totalCost = getTotalCost(shoppingList)
     taxedCost = totalCost + (MassTax * totalcost)
-    return `\$${totalCost.toFixed(2)} Subtotal <br>+ ${MassTax}% Tax`
+    return `\$${taxedCost.toFixed(2)} Subtotal <br>+ ${MassTax*100}% Tax`
 }
