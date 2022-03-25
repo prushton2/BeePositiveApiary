@@ -2,6 +2,13 @@ dburl = "http://localhost:3000"
 MassTax = 0.0625
 products = {
     "100": {
+        "name"         :"",
+        "price"        :1,
+        "unit"         :"&nbsp&nbsp&nbsp",
+        "description"  :"",
+        "increment"    :0
+    },
+    "100": {
         "name"         :"Cuticle Salve",
         "price"        :4.99,
         "unit"         :"&nbsp&nbsp&nbsp",
@@ -28,8 +35,35 @@ products = {
         "unit"         :"lb",
         "description"  :"Cranberry flavored honey",
         "increment"    :.5
+    },
+    "300": {
+        "name"         :"8oz Jar",
+        "price"        :0.5,
+        "unit"         :"&nbsp&nbsp&nbsp",
+        "description"  :"",
+        "increment"    :.5
+    },
+    "302": {
+        "name"         :"10oz Jar",
+        "price"        :0.625,
+        "unit"         :"&nbsp&nbsp&nbsp",
+        "description"  :"",
+        "increment"    :0.625
+    },
+    "303": {
+        "name"         :"1lb Jar",
+        "price"        :1,
+        "unit"         :"&nbsp&nbsp&nbsp",
+        "description"  :"",
+        "increment"    :1
+    },
+    "304": {
+        "name"         :"2lb Jar",
+        "price"        :2,
+        "unit"         :"&nbsp&nbsp&nbsp",
+        "description"  :"",
+        "increment"    :2
     }
-
 }
 
 function getTotalCost(shoppingList) { // This function returns the precise int of the cost of the given shoppinglist as well as the tax
@@ -44,7 +78,7 @@ function getTotalCost(shoppingList) { // This function returns the precise int o
     return totalcost
 }
 
-function setItemAmountToIncrement(itemID, amount) {
+function setItemAmountToIncrement(itemID, amount, subitem="000") {
 
     amount = amount <= 0 ? 0 : amount // remove negative numbers
 

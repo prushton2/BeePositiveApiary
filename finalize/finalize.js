@@ -1,15 +1,7 @@
 buy = async() => {
     textboxes = ["name", "address", "email", "phoneNumber"]
     Order = {}
-
-    // {
-    //     "name": username,
-    //     "address": address,
-    //     "email": email,
-    //     "phoneNumber": phone
-    // }
-    //Make this into a loop
-
+    
     textboxes.forEach(element => {
         if(document.getElementById(element).value) {//if not empty
             Order[element] = document.getElementById(element).value

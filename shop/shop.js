@@ -13,13 +13,13 @@ try {
 
 shoppingList = JSON.parse(shoppingList)
 
-function addToCart(item) {
+function addToCart(item, subitem="000") {
     amountToAdd = parseFloat(document.getElementById(`Count of ${item}`).value)
 
     amountToAdd = setItemAmountToIncrement(item, amountToAdd)
     
     for(i in shoppingList["Items"]) { //Look for the item if it is already in the shoppinglist.
-        if(shoppingList["Items"][i]["productID"] == item) {
+        if(shoppingList["Items"][i]["productID"] == item && shoppingList["Items"][i]["subProductID"] == subitem) {
             shoppingList["Items"][i]["amount"] += amountToAdd //Add the amount to the existing item in the shoppingList and return
             checkout()
             return;
@@ -29,6 +29,7 @@ function addToCart(item) {
     try {
         shoppingList["Items"].push( {
             "productID": item,
+            "subProductID": subitem,
             "amount": amountToAdd
         })
     } catch {
