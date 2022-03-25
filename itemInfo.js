@@ -1,7 +1,7 @@
 dburl = "http://localhost:3000"
 MassTax = 0.0625
 products = {
-    "100": {
+    "0": {
         "name"         :"",
         "price"        :1,
         "unit"         :"&nbsp&nbsp&nbsp",
