@@ -78,9 +78,9 @@ function getTotalCost(shoppingList) { // This function returns the precise int o
     return totalcost
 }
 
-function setItemAmountToIncrement(itemID, amount, subitem="000") {
+function setItemAmountToIncrement(itemID, amount) {
 
-    amount = amount <= 0 ? 0 : amount // remove negative numbers
+    amount = Math.max(amount, 0) //remove negative numbers
 
     if(products[itemID]["increment"] != 0) { // if the increment isnt 0, then make the number conform to the increment
         return (amount - (amount % products[itemID]["increment"]))
