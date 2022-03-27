@@ -34,7 +34,7 @@
     min-height: 54px;
   }
 }.u-section-2 .u-sheet-1 {
-  min-height: 948px;
+  min-height: 1299px;
 }
 
 .u-section-2 .u-list-1 {
@@ -47,10 +47,9 @@
 }
 
 .u-section-2 .u-group-1 {
-  width: 438px;
-  min-height: 365px;
-  height: auto;
-  margin: 0 auto 0 50px;
+  width: 450px;
+  min-height: 400px;
+  margin: 20px 50px 0 auto;
 }
 
 .u-section-2 .u-container-layout-1 {
@@ -65,42 +64,41 @@
 }
 
 .u-section-2 .u-text-1 {
-  margin: -147px 143px 0 auto;
+  margin: -147px 76px 0 auto;
 }
 
 .u-section-2 .u-text-2 {
   text-align: start;
-  margin: 20px 40px 0 186px;
+  margin: 22px 52px 0 186px;
 }
 
 .u-section-2 .u-text-3 {
-  margin: 63px 230px 0 10px;
+  margin: 20px 242px 0 10px;
 }
 
 .u-section-2 .u-custom-html-1 {
   min-height: 31px;
-  margin: 10px 151px 0 10px;
+  margin: 47px 213px 0 14px;
+}
+
+.u-section-2 .u-custom-html-2 {
+  min-height: 31px;
+  margin: -31px 10px 0 217px;
 }
 
 .u-section-2 .u-btn-1 {
   font-size: 0.9375rem;
   background-image: none;
   font-weight: 700;
-  margin: 21px 0 0 auto;
+  margin: 10px 0 0 auto;
   padding: 8px 33px;
 }
 
-.u-section-2 .u-text-4 {
-  text-align: start;
-  font-size: 0.75rem;
-  margin: -38px 181px 0 10px;
-}
-
 .u-section-2 .u-group-2 {
-  width: 438px;
-  min-height: 365px;
+  width: 450px;
+  min-height: 400px;
   height: auto;
-  margin: -365px 50px 60px auto;
+  margin: -400px auto 60px 50px;
 }
 
 .u-section-2 .u-container-layout-2 {
@@ -114,36 +112,35 @@
   margin: 0 auto 0 0;
 }
 
+.u-section-2 .u-text-4 {
+  margin: -147px 155px 0 auto;
+}
+
 .u-section-2 .u-text-5 {
-  margin: -147px 64px 0 auto;
+  text-align: start;
+  margin: 20px 52px 0 186px;
 }
 
 .u-section-2 .u-text-6 {
-  text-align: start;
-  margin: 20px 40px 0 186px;
+  margin: 72px 242px 0 10px;
 }
 
-.u-section-2 .u-text-7 {
-  margin: 13px 230px 0 10px;
-}
-
-.u-section-2 .u-custom-html-2 {
+.u-section-2 .u-custom-html-3 {
   min-height: 31px;
-  margin: 10px 151px 0 10px;
+  margin: 47px 203px 0 24px;
+}
+
+.u-section-2 .u-custom-html-4 {
+  min-height: 31px;
+  margin: -31px 0 0 227px;
 }
 
 .u-section-2 .u-btn-2 {
   font-size: 0.9375rem;
   background-image: none;
   font-weight: 700;
-  margin: 21px 0 0 auto;
+  margin: 10px 0 0 auto;
   padding: 8px 33px;
-}
-
-.u-section-2 .u-text-8 {
-  text-align: start;
-  font-size: 0.75rem;
-  margin: -38px 181px 0 10px;
 }
 
 @media (max-width: 1199px) {
@@ -155,11 +152,11 @@
     grid-template-columns: repeat(undefined, NaN%);
   }
 
-  .u-section-2 .u-group-1 {
+  .u-section-2 .u-custom-html-1 {
     height: auto;
   }
 
-  .u-section-2 .u-custom-html-1 {
+  .u-section-2 .u-custom-html-2 {
     height: auto;
   }
 
@@ -167,7 +164,11 @@
     height: auto;
   }
 
-  .u-section-2 .u-custom-html-2 {
+  .u-section-2 .u-custom-html-3 {
+    height: auto;
+  }
+
+  .u-section-2 .u-custom-html-4 {
     height: auto;
   }
 }
@@ -192,13 +193,13 @@
     padding-right: 10px;
   }
 
-  .u-section-2 .u-text-1 {
-    margin-right: 158px;
-  }
-
   .u-section-2 .u-container-layout-2 {
     padding-left: 10px;
     padding-right: 10px;
+  }
+
+  .u-section-2 .u-text-4 {
+    margin-right: 171px;
   }
 }
 
@@ -209,11 +210,7 @@
 
   .u-section-2 .u-group-1 {
     width: 340px;
-    margin-left: 0;
-  }
-
-  .u-section-2 .u-text-1 {
-    margin-right: 121px;
+    margin-right: 0;
   }
 
   .u-section-2 .u-text-2 {
@@ -227,37 +224,40 @@
   }
 
   .u-section-2 .u-custom-html-1 {
-    margin-right: 63px;
-    margin-left: 0;
-  }
-
-  .u-section-2 .u-text-4 {
-    margin-right: 93px;
-    margin-left: 0;
-  }
-
-  .u-section-2 .u-group-2 {
-    width: 340px;
-    margin-right: 0;
-  }
-
-  .u-section-2 .u-text-6 {
-    margin-right: 0;
-    margin-left: 128px;
-  }
-
-  .u-section-2 .u-text-7 {
-    margin-right: 142px;
+    margin-right: 117px;
     margin-left: 0;
   }
 
   .u-section-2 .u-custom-html-2 {
-    margin-right: 63px;
+    margin-right: 0;
+    margin-left: 117px;
+  }
+
+  .u-section-2 .u-group-2 {
+    width: 340px;
     margin-left: 0;
   }
 
-  .u-section-2 .u-text-8 {
-    margin-right: 93px;
+  .u-section-2 .u-text-4 {
+    margin-right: 127px;
+  }
+
+  .u-section-2 .u-text-5 {
+    margin-right: 0;
+    margin-left: 128px;
+  }
+
+  .u-section-2 .u-text-6 {
+    margin-right: 142px;
     margin-left: 0;
+  }
+
+  .u-section-2 .u-custom-html-3 {
+    margin-right: 117px;
+    margin-left: 0;
+  }
+
+  .u-section-2 .u-custom-html-4 {
+    margin-left: 117px;
   }
 }
