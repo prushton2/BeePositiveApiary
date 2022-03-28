@@ -7,10 +7,6 @@ dropdown.addEventListener("mouseover", async(e) => {
     html = ""
     shoppingList = JSON.parse(localStorage.getItem("shoppingList"))
     for(key in shoppingList["Items"]) {
-        console.log(shoppingList["Items"][key])
-        console.log(shoppingList["Items"][key]["subProductID"])
-        console.log(shoppingList["Items"][key]["subProductID"] == 0)
-
         subproduct = shoppingList["Items"][key]["subProductID"] == 0 ? "" : `${await products.getProduct(shoppingList["Items"][key]["subProductID"])["name"]} of `
         html += `<a href="#">${shoppingList["Items"][key]["amount"]}x ${subproduct}${products.getProduct(shoppingList["Items"][key]["productID"])["name"]}`
     }
