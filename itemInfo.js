@@ -7,18 +7,17 @@ class Products {
     }
 
     async getProducts() {
-        response = await httpRequest(`${dburl}/products`, "GET", {}, true)
-        this.products = response["products"]
+        let response = JSON.parse(await fetch(`${dburl}/getProducts`).then((value) => {return value.text()}))
+        this.products = response["response"]
     }
+
     //gets product from the database with the given name
-     getProduct(productID) {
-    
-        for(key in products) {
-            if(products[key]["id"] == productID) {
-                return products[key]
+    getProduct(productID) {
+        for(let key in this.products) {
+            if(this.products[key]["id"] == productID) {
+                return this.products[key]
             }
         }
-    
     }
     
     async getTotalCost(shoppingList) { // This function returns the precise int of the cost of the given shoppinglist as well as the tax
@@ -37,14 +36,11 @@ class Products {
     }
 
     async setItemAmountToIncrement(itemID, amount) {
-        products = await getProducts()
+        await this.getProducts()
         amount = Math.max(amount, 0) //remove negative numbers
-        console.log(products)
-        console.log(getProduct(products))
-        console.log(getProduct(products)["increment"])
-
-        if(getProduct(products[itemID])["increment"] != 0) { // if the increment isnt 0, then make the number conform to the increment
-            return (amount - (amount % getProduct(products[itemID])["increment"]))
+        
+        if(this.getProduct(itemID)["increment"] != 0) { // if the increment isnt 0, then make the number conform to the increment
+            return (amount - (amount % this.getProduct(itemID)["increment"]))
         }
         return amount
     }
@@ -64,3 +60,4 @@ class Products {
 }
 
 products = new Products()
+// await products.getProducts()
