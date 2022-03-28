@@ -12,7 +12,7 @@ function createHTML(item) { //shoppingList[item], supposed to contain amount and
 async function drawCheckout() {
     await products.getProducts() 
     document.getElementById("CheckoutList").innerHTML = `<div class="u-clearfix u-sheet u-sheet-1">${createAllHtml(shoppingList)}</div>`
-    document.getElementById("totalCost").innerHTML = `${getTaxCalculation(shoppingList["Items"])}<br>Total Cost: ${getDisplayCost(shoppingList["Items"])}`
+    document.getElementById("totalCost").innerHTML = `${await products.getTaxCalculation(shoppingList["Items"])}<br>Total Cost: ${await products.getDisplayCost(shoppingList["Items"])}`
 }
 
 function createAllHtml(jsonobject) { //takes in the shoppinglist
