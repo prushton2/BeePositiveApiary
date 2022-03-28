@@ -2,11 +2,12 @@
 
 dropdown = document.getElementById("cartButton") //Render the shoppinglist in the cart dropdown
 cartContents = document.getElementById("cartButtonContents")
-dropdown.addEventListener("mouseover", (e) => {
+dropdown.addEventListener("mouseover", async(e) => {
+    await products.getProducts()
     html = ""
     shoppingList = JSON.parse(localStorage.getItem("shoppingList"))
     for(key in shoppingList["Items"]) {
-        html += `<a href="#">${shoppingList["Items"][key]["amount"]} ${products[shoppingList["Items"][key]["productID"]]["name"]}`
+        html += `<a href="#">${shoppingList["Items"][key]["amount"]} ${products.getProduct(shoppingList["Items"][key]["productID"])["name"]}`
     }
     cartContents.innerHTML = html
 })

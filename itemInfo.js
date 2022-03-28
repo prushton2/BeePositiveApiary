@@ -3,12 +3,14 @@ MassTax = 0.0625
 
 class Products {
     constructor() {
-        this.products = {}
+        this.products = null
     }
 
     async getProducts() {
-        let response = JSON.parse(await fetch(`${dburl}/getProducts`).then((value) => {return value.text()}))
-        this.products = response["response"]
+        if(this.products == null) {
+            let response = JSON.parse(await fetch(`${dburl}/getProducts`).then((value) => {return value.text()}))
+            this.products = response["response"]
+        }
     }
 
     //gets product from the database with the given name
