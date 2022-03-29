@@ -1,31 +1,39 @@
 doc = document.getElementById("sec-214c")
 password = document.getElementById("pswdinput")
+password.value = "devpassword"
 
 renderpage = async() => { //this function feels bloated, I want to shrink it down a bit
     incomplete = ""
     complete = ""
     archived = ""
 
+    await products.getProducts()
+
+    //get all unarchived orders
     response = await httpRequest(`${dburl}/getOrders`, "POST", {
         password: password.value,
         getArchived: false
     }, false)
 
     orders = response["response"]
-    if(orders == "Invalid Credentials") {
+
+    if(orders == "Invalid Credentials") { //if the password is wrong (only happens once)
         alert("Incorrect Password")
         return
     }
 
     for(var order in orders) {
 
+        //get all items for each order
         items = await httpRequest(`${dburl}/getPurchases`, "POST", {
             password: password.value,
             orderID: orders[order]["id"],
             getArchived: false  
         }, false)
+
         items = items["response"]
 
+        //sort orders based on completeness
         if(orders[order]["isComplete"]) {
             complete += await createItemHTML(orders[order], items, false)
         } else {
@@ -33,6 +41,7 @@ renderpage = async() => { //this function feels bloated, I want to shrink it dow
         }
     }
 
+    //get all archived orders
     response = await httpRequest(`${dburl}/getOrders`, "POST", {
         password: password.value,
         getArchived: true,
@@ -41,7 +50,7 @@ renderpage = async() => { //this function feels bloated, I want to shrink it dow
     orders = response["response"]
 
     for(var order in orders) {
-
+        //get all items for each archived order
         items = await httpRequest(`${dburl}/getPurchases`, "POST", {
             password: password.value,
             orderID: orders[order]["id"],
@@ -52,12 +61,13 @@ renderpage = async() => { //this function feels bloated, I want to shrink it dow
         archived += await createItemHTML(orders[order], items, true)
     }
 
+    //this looks awful, but its just a bunch of line breaks with titles
     doc.innerHTML = `<div class="u-clearfix u-sheet u-sheet-1">Incomplete<br><br><br>${incomplete}<br><br><br>Complete<br><br><br>${complete}Archived<br><br><br>${archived}</div>`
 }
 
 async function createItemHTML(order, items, isArchived) {
     date = new Date(parseInt(order["date"]))
-    date = date.toString().split(" GMT")[0]
+    date = date.toString().split(" GMT")[0] //remove the timezone
     
     html = `Order for <b>${order["name"]}</b> placed on <b>${date}:</b>`
     
@@ -66,16 +76,17 @@ async function createItemHTML(order, items, isArchived) {
     }
 
     if(order["isComplete"] && !isArchived) {
-        html += `<button onClick="archiveItem('${order["id"]}', '${order["name"]}')">Archive Item</button><br>`
-    } else {
-        html += '<br>'
+        html += `<button onClick="archiveItem('${order["id"]}', '${order["name"]}')">Archive Item</button>`
     }
-    html += `Total Cost: <b>${getDisplayCost(items)}</b><br>`
+    html += '<br>' 
+    
+    html += `Total Cost: <b>${await products.getDisplayCost(items)}</b><br>`
     html += `Order Contents:<br>`
     
     for(var item in items) { 
         item = items[item]
-        html += `&nbsp&nbsp&nbsp• ${item["amount"]}x ${products[item["productID"]]["name"]}<br>`
+        subproduct = item["subProductID"] == "0" ? "" : `${products.getProduct(item["subProductID"])["name"]} of`
+        html += `&nbsp&nbsp&nbsp• ${item["amount"]}x ${subproduct} ${await products.getProduct(item["productID"])["name"]}<br>`
     }
     return html + "<br><br>"
 }
