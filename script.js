@@ -1,12 +1,14 @@
-//this script holds basic functions needed for any page to work
+//this script holds basic functions needed for any page to work, also requires the itemInfo.js file
 
 dropdown = document.getElementById("cartButton") //Render the shoppinglist in the cart dropdown
 cartContents = document.getElementById("cartButtonContents")
-dropdown.addEventListener("mouseover", (e) => {
+dropdown.addEventListener("mouseover", async(e) => {
+    await products.getProducts()
     html = ""
     shoppingList = JSON.parse(localStorage.getItem("shoppingList"))
     for(key in shoppingList["Items"]) {
-        html += `<a href="#">${shoppingList["Items"][key]["amount"]} ${products[shoppingList["Items"][key]["productID"]]["name"]}`
+        subproduct = shoppingList["Items"][key]["subProductID"] == 0 ? "" : `${await products.getProduct(shoppingList["Items"][key]["subProductID"])["name"]} of `
+        html += `<a href="#">${shoppingList["Items"][key]["amount"]}x ${subproduct}${products.getProduct(shoppingList["Items"][key]["productID"])["name"]}`
     }
     cartContents.innerHTML = html
 })
