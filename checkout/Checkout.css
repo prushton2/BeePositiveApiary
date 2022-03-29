@@ -87,7 +87,7 @@
     width: 320px;
   }
 }.u-section-4 .u-sheet-1 {
-  min-height: 173px;
+  min-height: 282px;
 }
 
 .u-section-4 .u-custom-html-1 {
@@ -102,7 +102,19 @@
   text-transform: uppercase;
   font-size: 0.875rem;
   letter-spacing: 1px;
-  margin: 22px auto;
+  margin: 22px auto 0;
+}
+
+.u-section-4 .u-text-1 {
+  margin: 61px auto 0;
+}
+
+.u-section-4 .u-btn-2 {
+  border-style: solid;
+  font-weight: 700;
+  font-size: 0.9375rem;
+  margin: 2px auto;
+  padding: 6px 31px 6px 30px;
 }
 
 @media (max-width: 1199px) {

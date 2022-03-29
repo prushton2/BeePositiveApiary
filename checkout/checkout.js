@@ -60,4 +60,15 @@ async function updateShoppingList() {
     drawCheckout()
 }
 
+function resetShoppingCart() {
+    if(confirm("Are you sure you want to reset your shopping cart?")) {
+        shoppingList = {
+            "Items": []
+        }
+        localStorage.setItem("shoppingList", JSON.stringify(shoppingList))
+        window.location.reload()
+        alert("Your shopping cart has been reset")
+    }
+}
+
 drawCheckout()
