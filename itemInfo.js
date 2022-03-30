@@ -29,11 +29,8 @@ class Products {
         for(let item in shoppingList) {
             item = shoppingList[item]
 
-            let itemCost = this.getProduct(item["productID"])["price"] * item["amount"] * 100
+            let itemCost = this.getProduct(item["productID"])["price"] * item["amount"] * 100 * this.getProduct(item["subProductID"])["price"]
 
-            if(item["subProductID"] != 0) {
-                itemCost *= this.getProduct(item["subProductID"])["price"]
-            }
             totalcost += itemCost
 
         }
