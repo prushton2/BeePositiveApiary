@@ -14,7 +14,7 @@ buy = async() => {
     shoppingList = JSON.parse(localStorage.getItem("shoppingList")) //get the shoppinglist
 
     response = await httpRequest(`${dburl}/add`, "POST", { //send the request to the database
-        "sendConfirmationEmail": document.getElementById("sendEmail").checked,
+        "wantsToReceiveEmails": document.getElementById("sendEmail").checked,
         "Order": Order,
         "Items": shoppingList["Items"]
     }, true)

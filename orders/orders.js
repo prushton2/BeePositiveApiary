@@ -75,6 +75,7 @@ async function createItemHTML(order, items, isArchived) {
     }
 
     if(order["isComplete"] && !isArchived) {
+        html += `<button onClick="sendCompletionEmail('${order["id"]}', '${order["name"]}')">${order["emailSent"] ? "Completion Email Sent" : "Send Completion Email"}</button>`
         html += `<button onClick="archiveItem('${order["id"]}', '${order["name"]}')">Archive Item</button>`
     }
     html += '<br>' 
@@ -103,6 +104,16 @@ markAsComplete = async(i, complete) => {
         )
     })
     await renderpage()
+}
+
+sendCompletionEmail = async(orderID, name) => {
+    if(confirm(`Are you sure you want to send a completion email to ${name}?`)) {
+        response = await httpRequest(`${dburl}/sendCompletionEmail`, "POST", {
+            password: password.value,
+            orderID: orderID
+        }, false)
+        alert(response["response"])
+    }
 }
 
 archiveItem = async(id, name) => {
