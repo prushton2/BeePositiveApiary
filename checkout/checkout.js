@@ -3,7 +3,7 @@ shoppingList = JSON.parse(localStorage.getItem("shoppingList"))
 function createHTML(item) { //shoppingList[item], supposed to contain amount and subproductID
     let subProductLabel = item["subProductID"] == 0 ? "" : `${products.getProduct(item["subProductID"])["name"]} of`
     let label = `<label>${subProductLabel} ${products.getProduct(item["productID"])["name"]}</label>`
-    let price = `<label>$${products.getProduct(item["productID"])["price"]}</label>&nbsp&nbsp&nbspx`
+    let price = `<label>$${ (products.getProduct(item["productID"])["price"] * products.getProduct(item["subProductID"])["price"]).toFixed(2) }</label>&nbsp&nbsp&nbspx`
     let textbox = `<input style="width: 75px;" type="number" step="any" onchange="updateShoppingList()" id="Count of ${item["productID"]} ${item["subProductID"]}" value=${item["amount"]}>`
 
     return `<div>${label}<div style='float:right; text-align: right;'>${price}${textbox}</div></div><br>`
@@ -11,7 +11,7 @@ function createHTML(item) { //shoppingList[item], supposed to contain amount and
 
 async function drawCheckout() {
     await products.getProducts() 
-    document.getElementById("CheckoutList").innerHTML = `<div class="u-clearfix u-sheet u-sheet-1">${createAllHtml(shoppingList)}</div>`
+    document.getElementById("CheckoutList").innerHTML = createAllHtml(shoppingList)//`<div class="u-clearfix u-sheet u-sheet-1">${createAllHtml(shoppingList)}</div>`
     document.getElementById("totalCost").innerHTML = `${await products.getTaxCalculation(shoppingList["Items"])}<br>Total Cost: ${await products.getDisplayCost(shoppingList["Items"])}`
 }
 
@@ -21,8 +21,6 @@ function createAllHtml(jsonobject) { //takes in the shoppinglist
         productID = jsonobject["Items"][key]["productID"]        
         html += createHTML(jsonobject["Items"][key])
     }
-
-
 
     return html == "" ? "Your items will appear here when they have been added to the cart!" : html
 }
