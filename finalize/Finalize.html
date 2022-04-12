@@ -113,38 +113,64 @@
     </section>
     <section class="u-clearfix u-section-2" id="sec-32b2">
       <div class="u-clearfix u-sheet u-sheet-1">
-        <div class="u-container-style u-grey-10 u-group u-group-1">
-          <div class="u-container-layout u-container-layout-1">
-            <div class="u-clearfix u-custom-html u-custom-html-1">
-              <p style="text-align: center;">Name: <input id="name" style="width: 275px;">
-              </p>
-            </div>
-            <div class="u-clearfix u-custom-html u-expanded-width u-custom-html-2">
-              <p style="text-align: center;">Address: <input id="address" style="width: 275px;">
-              </p>
-            </div>
-            <div class="u-clearfix u-custom-html u-expanded-width u-custom-html-3">
-              <p style="text-align: center;">Email: <input id="email" style="width: 275px;">
-              </p>
-            </div>
-            <div class="u-clearfix u-custom-html u-expanded-width u-custom-html-4">
-              <p style="text-align: center;">Phone: <input id="phoneNumber" style="width: 275px;">
-              </p>
-            </div>
-            <div class="u-clearfix u-custom-html u-expanded-width u-custom-html-5">
-              <p style="text-align: center;">Receive Confirmation Email: <input id="sendEmail" type="checkbox" checked="true">
-              </p>
+        <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
+          <div class="u-layout">
+            <div class="u-layout-row">
+              <div class="u-container-style u-layout-cell u-size-30 u-layout-cell-1">
+                <div class="u-container-layout u-valign-top u-container-layout-1">
+                  <div class="u-container-style u-expanded-width u-group u-palette-5-base u-group-1">
+                    <div class="u-container-layout u-container-layout-2">
+                      <div class="u-clearfix u-custom-html u-custom-html-1">
+                        <p style="width: 100%; height: 100%" id="CheckoutList">Your items will appear here when they have been added to the cart!</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="u-container-style u-layout-cell u-size-30 u-layout-cell-2">
+                <div class="u-container-layout u-container-layout-3">
+                  <div class="u-container-style u-grey-10 u-group u-group-2">
+                    <div class="u-container-layout u-valign-middle u-container-layout-4">
+                      <div class="u-container-style u-grey-10 u-group u-group-3">
+                        <div class="u-container-layout u-container-layout-5">
+                          <div class="u-clearfix u-custom-html u-preserve-proportions u-custom-html-2">
+                            <p style="text-align: right;">Name: <input id="name" style="width: 250px;">
+                            </p>
+                          </div>
+                          <div class="u-clearfix u-custom-html u-preserve-proportions u-custom-html-3">
+                            <p style="text-align: right;">Address: <input id="address" style="width: 250px;">
+                            </p>
+                          </div>
+                          <div class="u-clearfix u-custom-html u-preserve-proportions u-custom-html-4">
+                            <p style="text-align: right;">Phone: <input id="phoneNumber" style="width: 250px;">
+                            </p>
+                          </div>
+                          <div class="u-clearfix u-custom-html u-custom-html-5">
+                            <p style="text-align: right;">Email: <input id="email" style="width: 250px;">
+                            </p>
+                          </div>
+                          <div class="u-clearfix u-custom-html u-expanded-width u-custom-html-6">
+                            <p style="text-align: center;">Receive Confirmation Email: <input id="sendEmail" type="checkbox" checked="true">
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+<button onClick="buy()" class="u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-50 u-btn-1">Place Order</button>
+                  <div class="u-clearfix u-custom-html u-custom-html-7">
+                    <p style="text-align: center;" id="response">Order Complete</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-<button onClick="buy()" class="u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-50 u-btn-1">Complete purchase</button>
-        <div class="u-clearfix u-custom-html u-expanded-width u-custom-html-6">
-          <p style="text-align: center;" id="response"></p>
         </div>
       </div>
     </section>
 <script src="../script.js"></script>
 <script src="../itemInfo.js"></script>
 <script src="finalize.js"></script>
+<script src="../checkout/checkout.js"></script>
 </body>
 </html>
