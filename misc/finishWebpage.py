@@ -30,7 +30,7 @@ pages = {
     },
     "finalize":{
         "page": "finalize/Finalize.html",
-        "scripts": ["../script.js", "../itemInfo.js", "finalize.js"],
+        "scripts": ["../script.js", "../itemInfo.js", "finalize.js", "../checkout/checkout.js"],
         "renameTo": "index.html"
     }
 }
