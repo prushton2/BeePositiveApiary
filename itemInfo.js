@@ -7,10 +7,10 @@ class Products {
     }
 
     async getProducts() {
-        if(this.products == null) {
+        if(this.products == null || this.productRelations == null) {
             let response = JSON.parse(await fetch(`${dburl}/getProducts`).then((value) => {return value.text()}))
             this.products = response["response"]["products"]
-            this.productRelationss = response["response"]["productRelations"]
+            this.productRelations = response["response"]["productRelations"]
         }
     }
 
@@ -22,7 +22,20 @@ class Products {
             }
         }
     }
-    
+
+    getProductRelation(productId, subProductId) {
+        for(let key in this.productRelations) {
+            if(this.productRelations[key]["productId"] == productId && this.productRelations[key]["subProductId"] == subProductId) {
+                return this.productRelations[key]
+            }
+        }
+    }
+
+    async getItemCost(productId, subProductId, amount) {
+        await this.getProducts()
+        return this.getProductRelation(productId, subProductId)["price"] * amount
+    }
+
     async getTotalCost(shoppingList) { // This function returns the precise int of the cost of the given shoppinglist as well as the tax
         await this.getProducts()
         let totalcost = 0;
@@ -30,10 +43,8 @@ class Products {
         for(let item in shoppingList) {
             item = shoppingList[item]
 
-            let itemCost = this.getProduct(item["productID"])["price"] * item["amount"] * 100 * this.getProduct(item["subProductID"])["price"]
-
+            let itemCost = await this.getItemCost(item["productID"], item["subProductID"], item["amount"]) * 100
             totalcost += itemCost
-
         }
 
         totalcost /= 100
@@ -41,25 +52,23 @@ class Products {
     }
 
     async setItemAmountToIncrement(itemID, amount) {
-        await this.getProducts()
-        amount = Math.max(amount, 0) //remove negative numbers
+        // await this.getProducts()
+        // amount = Math.max(amount, 0) //remove negative numbers
         
-        if(this.getProduct(itemID)["increment"] != 0) { // if the increment isnt 0, then make the number conform to the increment
-            return (amount - (amount % this.getProduct(itemID)["increment"]))
-        }
-        return amount
+        // if(this.getProduct(itemID)["increment"] != 0) { // if the increment isnt 0, then make the number conform to the increment
+        //     return (amount - (amount % this.getProduct(itemID)["increment"]))
+        // }
+        return amount - amount%1
     }
 
     async getDisplayCost(shoppingList) { // This function gives back a string that looks more like a price to the user ($4.90 instead of 4.9) aswell as the tax calculation
         let totalCost = await this.getTotalCost(shoppingList)
         let taxedCost = totalCost + (this.MassTax * totalCost)
-        
         return `\$${taxedCost.toFixed(2)}`
     }
 
     async getTaxCalculation(shoppingList) { //This returns a display of the tax calculation being done without the total cost
         let totalCost = await this.getTotalCost(shoppingList)
-        let taxedCost = totalCost + (this.MassTax * totalCost)
         return `\$${totalCost.toFixed(2)} Subtotal <br>+ ${this.MassTax*100}% Tax`
     }
 }

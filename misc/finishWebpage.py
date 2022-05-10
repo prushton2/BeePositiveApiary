@@ -60,7 +60,6 @@ createFiles = {
 
 deleteFiles = [
     "templates/password",
-    "templates",
     "Page-Password-Template.css"
 ]
 
