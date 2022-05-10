@@ -49,6 +49,8 @@ async function addToCart(item, hasSubproduct=false) { //Subproduct is used for s
     checkout()
 }
 
+
+
 function checkout() { //save the shoppinglist and go to the checkout
     localStorage.setItem("shoppingList", JSON.stringify(shoppingList))
     window.location.href = "../checkout/Checkout.html"
