@@ -1,12 +1,12 @@
 shoppingList = JSON.parse(localStorage.getItem("shoppingList"))
 
 async function createHTML(item) { //shoppingList[item], supposed to contain amount and subproductID
-    let subProductLabel = item["subProductID"] == 0 ? "" : `${products.getProduct(item["subProductID"])["name"]} of`
-    let label = `<label>${subProductLabel} ${products.getProduct(item["productID"])["name"]}</label>`
-    let price = `<label>$${ await products.getItemCost(item["productID"], item["subProductID"], 1) }</label>&nbsp&nbsp&nbspx`
+    let subProductLabel = item["subProductID"] == 0 ? "" : `${ (await products.getProduct(item["subProductID"]))["name"]} of`
+    let label = `<label>${subProductLabel} ${(await products.getProduct(item["productID"]))["name"]}</label>`
+    let price = `<label>$${ await products.getItemCost(item["productID"], item["subProductID"], 1) }</label>&nbsp&nbsp&nbsp`
     let textbox = `<input style="width: 75px;" type="number" step="any" onchange="updateShoppingList()" id="Count of ${item["productID"]} ${item["subProductID"]}" value=${item["amount"]}>`
 
-    return `<div>${label}<div style='float:right; text-align: right;'>${price}${textbox}</div></div><br>`
+    return `<div>${label}<div style='float:right; text-align: right;'>${price}x${textbox}</div></div><br>`
 }
 
 async function drawCheckout() {

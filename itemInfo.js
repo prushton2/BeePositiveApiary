@@ -46,7 +46,7 @@ class Products {
 
     async getItemCost(productId, subProductId, amount) {
         await this.getProducts()
-        return this.getProductRelation(productId, subProductId)["price"] * amount
+        return (await this.getProductRelation(productId, subProductId))["price"] * amount
     }
 
     async getTotalCost(shoppingList) { // This function returns the precise int of the cost of the given shoppinglist as well as the tax

@@ -85,8 +85,8 @@ async function createItemHTML(order, items, isArchived) {
     
     for(var item in items) { 
         item = items[item]
-        subproduct = item["subProductID"] == "0" ? "" : `${products.getProduct(item["subProductID"])["name"]} of`
-        html += `&nbsp&nbsp&nbsp• ${item["amount"]}x ${subproduct} ${await products.getProduct(item["productID"])["name"]}<br>`
+        subproduct = item["subProductID"] == "0" ? "" : `${(await products.getProduct(item["subProductID"]))["name"]} of`
+        html += `&nbsp&nbsp&nbsp• ${item["amount"]}x ${subproduct} ${(await products.getProduct(item["productID"]))["name"]}<br>`
     }
     return html + "<br><br>"
 }

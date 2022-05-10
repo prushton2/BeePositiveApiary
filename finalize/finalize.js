@@ -19,11 +19,11 @@ buy = async() => {
         "Items": shoppingList["Items"]
     }, true)
 
-    if(response["response"] == "Invalid input") { //if the response is invalid input
-        document.getElementById("response").innerHTML = "There was an error placing your order." //tell them there was an error
+    if(response["response"] != "Order Created") { //if the response is invalid input
+        document.getElementById("response").innerHTML = response["response"] //tell them there was an error
     } else {
         document.getElementById("response").innerHTML = `Order has been placed!` //if the response is valid, tell them the order has been placed
+        localStorage.removeItem("shoppingList") //delete the shoppinglist to prevent duplicate orders
     }
     
-    localStorage.removeItem("shoppingList") //delete the shoppinglist to prevent duplicate orders
 }

@@ -100,11 +100,11 @@ async function createHTML(itemID, extraStyle="") { //create the html for the ite
                 <td id="subproducts"> 
                     ${subProductHTML} 
                 </td>
-                <td style="text-align: right;"> <input id="Count of 201" style="width: 75px;" value="1" type="number" step="1"> Quantity </td>
+                <td style="text-align: right;"> <input id="Count of ${itemID}" style="width: 75px;" value="1" type="number" step="1"> Quantity </td>
             </tr>
             <tr>
                 <td> </td>
-                <td style="vertical-align: top;"> </b><button onClick="addToCart(${itemID}, ${subProductHTML == ""})" class="u-btn u-btn-round u-button-style u-custom-item u-hover-palette-1-light-1 u-palette-1-base u-radius-6 u-btn-2"><b>Add to Cart</b></button></td>
+                <td style="vertical-align: top;"> </b><button onClick="addToCart(${itemID}, ${subProductHTML != ""})" class="u-btn u-btn-round u-button-style u-custom-item u-hover-palette-1-light-1 u-palette-1-base u-radius-6 u-btn-2"><b>Add to Cart</b></button></td>
             </tr>
         </table>
     </div>`
