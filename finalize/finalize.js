@@ -1,19 +1,19 @@
 buy = async() => {
-    textboxes = ["name", "address", "email", "phoneNumber"]
-    Order = {}
+    textboxes = ["name", "address", "email", "phoneNumber"] // the textboxes that are required
+    Order = {} 
     
     textboxes.forEach(element => { //go over each textbox
         if(document.getElementById(element).value) {//if not empty
             Order[element] = document.getElementById(element).value //add it to the order
         } else {
-            document.getElementById("response").innerHTML = "Please fill in all the textboxes" //if empty, tell them to fill in all the textboxes
+            document.getElementById("response").innerHTML = "Please fill in all the textboxes" //if empty, tell the user to fill in all the textboxes
             return 
         }
     });
 
     shoppingList = JSON.parse(localStorage.getItem("shoppingList")) //get the shoppinglist
 
-    response = await httpRequest(`${dburl}/add`, "POST", { //send the request to the database
+    response = await httpRequest(`${dburl}/add`, "POST", { //send the post request to the database to add the order
         "wantsToReceiveEmails": document.getElementById("sendEmail").checked,
         "Order": Order,
         "Items": shoppingList["Items"]
