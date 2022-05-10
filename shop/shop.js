@@ -56,12 +56,10 @@ function checkout() { //save the shoppinglist and go to the checkout
     window.location.href = "../checkout/Checkout.html"
 }
 
-async function createHTML(itemID) { //create the html for the item
+async function createHTML(itemID, extraStyle="") { //create the html for the item
     item = await products.getProduct(itemID)
     subProducts = await products.getProductRelations(itemID)
 
-    console.log(item)
-    console.log(subProducts)
 
     subproductsDropdownHTML = ``
 
@@ -82,7 +80,7 @@ async function createHTML(itemID) { //create the html for the item
         item["price"] = subProducts[0]["price"]
     }
     htmlString = `
-    <table>
+    <table style="${extraStyle}">
         <tr>
             <td> <img src="${item["imageURL"]}" style="width:166px;"> </td>
             <td> <label>${item["name"]}</label> <br> <label>${item["description"]}</label> </td>
