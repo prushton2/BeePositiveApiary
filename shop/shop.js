@@ -56,19 +56,22 @@ function checkout() { //save the shoppinglist and go to the checkout
     window.location.href = "../checkout/Checkout.html"
 }
 
+
 async function createHTML(itemID, extraStyle="") { //create the html for the item
-    item = await products.getProduct(itemID)
-    subProducts = await products.getProductRelations(itemID)
+    let item = await products.getProduct(itemID)
+    let subProducts = await products.getProductRelations(itemID)
 
+    console.log(subProducts)
 
-    subproductsDropdownHTML = ``
+    let subproductsDropdownHTML = ``
 
     for(i in subProducts) {
         if(subProducts[i]["subProductId"] != 0) {
-            subproductsDropdownHTML += `<option value="${subProducts[i]["subProductId"]}">${subProducts[i]["subProductName"]}</option>`
+            subproduct = await products.getProduct(subProducts[i]["subProductId"])
+            subproductsDropdownHTML += `<option value="${subProducts[i]["subProductId"]}">${subproduct["name"]}</option>`
         }
     }
-    subProductHTML = `
+    let subProductHTML = `
         <form> Size 
             <select id="Subproduct of ${itemID}">
                 ${subproductsDropdownHTML}
@@ -79,7 +82,7 @@ async function createHTML(itemID, extraStyle="") { //create the html for the ite
         subProductHTML = ""
         item["price"] = subProducts[0]["price"]
     }
-    htmlString = `
+    let htmlString = `
     <div style="${extraStyle}">
         <table>
             <tr>
