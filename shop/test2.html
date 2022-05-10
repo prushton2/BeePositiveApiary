@@ -1,0 +1,68 @@
+<link rel="stylesheet" href="../nicepage.css" media="screen">
+
+<style>
+  td {
+    vertical-align: top;
+  }
+  table {
+	  padding: 25px;
+	  background-color: #ddd;
+	  color: black;
+	  font-size: 100%;
+	  width: 450px;
+	  height: 400px;
+  }
+  .dropbtn {
+  background-color: transparent;
+  color: black;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+}
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #ddd;}
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {display: block;}
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {background-color: #ddd;} 
+</style>
+
+<table>
+    <tr>
+        <td> <img src="${imageURL}" style="width:166px;"> </td>
+        <td> <label>${Name}</label> <br> <label>${Description}</label> </td>
+	</tr>
+	<tr>
+		<td> <label>${Price}</label> <br><br></td>
+	</tr>
+	<tr style="vertical-align: bottom;">
+		<td id="subproducts"> 
+			${subproductsHTML} 
+		</td>
+		<td style="text-align: right;"> <input id="Count of 201" style="width: 75px;" value="1" type="number" step="1"> Quantity </td>
+	</tr>
+	<tr>
+		<td> </td>
+		<td style="vertical-align: top;"> </b><button onClick="addToCart(${itemID}, ${hasSubProducts})" class="u-btn u-btn-round u-button-style u-custom-item u-hover-palette-1-light-1 u-palette-1-base u-radius-6 u-btn-2"><b>Add to Cart</b></button></td>
+</table>
