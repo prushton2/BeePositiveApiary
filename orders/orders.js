@@ -1,5 +1,6 @@
 doc = document.getElementById("sec-214c")
 password = document.getElementById("pswdinput")
+password.value = "devpassword"
 
 renderpage = async() => { //this function feels bloated, I want to shrink it down a bit
     incomplete = ""
@@ -65,10 +66,10 @@ renderpage = async() => { //this function feels bloated, I want to shrink it dow
 }
 
 async function createItemHTML(order, items, isArchived) {
-    date = new Date(parseInt(order["date"]))
+    let date = new Date(parseInt(order["date"]))
     date = date.toString().split(" GMT")[0] //remove the timezone
     
-    html = `Order for <b>${order["name"]}</b> placed on <b>${date}:</b>`
+    let html = `Order for <b>${order["name"]}</b> placed on <b>${date}:</b>`
     
     if(!isArchived) {
         html += `<button onClick="markAsComplete('${order["id"]}', ${!order["isComplete"]})">Mark as ${order["isComplete"] ? "incomplete" : "complete"}</button>`
@@ -93,7 +94,7 @@ async function createItemHTML(order, items, isArchived) {
 
 
 markAsComplete = async(i, complete) => {
-    response = await fetch(`${dburl}/complete`, {
+    let response = await fetch(`${dburl}/complete`, {
         method: "POST", headers: {"Accept": "applcation/json", "Content-Type": "application/json"},
         body: JSON.stringify(
             {
@@ -108,11 +109,16 @@ markAsComplete = async(i, complete) => {
 
 sendCompletionEmail = async(orderID, name) => {
     if(confirm(`Are you sure you want to send a completion email to ${name}?`)) {
-        response = await httpRequest(`${dburl}/sendCompletionEmail`, "POST", {
-            password: password.value,
-            orderID: orderID
-        }, false)
+        let response = await fetch(`${dburl}/sendCompletionEmail`, {
+            method: "POST", headers: {"Accept": "applcation/json", "Content-Type": "application/json"},
+            body: JSON.stringify({    
+                password: password.value,
+                orderID: orderID
+            })
+        })
+        response = JSON.parse(await response.text())
         alert(response["response"])
+        await renderpage()
     }
 }
 
