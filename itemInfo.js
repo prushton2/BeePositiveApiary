@@ -15,7 +15,8 @@ class Products {
     }
 
     //gets product from the database with the given name
-    getProduct(productID) {
+    async getProduct(productID) {
+        await this.getProducts()
         for(let key in this.products) {
             if(this.products[key]["id"] == productID) {
                 return this.products[key]
@@ -23,12 +24,24 @@ class Products {
         }
     }
 
-    getProductRelation(productId, subProductId) {
+    async getProductRelation(productId, subProductId) {
+        await this.getProducts()
         for(let key in this.productRelations) {
             if(this.productRelations[key]["productId"] == productId && this.productRelations[key]["subProductId"] == subProductId) {
                 return this.productRelations[key]
             }
         }
+    }
+
+    async getProductRelations(productId) {
+        await this.getProducts()
+        let returnObject = []
+        for(let key in this.productRelations) {
+            if(this.productRelations[key]["productId"] == productId) {
+                returnObject.push(this.productRelations[key])
+            }
+        }
+        return returnObject
     }
 
     async getItemCost(productId, subProductId, amount) {

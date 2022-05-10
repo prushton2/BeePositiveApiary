@@ -1,5 +1,3 @@
-<link rel="stylesheet" href="../nicepage.css" media="screen">
-
 <style>
   td {
     vertical-align: top;
@@ -47,6 +45,7 @@
 /* Change the background color of the dropdown button when the dropdown content is shown */
 .dropdown:hover .dropbtn {background-color: #ddd;} 
 </style>
+<link rel="stylesheet" href="../nicepage.css" media="screen">
 
 <table>
     <tr>
@@ -58,7 +57,14 @@
 	</tr>
 	<tr style="vertical-align: bottom;">
 		<td id="subproducts"> 
-			${subproductsHTML} 
+			<form> Jar Size 
+				<select id="Subproduct of 201">
+					<option value="300"> 8oz </option>
+					<option value="301"> 10oz</option>
+					<option value="302"> 1lb</option>
+					<option value="303"> 2lb </option>
+				</select>
+			</form> 
 		</td>
 		<td style="text-align: right;"> <input id="Count of 201" style="width: 75px;" value="1" type="number" step="1"> Quantity </td>
 	</tr>

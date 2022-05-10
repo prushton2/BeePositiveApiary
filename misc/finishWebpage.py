@@ -5,12 +5,12 @@ import os
 pages = {
     "shop":{ 
         "page": "shop/Shop.html",
-        "scripts": ["../config.js", "../script.js", "../itemInfo.js", "shop.js"],
+        "scripts": ["../config.js", "../script.js", "../itemInfo.js", "shop.js", "itemShop.js"],
         "renameTo": "index.html"
     },
     "honey":{
         "page": "shop/Honey.html",
-        "scripts": ["../config.js", "../script.js", "../itemInfo.js", "shop.js"],
+        "scripts": ["../config.js", "../script.js", "../itemInfo.js", "shop.js", "honeyShop.js"],
         "renameTo": "index.html"
     },
     "checkout":{

@@ -55,3 +55,53 @@ function checkout() { //save the shoppinglist and go to the checkout
     localStorage.setItem("shoppingList", JSON.stringify(shoppingList))
     window.location.href = "../checkout/Checkout.html"
 }
+
+async function createHTML(itemID) { //create the html for the item
+    item = await products.getProduct(itemID)
+    subProducts = await products.getProductRelations(itemID)
+
+    console.log(item)
+    console.log(subProducts)
+
+    subproductsDropdownHTML = ``
+
+    for(i in subProducts) {
+        if(subProducts[i]["subProductId"] != 0) {
+            subproductsDropdownHTML += `<option value="${subProducts[i]["subProductId"]}">${subProducts[i]["subProductName"]}</option>`
+        }
+    }
+    subProductHTML = `
+        <form> Size 
+            <select id="Subproduct of ${itemID}">
+                ${subproductsDropdownHTML}
+            </select>
+        </form>
+    `
+    if(subproductsDropdownHTML == "") {
+        subProductHTML = ""
+        item["price"] = subProducts[0]["price"]
+    }
+    htmlString = `
+    <table>
+        <tr>
+            <td> <img src="${item["imageURL"]}" style="width:166px;"> </td>
+            <td> <label>${item["name"]}</label> <br> <label>${item["description"]}</label> </td>
+        </tr>
+        <tr>
+            <td> <label id="price">$${item["price"]}</label> <br><br></td>
+        </tr>
+        <tr style="vertical-align: bottom;">
+            <td id="subproducts"> 
+                ${subProductHTML} 
+            </td>
+            <td style="text-align: right;"> <input id="Count of 201" style="width: 75px;" value="1" type="number" step="1"> Quantity </td>
+        </tr>
+        <tr>
+            <td> </td>
+            <td style="vertical-align: top;"> </b><button onClick="addToCart(${itemID}, ${subProductHTML == ""})" class="u-btn u-btn-round u-button-style u-custom-item u-hover-palette-1-light-1 u-palette-1-base u-radius-6 u-btn-2"><b>Add to Cart</b></button></td>
+        </tr>
+    </table>`
+
+    return htmlString
+
+}
