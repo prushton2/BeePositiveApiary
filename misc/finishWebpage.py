@@ -5,32 +5,32 @@ import os
 pages = {
     "shop":{ 
         "page": "shop/Shop.html",
-        "scripts": ["../script.js", "../itemInfo.js", "shop.js"],
+        "scripts": ["../config.js", "../script.js", "../itemInfo.js", "shop.js"],
         "renameTo": "index.html"
     },
     "honey":{
         "page": "shop/Honey.html",
-        "scripts": ["../script.js", "../itemInfo.js", "shop.js"],
+        "scripts": ["../config.js", "../script.js", "../itemInfo.js", "shop.js"],
         "renameTo": "index.html"
     },
     "checkout":{
         "page": "checkout/Checkout.html",
-        "scripts": ["../script.js", "../itemInfo.js", "checkout.js"],
+        "scripts": ["../config.js", "../script.js", "../itemInfo.js", "checkout.js"],
         "renameTo": "index.html"
     },
     "orders":{
         "page": "orders/Orders.html",
-        "scripts": ["../script.js", "../itemInfo.js", "orders.js"],
+        "scripts": ["../config.js", "../script.js", "../itemInfo.js", "orders.js"],
         "renameTo": "index.html"
     },
     "home":{
         "page": "home/Home.html",
-        "scripts": ["../script.js"],
+        "scripts": ["../config.js", "../script.js"],
         "renameTo": "index.html"
     },
     "finalize":{
         "page": "finalize/Finalize.html",
-        "scripts": ["../script.js", "../itemInfo.js", "finalize.js", "../checkout/checkout.js"],
+        "scripts": ["../config.js", "../script.js", "../itemInfo.js", "finalize.js", "../checkout/checkout.js"],
         "renameTo": "index.html"
     }
 }
@@ -57,6 +57,12 @@ createFiles = {
         "content": "<!DOCTYPE HTML><head></head><body><script>window.location.href='Shop.html';</script></body>" 
     }
 }
+
+deleteFiles = [
+    "templates/password",
+    "templates",
+    "Page-Password-Template.css"
+]
 
 indexSettings = {
     "indexPage": "index.html",
@@ -100,6 +106,9 @@ for file in createFiles:
     file = createFiles[file]
     with open(file["name"], "w") as f:
         f.write(file["content"])
+
+for file in deleteFiles:
+    os.remove(file)
 
 with open(indexSettings["indexPage"], "w") as page:
     redirectHTML = f"<!DOCTYPE HTML><head></head><body><script>window.location.href='{indexSettings['redirectPage']}';</script></body>"

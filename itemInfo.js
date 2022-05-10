@@ -1,15 +1,16 @@
-dburl = "http://localhost:3000"
-
+dburl = CONFIG_dburl
 class Products {
     constructor() {
-        this.MassTax = 0.0625
+        this.MassTax = CONFIG_tax
         this.products = null
+        this.productRelations = null
     }
 
     async getProducts() {
         if(this.products == null) {
             let response = JSON.parse(await fetch(`${dburl}/getProducts`).then((value) => {return value.text()}))
-            this.products = response["response"]
+            this.products = response["response"]["products"]
+            this.productRelationss = response["response"]["productRelations"]
         }
     }
 
