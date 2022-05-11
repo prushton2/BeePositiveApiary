@@ -5,33 +5,31 @@ import os
 pages = {
     "shop":{ 
         "page": "shop/Shop.html",
-        "scripts": ["../script.js", "../itemInfo.js", "shop.js"],
-        "renameTo": "index.html"
+        "scripts": ["../config.js", "../script.js", "../itemInfo.js", "shop.js", "itemShop.js"]
     },
     "honey":{
         "page": "shop/Honey.html",
-        "scripts": ["../script.js", "../itemInfo.js", "shop.js"],
-        "renameTo": "index.html"
-    },
-    "checkout":{
-        "page": "checkout/Checkout.html",
-        "scripts": ["../script.js", "../itemInfo.js", "checkout.js"],
-        "renameTo": "index.html"
+        "scripts": ["../config.js", "../script.js", "../itemInfo.js", "shop.js", "honeyShop.js"]
     },
     "orders":{
         "page": "orders/Orders.html",
-        "scripts": ["../script.js", "../itemInfo.js", "orders.js"],
-        "renameTo": "index.html"
+        "scripts": ["../config.js", "../script.js", "../itemInfo.js", "orders.js"]
     },
     "home":{
         "page": "home/Home.html",
-        "scripts": ["../script.js"],
-        "renameTo": "index.html"
+        "scripts": ["../config.js", "../script.js"]
+    },
+    "orderconfirmed":{
+        "page": "checkout/OrderConfirmed.html",
+        "scripts": ["../config.js", "../script.js", "../itemInfo.js", "orderConfirmed.js"]
     },
     "finalize":{
-        "page": "finalize/Finalize.html",
-        "scripts": ["../script.js", "../itemInfo.js", "finalize.js", "../checkout/checkout.js"],
-        "renameTo": "index.html"
+        "page": "checkout/Finalize.html",
+        "scripts": ["../config.js", "../script.js", "../itemInfo.js", "finalize.js", "checkout.js"]
+    },
+    "checkout":{
+        "page": "checkout/Checkout.html",
+        "scripts": ["../config.js", "../script.js", "../itemInfo.js", "checkout.js"]
     }
 }
 
@@ -41,22 +39,23 @@ createFiles = {
         "content": "<!DOCTYPE HTML><head></head><body><script>window.location.href='Checkout.html';</script></body>" 
     },
     1: {
-        "name": "finalize/index.html",
-        "content": "<!DOCTYPE HTML><head></head><body><script>window.location.href='Finalize.html';</script></body>" 
-    },
-    2: {
         "name": "home/index.html",
         "content": "<!DOCTYPE HTML><head></head><body><script>window.location.href='Home.html';</script></body>" 
     },
-    3: {
+    2: {
         "name": "orders/index.html",
         "content": "<!DOCTYPE HTML><head></head><body><script>window.location.href='Orders.html';</script></body>" 
     },
-    4: {
+    3: {
         "name": "shop/index.html",
         "content": "<!DOCTYPE HTML><head></head><body><script>window.location.href='Shop.html';</script></body>" 
     }
 }
+
+deleteFiles = [
+    "templates/password",
+    "Page-Password-Template.css"
+]
 
 indexSettings = {
     "indexPage": "index.html",
@@ -87,7 +86,7 @@ for pageInfo in pages:
 
                 for script in scripts:
                     if(script != ""):
-                        newPage.append(f"<script src=\"{script}\"></script>")
+                        newPage.append(f'<script src=\"{script}\"></script>')
 
                 newPage.append("</body>\n</html>")
         
@@ -100,6 +99,9 @@ for file in createFiles:
     file = createFiles[file]
     with open(file["name"], "w") as f:
         f.write(file["content"])
+
+for file in deleteFiles:
+    os.remove(file)
 
 with open(indexSettings["indexPage"], "w") as page:
     redirectHTML = f"<!DOCTYPE HTML><head></head><body><script>window.location.href='{indexSettings['redirectPage']}';</script></body>"

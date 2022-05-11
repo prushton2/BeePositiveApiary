@@ -34,261 +34,49 @@
     min-height: 54px;
   }
 }.u-section-2 .u-sheet-1 {
-  min-height: 1007px;
-}
-
-.u-section-2 .u-layout-wrap-1 {
-  margin-top: 50px;
-  margin-bottom: 60px;
-}
-
-.u-section-2 .u-layout-cell-1 {
-  min-height: 400px;
-}
-
-.u-section-2 .u-container-layout-1 {
-  padding: 0 30px;
-}
-
-.u-section-2 .u-group-1 {
-  width: 450px;
-  min-height: 400px;
-  height: auto;
-  margin: 0 auto -30px;
-}
-
-.u-section-2 .u-container-layout-2 {
-  padding: 30px;
-}
-
-.u-section-2 .u-image-1 {
-  width: 166px;
-  height: 167px;
-  text-align: start;
-  margin: 0 auto 0 0;
-}
-
-.u-section-2 .u-text-1 {
-  margin: -147px 110px 0 auto;
-}
-
-.u-section-2 .u-text-2 {
-  text-align: start;
-  margin: 20px 52px 0 186px;
-}
-
-.u-section-2 .u-text-3 {
-  margin: 72px 242px 0 10px;
-}
-
-.u-section-2 .u-custom-html-1 {
-  min-height: 31px;
-  margin: 47px 0 0 227px;
-}
-
-.u-section-2 .u-btn-1 {
-  font-size: 0.9375rem;
-  background-image: none;
-  font-weight: 700;
-  margin: 10px 0 0 auto;
-  padding: 8px 33px;
-}
-
-.u-section-2 .u-layout-cell-2 {
-  min-height: 400px;
-}
-
-.u-section-2 .u-container-layout-3 {
-  padding: 0 30px;
-}
-
-.u-section-2 .u-group-2 {
-  width: 450px;
-  min-height: 400px;
-  height: auto;
-  margin: 0 auto -30px;
-}
-
-.u-section-2 .u-container-layout-4 {
-  padding: 30px;
-}
-
-.u-section-2 .u-image-2 {
-  width: 166px;
-  height: 167px;
-  text-align: start;
-  margin: 0 auto 0 0;
-}
-
-.u-section-2 .u-text-4 {
-  margin: -147px auto 0 186px;
-}
-
-.u-section-2 .u-text-5 {
-  text-align: start;
-  margin: 20px auto 0 186px;
-}
-
-.u-section-2 .u-text-6 {
-  margin: 72px 0 0 10px;
-}
-
-.u-section-2 .u-custom-html-2 {
-  min-height: 31px;
-  margin: 47px 0 0 227px;
-}
-
-.u-section-2 .u-btn-2 {
-  font-size: 0.9375rem;
-  background-image: none;
-  font-weight: 700;
-  margin: 10px 0 0 auto;
-  padding: 8px 33px;
-}
-
-@media (max-width: 1199px) {
-  .u-section-2 .u-layout-cell-1 {
-    min-height: 330px;
+  min-height: 880px;
+} td {
+    vertical-align: top;
   }
-
-  .u-section-2 .u-group-1 {
-    width: 410px;
-    height: auto;
+  table {
+	  padding: 25px;
+	  background-color: #ddd;
+	  color: black;
+	  font-size: 100%;
+	  width: 450px;
+	  height: 400px;
   }
-
-  .u-section-2 .u-custom-html-1 {
-    height: auto;
-  }
-
-  .u-section-2 .u-layout-cell-2 {
-    min-height: 330px;
-  }
-
-  .u-section-2 .u-group-2 {
-    width: 410px;
-    height: auto;
-  }
-
-  .u-section-2 .u-custom-html-2 {
-    height: auto;
-  }
-}
-
-@media (max-width: 991px) {
-  .u-section-2 .u-layout-cell-1 {
-    min-height: 100px;
-  }
-
-  .u-section-2 .u-group-1 {
-    width: 300px;
-  }
-
-  .u-section-2 .u-layout-cell-2 {
-    min-height: 100px;
-  }
-
-  .u-section-2 .u-group-2 {
-    width: 300px;
-  }
-}
-
-@media (max-width: 767px) {
-  .u-section-2 .u-sheet-1 {
-    min-height: 2025px;
-  }
-
-  .u-section-2 .u-container-layout-1 {
-    padding-left: 10px;
-    padding-right: 10px;
-  }
-
-  .u-section-2 .u-container-layout-2 {
-    padding-left: 10px;
-    padding-right: 10px;
-  }
-
-  .u-section-2 .u-container-layout-3 {
-    padding-left: 10px;
-    padding-right: 10px;
-  }
-
-  .u-section-2 .u-container-layout-4 {
-    padding-left: 10px;
-    padding-right: 10px;
-  }
-}
-
-@media (max-width: 575px) {
-  .u-section-2 .u-sheet-1 {
-    min-height: 1499px;
-  }
-
-  .u-section-2 .u-text-1 {
-    margin-right: 82px;
-  }
-
-  .u-section-2 .u-text-2 {
-    margin-right: 0;
-    margin-left: 128px;
-  }
-
-  .u-section-2 .u-text-3 {
-    margin-right: 142px;
-    margin-left: 0;
-  }
-
-  .u-section-2 .u-custom-html-1 {
-    margin-left: 117px;
-  }
-
-  .u-section-2 .u-text-4 {
-    margin-right: 82px;
-    margin-left: 76px;
-  }
-
-  .u-section-2 .u-text-5 {
-    margin-left: 76px;
-  }
-
-  .u-section-2 .u-text-6 {
-    margin-left: 0;
-  }
-
-  .u-section-2 .u-custom-html-2 {
-    margin-left: 117px;
-  }
-}/* Dropdown Button */
-.dropbtn {
-  background-color: #04AA6D;
-  color: white;
+  .dropbtn {
+  background-color: transparent;
+  color: black;
   padding: 16px;
   font-size: 16px;
   border: none;
 }
 /* The container  - needed to position the dropdown content */
 .dropdown {
-  position: relative;
-  display: inline-block;
-}
-/* Dropdown Content (Hidden by Default) */
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f1f1f1;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-/* Links inside the dropdown */
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-/* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color: #ddd;}
-/* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {display: block;}
-/* Change the background color of the dropdown button when the dropdown content is shown */
-.dropdown:hover .dropbtn {background-color: #3e8e41;}
+    position: relative;
+    display: inline-block;
+  }
+  /* Dropdown Content (Hidden by Default) */
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  /* Links inside the dropdown */
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  /* Change color of dropdown links on hover */
+  .dropdown-content a:hover {background-color: #ddd;}
+  /* Show the dropdown menu on hover */
+  .dropdown:hover .dropdown-content {display: block;}
+  /* Change the background color of the dropdown button when the dropdown content is shown */
+  .dropdown:hover .dropbtn {background-color: #ddd;} 
