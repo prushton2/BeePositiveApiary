@@ -27,7 +27,7 @@ async function createAllHtml(jsonobject) { //takes in the shoppinglist
 
 function gotofinalize() {
     localStorage.setItem("shoppingList", JSON.stringify(shoppingList))
-    window.location.href = "../finalize/Finalize.html"
+    window.location.href = "Finalize.html"
 }
 
 async function updateShoppingList() {

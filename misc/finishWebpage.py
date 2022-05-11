@@ -13,11 +13,6 @@ pages = {
         "scripts": ["../config.js", "../script.js", "../itemInfo.js", "shop.js", "honeyShop.js"],
         "renameTo": "index.html"
     },
-    "checkout":{
-        "page": "checkout/Checkout.html",
-        "scripts": ["../config.js", "../script.js", "../itemInfo.js", "checkout.js"],
-        "renameTo": "index.html"
-    },
     "orders":{
         "page": "orders/Orders.html",
         "scripts": ["../config.js", "../script.js", "../itemInfo.js", "orders.js"],
@@ -28,9 +23,14 @@ pages = {
         "scripts": ["../config.js", "../script.js"],
         "renameTo": "index.html"
     },
+    "checkout":{
+        "page": "checkout/Checkout.html",
+        "scripts": ["../config.js", "../script.js", "../itemInfo.js", "checkout.js"],
+        "renameTo": "index.html"
+    },
     "finalize":{
-        "page": "finalize/Finalize.html",
-        "scripts": ["../config.js", "../script.js", "../itemInfo.js", "finalize.js", "../checkout/checkout.js"],
+        "page": "checkout/Finalize.html",
+        "scripts": ["../config.js", "../script.js", "../itemInfo.js", "finalize.js", "checkout.js"],
         "renameTo": "index.html"
     }
 }
@@ -41,18 +41,14 @@ createFiles = {
         "content": "<!DOCTYPE HTML><head></head><body><script>window.location.href='Checkout.html';</script></body>" 
     },
     1: {
-        "name": "finalize/index.html",
-        "content": "<!DOCTYPE HTML><head></head><body><script>window.location.href='Finalize.html';</script></body>" 
-    },
-    2: {
         "name": "home/index.html",
         "content": "<!DOCTYPE HTML><head></head><body><script>window.location.href='Home.html';</script></body>" 
     },
-    3: {
+    2: {
         "name": "orders/index.html",
         "content": "<!DOCTYPE HTML><head></head><body><script>window.location.href='Orders.html';</script></body>" 
     },
-    4: {
+    3: {
         "name": "shop/index.html",
         "content": "<!DOCTYPE HTML><head></head><body><script>window.location.href='Shop.html';</script></body>" 
     }
