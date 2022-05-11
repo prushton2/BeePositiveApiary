@@ -1,6 +1,5 @@
 doc = document.getElementById("sec-214c")
 password = document.getElementById("pswdinput")
-password.value = "devpassword"
 
 renderpage = async() => { //this function feels bloated, I want to shrink it down a bit
     incomplete = ""
