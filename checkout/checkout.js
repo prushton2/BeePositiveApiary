@@ -1,38 +1,39 @@
-shoppingList = JSON.parse(localStorage.getItem("shoppingList"))
+import * as utils from "../utils.js"
 
-async function createHTML(item) { //shoppingList[item], supposed to contain amount and subproductID
-    let subProductLabel = item["subProductID"] == 0 ? "" : `${ (await products.getProduct(item["subProductID"]))["name"]} of`
-    let label = `<label>${subProductLabel} ${(await products.getProduct(item["productID"]))["name"]}</label>`
-    let price = `<label>$${ await products.getItemCost(item["productID"], item["subProductID"], 1) }</label>&nbsp&nbsp&nbsp`
+let shoppingList = JSON.parse(localStorage.getItem("shoppingList"))
+
+export async function createHTML(item) { //shoppingList[item], supposed to contain amount and subproductID
     let textbox = `<input style="width: 75px;" type="number" step="any" onchange="updateShoppingList()" id="Count of ${item["productID"]} ${item["subProductID"]}" value=${item["amount"]}>`
+    
+    let htmlString = `<div> <label>{productName}</label> <div style='float:right; text-align: right;'>{price}&nbsp&nbsp&nbspx${textbox}</div></div><br>`
 
-    return `<div>${label}<div style='float:right; text-align: right;'>${price}x${textbox}</div></div><br>`
+    return utils.products.createItemNameString(item, htmlString)
 }
 
-async function drawCheckout() {
-    await products.getProducts() 
+export async function drawCheckout() {
+    await utils.products.getProducts() 
     document.getElementById("CheckoutList").innerHTML = await createAllHtml(shoppingList)//`<div class="u-clearfix u-sheet u-sheet-1">${createAllHtml(shoppingList)}</div>`
-    document.getElementById("totalCost").innerHTML = `${await products.getTaxCalculation(shoppingList["Items"])}<br>Total Cost: ${await products.getDisplayCost(shoppingList["Items"])}`
+    document.getElementById("totalCost").innerHTML = `${await utils.products.getTaxCalculation(shoppingList["Items"])}<br>Total Cost: ${await utils.products.getDisplayCost(shoppingList["Items"])}`
 }
 
-async function createAllHtml(jsonobject) { //takes in the shoppinglist
-    html = ""
-    for(var key in jsonobject["Items"]) {
-        productID = jsonobject["Items"][key]["productID"]        
+export async function createAllHtml(jsonobject) { //takes in the shoppinglist
+    let html = ""
+    for(let key in jsonobject["Items"]) {
+        let productID = jsonobject["Items"][key]["productID"]        
         html += await createHTML(jsonobject["Items"][key])
     }
 
     return html == "" ? "Your items will appear here when they have been added to the cart!" : html
 }
 
-function gotofinalize() {
+export function gotofinalize() {
     localStorage.setItem("shoppingList", JSON.stringify(shoppingList))
     window.location.href = "Finalize.html"
 }
 
-async function updateShoppingList() {
+export async function updateShoppingList() {
     
-    for(key in shoppingList["Items"]) {
+    for(let key in shoppingList["Items"]) {
         item = shoppingList["Items"][key]
 
         newAmount = parseFloat(document.getElementById(`Count of ${item["productID"]} ${item["subProductID"]}`).value)
@@ -58,7 +59,7 @@ async function updateShoppingList() {
     drawCheckout()
 }
 
-function resetShoppingCart() {
+export function resetShoppingCart() {
     if(confirm("Are you sure you want to reset your shopping cart?")) {
         shoppingList = {
             "Items": []
