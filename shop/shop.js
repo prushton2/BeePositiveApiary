@@ -115,10 +115,11 @@ export async function createHTML(itemID, extraStyle="") { //create the html for 
 
 export async function createAllHTML(items) {
     let allHTML = ""
+    let halfwidth = document.documentElement.clientWidth/2
     for (let j in items) {
         let i = items[j]
-        allHTML += await createHTML(i[0], `position: absolute; left:  20%; margin-top: ${50 + (j*450)}px;`)
-        allHTML += await createHTML(i[1], `position: absolute; right: 20%; margin-top: ${50 + (j*450)}px;`)
+        allHTML += await createHTML(i[0], `position: absolute; left:  ${halfwidth-550}px; margin-top: ${50 + (j*450)}px;`)
+        allHTML += await createHTML(i[1], `position: absolute; right: ${halfwidth-550}px; margin-top: ${50 + (j*450)}px;`)
         allHTML += "<br>"
     }
     return allHTML
