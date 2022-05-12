@@ -5,15 +5,15 @@ import os
 pages = {
     "shop":{ 
         "page": "shop/Shop.html",
-        "scripts": ["../config.js", "../utils.js", "../itemInfo.js", "shop.js", "itemShop.js"]
+        "scripts": ["../config.js", "../utils.js", "shop.js", "itemShop.js"]
     },
     "honey":{
         "page": "shop/Honey.html",
-        "scripts": ["../config.js", "../utils.js", "../itemInfo.js", "shop.js", "honeyShop.js"]
+        "scripts": ["../config.js", "../utils.js", "shop.js", "honeyShop.js"]
     },
     "orders":{
         "page": "orders/Orders.html",
-        "scripts": ["../config.js", "../utils.js", "../itemInfo.js", "orders.js"]
+        "scripts": ["../config.js", "../utils.js", "orders.js"]
     },
     "home":{
         "page": "home/Home.html",
@@ -21,15 +21,15 @@ pages = {
     },
     "orderconfirmed":{
         "page": "checkout/OrderConfirmed.html",
-        "scripts": ["../config.js", "../utils.js", "../itemInfo.js", "orderConfirmed.js"]
+        "scripts": ["../config.js", "../utils.js", "orderConfirmed.js"]
     },
     "finalize":{
         "page": "checkout/Finalize.html",
-        "scripts": ["../config.js", "../utils.js", "../itemInfo.js", "finalize.js", "checkout.js"]
+        "scripts": ["../config.js", "../utils.js", "finalize.js", "checkout.js"]
     },
     "checkout":{
         "page": "checkout/Checkout.html",
-        "scripts": ["../config.js", "../utils.js", "../itemInfo.js", "checkout.js"]
+        "scripts": ["../config.js", "../utils.js", "checkout.js"]
     }
 }
 

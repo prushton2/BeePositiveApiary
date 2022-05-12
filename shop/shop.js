@@ -1,5 +1,5 @@
 // Requires itemInfo.js
-import * as itemInfo from "../itemInfo.js"
+import * as utils from "../utils.js"
 
 let shoppingList = localStorage.getItem("shoppingList")
 
@@ -16,11 +16,11 @@ shoppingList = JSON.parse(shoppingList)
 
 export async function addToCart(item, hasSubproduct=false) { //Subproduct is used for something like a jar of honey, where the jar is the subproduct and the honey is the item
     amountToAdd = parseFloat(document.getElementById(`Count of ${item}`).value)
-    amountToAdd = await itemInfo.products.setItemAmountToIncrement(item, amountToAdd)
+    amountToAdd = await utils.products.setItemAmountToIncrement(item, amountToAdd)
     
     if(hasSubproduct) { //if we have a subproduct, we need to add the subproduct to the shoppinglist and make sure the amount of the subproduct follows the increment of the item
         subProduct = document.getElementById(`Subproduct of ${item}`).value
-        amountToAdd = await itemInfo.products.setItemAmountToIncrement(subProduct, amountToAdd)
+        amountToAdd = await utils.products.setItemAmountToIncrement(subProduct, amountToAdd)
     } else {
         subProduct = 0 //0 is the empty value for subproduct
     }
@@ -59,20 +59,20 @@ export function checkout() { //save the shoppinglist and go to the checkout
 
 export async function updateDisplayPrice(productID) { //update the displayed price of the item
     subProduct = document.getElementById(`Subproduct of ${productID}`).value
-    subProductRelation = await itemInfo.products.getProductRelation(productID, subProduct)
+    subProductRelation = await utils.products.getProductRelation(productID, subProduct)
     document.getElementById(`price of ${productID}`).innerHTML = `$${subProductRelation["price"]}`
 }
 
 export async function createHTML(itemID, extraStyle="") { //create the html for the item
-    let item = await itemInfo.products.getProduct(itemID)
-    let subProducts = await itemInfo.products.getProductRelations(itemID)
+    let item = await utils.products.getProduct(itemID)
+    let subProducts = await utils.products.getProductRelations(itemID)
 
 
     let subproductsDropdownHTML = ``
 
     for(let i in subProducts) {
         if(subProducts[i]["subProductId"] != 0) {
-            let subproduct = await itemInfo.products.getProduct(subProducts[i]["subProductId"])
+            let subproduct = await utils.products.getProduct(subProducts[i]["subProductId"])
             subproductsDropdownHTML += `<option value="${subProducts[i]["subProductId"]}">${subproduct["name"]}</option>`
         }
     }
