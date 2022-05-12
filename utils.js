@@ -30,7 +30,7 @@ export async function httpRequest(url, method, body, makeAlertOnError) {
         if(makeAlertOnError) {
             alert("There was an error making your request")
         }
-        text = await response.text()
+        let text = await response.text()
         return JSON.parse(text)
     }
 }

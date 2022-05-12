@@ -1,20 +1,26 @@
-doc = document.getElementById("sec-214c")
-password = document.getElementById("pswdinput")
+import * as utils from "../utils.js"
+import * as config from "../config.js"
 
-renderpage = async() => { //this function feels bloated, I want to shrink it down a bit
-    incomplete = ""
-    complete = ""
-    archived = ""
+let doc = document.getElementById("sec-214c")
+let password = document.getElementById("pswdinput")
+password.value = "password"
 
-    await products.getProducts()
+window.markAsComplete = markAsComplete
+window.sendCompletionEmail = sendCompletionEmail
+window.archiveItem = archiveItem
+
+async function renderpage() { //this function feels bloated, I want to shrink it down a bit
+    let incomplete = ""
+    let complete = ""
+    let archived = ""
 
     //get all unarchived orders
-    response = await httpRequest(`${dburl}/getOrders`, "POST", {
+    let response = await utils.httpRequest(`${config.dburl}/getOrders`, "POST", {
         password: password.value,
         getArchived: false
     }, false)
 
-    orders = response["response"]
+    let orders = response["response"]
 
     if(orders == "Invalid Credentials") { //if the password is wrong (only happens once)
         alert("Incorrect Password")
@@ -24,7 +30,7 @@ renderpage = async() => { //this function feels bloated, I want to shrink it dow
     for(var order in orders) {
 
         //get all items for each order
-        items = await httpRequest(`${dburl}/getPurchases`, "POST", {
+        let items = await utils.httpRequest(`${config.dburl}/getPurchases`, "POST", {
             password: password.value,
             orderID: orders[order]["id"],
             getArchived: false  
@@ -41,7 +47,7 @@ renderpage = async() => { //this function feels bloated, I want to shrink it dow
     }
 
     //get all archived orders
-    response = await httpRequest(`${dburl}/getOrders`, "POST", {
+    response = await utils.httpRequest(`${config.dburl}/getOrders`, "POST", {
         password: password.value,
         getArchived: true,
     }, false)
@@ -50,7 +56,7 @@ renderpage = async() => { //this function feels bloated, I want to shrink it dow
 
     for(var order in orders) {
         //get all items for each archived order
-        items = await httpRequest(`${dburl}/getPurchases`, "POST", {
+        let items = await utils.httpRequest(`${config.dburl}/getPurchases`, "POST", {
             password: password.value,
             orderID: orders[order]["id"],
             getArchived: true
@@ -80,20 +86,20 @@ async function createItemHTML(order, items, isArchived) {
     }
     html += '<br>' 
     
-    html += `Total Cost: <b>${await products.getDisplayCost(items)}</b><br>`
+    html += `Total Cost: <b>${utils.products.getDisplayCost(items)}</b><br>`
     html += `Order Contents:<br>`
     
     for(var item in items) { 
         item = items[item]
-        subproduct = item["subProductID"] == "0" ? "" : `${(await products.getProduct(item["subProductID"]))["name"]} of`
-        html += `&nbsp&nbsp&nbsp• ${item["amount"]}x ${subproduct} ${(await products.getProduct(item["productID"]))["name"]}<br>`
+        let subproduct = item["subProductID"] == "0" ? "" : `${(await utils.products.getProduct(item["subProductID"]))["name"]} of`
+        html += `&nbsp&nbsp&nbsp• ${item["amount"]}x ${subproduct} ${(await utils.products.getProduct(item["productID"]))["name"]}<br>`
     }
     return html + "<br><br>"
 }
 
 
-markAsComplete = async(i, complete) => {
-    let response = await fetch(`${dburl}/complete`, {
+async function markAsComplete(i, complete) {
+    let response = await fetch(`${config.dburl}/complete`, {
         method: "POST", headers: {"Accept": "applcation/json", "Content-Type": "application/json"},
         body: JSON.stringify(
             {
@@ -106,9 +112,9 @@ markAsComplete = async(i, complete) => {
     await renderpage()
 }
 
-sendCompletionEmail = async(orderID, name) => {
+async function sendCompletionEmail(orderID, name) {
     if(confirm(`Are you sure you want to send a completion email to ${name}?`)) {
-        let response = await fetch(`${dburl}/sendCompletionEmail`, {
+        let response = await fetch(`${config.dburl}/sendCompletionEmail`, {
             method: "POST", headers: {"Accept": "applcation/json", "Content-Type": "application/json"},
             body: JSON.stringify({    
                 password: password.value,
@@ -121,10 +127,10 @@ sendCompletionEmail = async(orderID, name) => {
     }
 }
 
-archiveItem = async(id, name) => {
+async function archiveItem(id, name) {
     let text = `Are you sure you would like to archive ${name}'s order?\n (ID: ${id})`;
     if (confirm(text)) {
-        await fetch(`${dburl}/archive`, {
+        await fetch(`${config.dburl}/archive`, {
             method: "POST", headers: {"Accept": "application/json", "Content-Type": "application/json"},
             body: JSON.stringify({
                 "password": password.value,
@@ -135,3 +141,11 @@ archiveItem = async(id, name) => {
     }
     await renderpage()
 }
+
+document.getElementById("pswdinput").addEventListener("keyup", async(e) => {
+    if(e.key == "Enter") {
+        renderpage()
+    }
+})
+
+document.getElementById("renderPageButton").addEventListener("click", renderpage)
