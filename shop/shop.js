@@ -89,8 +89,8 @@ async function createHTML(itemID, extraStyle="") { //create the html for the ite
     let htmlString = `
     <div style="${extraStyle}">
         <table>
-            <tr>
-                <td> <img src="${item["imageURL"]}" style="width:166px;"> </td>
+            <tr style="text-align: left;">
+                <td style="width: 180px; height: 180px;"> <img src="${item["imageURL"]}" style="width:170px;"> </td>
                 <td> <label>${item["name"]}</label> <br> <label>${item["description"]}</label> </td>
             </tr>
             <tr>
@@ -104,7 +104,7 @@ async function createHTML(itemID, extraStyle="") { //create the html for the ite
             </tr>
             <tr>
                 <td> </td>
-                <td style="vertical-align: top;"> </b><button onClick="addToCart(${itemID}, ${subProductHTML != ""})" class="u-btn u-btn-round u-button-style u-custom-item u-hover-palette-1-light-1 u-palette-1-base u-radius-6 u-btn-2"><b>Add to Cart</b></button></td>
+                <td style="vertical-align: top; text-align: right;"></b><button onClick="addToCart(${itemID}, ${subProductHTML != ""})" class="u-btn-round u-button-style u-custom-item u-hover-palette-1-light-1 u-palette-1-base u-radius-6 u-btn-2" style="padding: 10px 20px;" ><b>Add to Cart</b></button></td>
             </tr>
         </table>
     </div>`
