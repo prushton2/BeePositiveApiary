@@ -86,7 +86,7 @@ for pageInfo in pages:
 
                 for script in scripts:
                     if(script != ""):
-                        newPage.append(f'<script src=\"{script}\"></script>')
+                        newPage.append(f'<script type="module" src=\"{script}\"></script>')
 
                 newPage.append("</body>\n</html>")
         
