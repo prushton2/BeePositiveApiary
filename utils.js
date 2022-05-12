@@ -5,10 +5,10 @@ let dropdown = document.getElementById("cartButton") //Render the shoppinglist i
 let cartContents = document.getElementById("cartButtonContents")
 dropdown.addEventListener("mouseover", async(e) => {
     await products.getProducts()
-    html = ""
-    shoppingList = JSON.parse(localStorage.getItem("shoppingList"))
-    for(key in shoppingList["Items"]) {
-        subproduct = shoppingList["Items"][key]["subProductID"] == 0 ? "" : `${(await products.getProduct(shoppingList["Items"][key]["subProductID"]))["name"]} of `
+    let html = ""
+    let shoppingList = JSON.parse(localStorage.getItem("shoppingList"))
+    for(let key in shoppingList["Items"]) {
+        let subproduct = shoppingList["Items"][key]["subProductID"] == 0 ? "" : `${(await products.getProduct(shoppingList["Items"][key]["subProductID"]))["name"]} of `
         html += `<a href="#">${shoppingList["Items"][key]["amount"]}x ${subproduct}${(await products.getProduct(shoppingList["Items"][key]["productID"]))["name"]}`
     }
     cartContents.innerHTML = html
@@ -16,7 +16,7 @@ dropdown.addEventListener("mouseover", async(e) => {
 
 
 //cleaner http requests with automatic error handling
-async function httpRequest(url, method, body, makeAlertOnError) {
+export async function httpRequest(url, method, body, makeAlertOnError) {
 
     response = await fetch(url, {
         method: method, headers: {'Accept': 'application/json','Content-Type': 'application/json'},
@@ -100,13 +100,7 @@ class Products {
         return totalcost
     }
 
-    async setItemAmountToIncrement(itemID, amount) {
-        // await this.getProducts()
-        // amount = Math.max(amount, 0) //remove negative numbers
-        
-        // if(this.getProduct(itemID)["increment"] != 0) { // if the increment isnt 0, then make the number conform to the increment
-        //     return (amount - (amount % this.getProduct(itemID)["increment"]))
-        // }
+    async setItemAmountToIncrement(itemID, amount) { //going to be deprecated
         return amount - amount%1
     }
 
@@ -123,3 +117,4 @@ class Products {
 }
 
 export let products = new Products()
+await products.getProducts()
