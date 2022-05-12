@@ -1,27 +1,22 @@
+import * as utils from "../utils.js"
+import * as config from "../config.js"
+
 //get the url parameters
 const urlParams = new URLSearchParams(window.location.search);
 const orderId = urlParams.get('orderId');
 const viewKey = urlParams.get('viewKey');
 
-
 async function createHTML(item) { //shoppingList[item], supposed to contain amount and subproductID
-    let subProductLabel = item["subProductID"] == 0 ? "" : `${ (await products.getProduct(item["subProductID"]))["name"]} of`
-    let label = `<label>${subProductLabel} ${(await products.getProduct(item["productID"]))["name"]}</label>`
-    let price = `<label>$${ await products.getItemCost(item["productID"], item["subProductID"], 1) }</label>&nbsp&nbsp&nbsp`
-
-    return `<div>${label}<div style='float:right; text-align: right;'>${price}x${item["amount"]}</div></div><br>`
+    let htmlString = `<div> <label>{productName}</label><div style='float:right; text-align: right;'>{price}&nbsp&nbsp&nbspx{amount} &nbsp&nbsp&nbsp (\${totalPrice})</div></div><br>`
+    return utils.products.createItemNameString(item, htmlString)
 }
 
 setTimeout(async() => {
 
-    console.log(orderId);
-    console.log(viewKey);
-
-    const orderInfo = await httpRequest(`${dburl}/getSpecificOrder`, "POST", {
+    const orderInfo = await utils.httpRequest(`${config.dburl}/getSpecificOrder`, "POST", {
         "orderID": parseInt(orderId),
         "viewKey": viewKey
     }, false)
-    console.log(orderInfo)
 
     document.getElementById("orderNumber").innerHTML = `Order #${orderInfo["response"]["order"]["id"]}`;
     document.getElementById("name").innerHTML = orderInfo["response"]["order"]["name"];

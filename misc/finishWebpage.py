@@ -80,6 +80,14 @@ for pageInfo in pages:
 
                 newPage[index] = f"<button onClick=\"{function}\" class=\"{css}\">{buttonText}</button>"
 
+            if('SETID:' in element):
+                css = element.split('"')[3]
+                function = re.split("(SETID:)|(\" class)", element)[3]
+                buttonText = re.split("<|>", element)[-3]
+
+                newPage[index] = f"<button id=\"{function}\" class=\"{css}\">{buttonText}</button>"
+
+
             # Delete footer and insert script tags
             if("<footer class=" in element):
                 newPage = newPage[0:index-2]

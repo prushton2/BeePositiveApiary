@@ -18,13 +18,13 @@ dropdown.addEventListener("mouseover", async(e) => {
 //cleaner http requests with automatic error handling
 export async function httpRequest(url, method, body, makeAlertOnError) {
 
-    response = await fetch(url, {
+    let response = await fetch(url, {
         method: method, headers: {'Accept': 'application/json','Content-Type': 'application/json'},
         body: JSON.stringify(body)
     })
     
     if(response.status >= 200 && response.status < 300) {
-        text = await response.text()
+        let text = await response.text()
         return JSON.parse(text)
     } else {
         if(makeAlertOnError) {

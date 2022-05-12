@@ -1,6 +1,8 @@
-buy = async() => {
-    textboxes = ["name", "address", "email", "phoneNumber"] // the textboxes that are required
-    Order = {} 
+import * as utils from "../utils.js"
+import * as config from "../config.js"
+export async function buy() {
+    let textboxes = ["name", "address", "email", "phoneNumber"] // the textboxes that are required
+    let Order = {} 
     
     textboxes.forEach(element => { //go over each textbox
         if(document.getElementById(element).value) {//if not empty
@@ -11,9 +13,9 @@ buy = async() => {
         }
     });
 
-    shoppingList = JSON.parse(localStorage.getItem("shoppingList")) //get the shoppinglist
+    let shoppingList = JSON.parse(localStorage.getItem("shoppingList")) //get the shoppinglist
 
-    response = await httpRequest(`${dburl}/add`, "POST", { //send the post request to the database to add the order
+    let response = await utils.httpRequest(`${config.dburl}/add`, "POST", { //send the post request to the database to add the order
         "wantsToReceiveEmails": document.getElementById("sendEmail").checked,
         "Order": Order,
         "Items": shoppingList["Items"]
@@ -28,3 +30,5 @@ buy = async() => {
     }
     
 }
+
+document.getElementById("PlaceorderButton").addEventListener("click", buy) //when the place order button is clicked, run the buy function
