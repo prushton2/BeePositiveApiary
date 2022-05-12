@@ -1,31 +1,32 @@
 // Requires itemInfo.js
 import * as utils from "../utils.js"
 
-let shoppingList = localStorage.getItem("shoppingList")
+//initialize the shopping list
+export let shoppingList = localStorage.getItem("shoppingList")
 
 let test = shoppingList
 
-try { //this handle cases where the shoppinglist doesnt work
+try { //this handle cases where the shoppinglist doesnt work. If it doesnt work, it will create a new shopping list
     test = JSON.parse(test)
     test["Items"].push({"key": "value"})
 } catch {
     shoppingList = '{"Items":[]}'
 }
-
 shoppingList = JSON.parse(shoppingList)
 
-export async function addToCart(item, hasSubproduct=false) { //Subproduct is used for something like a jar of honey, where the jar is the subproduct and the honey is the item
-    amountToAdd = parseFloat(document.getElementById(`Count of ${item}`).value)
+export async function addToCart(item) { //Subproduct is used for something like a jar of honey, where the jar is the subproduct and the honey is the item
+    let amountToAdd = parseFloat(document.getElementById(`Count of ${item}`).value)
     amountToAdd = await utils.products.setItemAmountToIncrement(item, amountToAdd)
     
-    if(hasSubproduct) { //if we have a subproduct, we need to add the subproduct to the shoppinglist and make sure the amount of the subproduct follows the increment of the item
+    let subProduct
+    try { //if we have a subproduct, we need to add the subproduct to the shoppinglist and make sure the amount of the subproduct follows the increment of the item
         subProduct = document.getElementById(`Subproduct of ${item}`).value
         amountToAdd = await utils.products.setItemAmountToIncrement(subProduct, amountToAdd)
-    } else {
+    } catch {
         subProduct = 0 //0 is the empty value for subproduct
     }
     
-    for(i in shoppingList["Items"]) { //Look for the item if it is already in the shoppinglist.
+    for(let i in shoppingList["Items"]) { //Look for the item if it is already in the shoppinglist.
         if(shoppingList["Items"][i]["productID"] == item && shoppingList["Items"][i]["subProductID"] == subProduct) {
             shoppingList["Items"][i]["amount"] += amountToAdd //Add the amount to the existing item in the shoppingList and return
             checkout()
@@ -50,16 +51,14 @@ export async function addToCart(item, hasSubproduct=false) { //Subproduct is use
     checkout()
 }
 
-
-
 export function checkout() { //save the shoppinglist and go to the checkout
     localStorage.setItem("shoppingList", JSON.stringify(shoppingList))
     window.location.href = "../checkout/Checkout.html"
 }
 
 export async function updateDisplayPrice(productID) { //update the displayed price of the item
-    subProduct = document.getElementById(`Subproduct of ${productID}`).value
-    subProductRelation = await utils.products.getProductRelation(productID, subProduct)
+    let subProduct = document.getElementById(`Subproduct of ${productID}`).value
+    let subProductRelation = await utils.products.getProductRelation(productID, subProduct)
     document.getElementById(`price of ${productID}`).innerHTML = `$${subProductRelation["price"]}`
 }
 
@@ -78,7 +77,7 @@ export async function createHTML(itemID, extraStyle="") { //create the html for 
     }
     let subProductHTML = `
         <form> Size 
-            <select id="Subproduct of ${itemID}" onChange="updateDisplayPrice(${itemID})">
+            <select id="Subproduct of ${itemID}">
                 ${subproductsDropdownHTML}
             </select>
         </form>
@@ -98,18 +97,41 @@ export async function createHTML(itemID, extraStyle="") { //create the html for 
                 <td> <label id="price of ${itemID}">$${item["price"]}</label> <br><br></td>
             </tr>
             <tr style="vertical-align: bottom;">
-                <td id="subproducts"> 
+                <td> 
                     ${subProductHTML} 
                 </td>
                 <td style="text-align: right;"> <input id="Count of ${itemID}" style="width: 75px;" value="1" type="number" step="1"> Quantity </td>
             </tr>
             <tr>
                 <td> </td>
-                <td style="vertical-align: top; text-align: right;"></b><button onClick="addToCart(${itemID}, ${subProductHTML != ""})" class="u-btn-round u-button-style u-custom-item u-hover-palette-1-light-1 u-palette-1-base u-radius-6 u-btn-2" style="padding: 10px 20px;" ><b>Add to Cart</b></button></td>
+                <td style="vertical-align: top; text-align: right;"></b><button id="Add to cart ${itemID}"  class="u-btn-round u-button-style u-custom-item u-hover-palette-1-light-1 u-palette-1-base u-radius-6 u-btn-2" style="padding: 10px 20px;" ><b>Add to Cart</b></button></td>
             </tr>
         </table>
     </div>`
 
     return htmlString
 
+}
+
+export async function createAllHTML(items) {
+    let allHTML = ""
+    for (let j in items) {
+        let i = items[j]
+        allHTML += await createHTML(i[0], `position: absolute; left:  20%; margin-top: ${50 + (j*450)}px;`)
+        allHTML += await createHTML(i[1], `position: absolute; right: 20%; margin-top: ${50 + (j*450)}px;`)
+        allHTML += "<br>"
+    }
+    return allHTML
+}
+
+export function addEventListeners(items) {
+    for (let i in items) {
+        for (let j in items[i]) {
+            j = items[i][j]
+            document.getElementById(`Add to cart ${j}`).addEventListener("click", async() => { await addToCart(j) })
+            try {
+                document.getElementById(`Subproduct of ${j}`).addEventListener("change", async() => { await updateDisplayPrice(j) })
+            } catch {}
+        }
+    }
 }
