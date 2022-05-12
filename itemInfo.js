@@ -1,14 +1,16 @@
-dburl = CONFIG_dburl
+import * as config from '../config.js';
+
+// dburl = config.dburl
 class Products {
     constructor() {
-        this.MassTax = CONFIG_tax
+        this.MassTax = config.tax
         this.products = null
         this.productRelations = null
     }
 
     async getProducts() {
         if(this.products == null || this.productRelations == null) {
-            let response = JSON.parse(await fetch(`${dburl}/getProducts`).then((value) => {return value.text()}))
+            let response = JSON.parse(await fetch(`${config.dburl}/getProducts`).then((value) => {return value.text()}))
             this.products = response["response"]["products"]
             this.productRelations = response["response"]["productRelations"]
         }
@@ -86,4 +88,4 @@ class Products {
     }
 }
 
-products = new Products()
+export let products = new Products()

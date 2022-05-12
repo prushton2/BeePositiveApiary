@@ -1,8 +1,9 @@
 // Requires itemInfo.js
+import * as itemInfo from "../itemInfo.js"
 
-shoppingList = localStorage.getItem("shoppingList")
+let shoppingList = localStorage.getItem("shoppingList")
 
-test = shoppingList
+let test = shoppingList
 
 try { //this handle cases where the shoppinglist doesnt work
     test = JSON.parse(test)
@@ -13,13 +14,13 @@ try { //this handle cases where the shoppinglist doesnt work
 
 shoppingList = JSON.parse(shoppingList)
 
-async function addToCart(item, hasSubproduct=false) { //Subproduct is used for something like a jar of honey, where the jar is the subproduct and the honey is the item
+export async function addToCart(item, hasSubproduct=false) { //Subproduct is used for something like a jar of honey, where the jar is the subproduct and the honey is the item
     amountToAdd = parseFloat(document.getElementById(`Count of ${item}`).value)
-    amountToAdd = await products.setItemAmountToIncrement(item, amountToAdd)
+    amountToAdd = await itemInfo.products.setItemAmountToIncrement(item, amountToAdd)
     
     if(hasSubproduct) { //if we have a subproduct, we need to add the subproduct to the shoppinglist and make sure the amount of the subproduct follows the increment of the item
         subProduct = document.getElementById(`Subproduct of ${item}`).value
-        amountToAdd = await products.setItemAmountToIncrement(subProduct, amountToAdd)
+        amountToAdd = await itemInfo.products.setItemAmountToIncrement(subProduct, amountToAdd)
     } else {
         subProduct = 0 //0 is the empty value for subproduct
     }
@@ -51,27 +52,27 @@ async function addToCart(item, hasSubproduct=false) { //Subproduct is used for s
 
 
 
-function checkout() { //save the shoppinglist and go to the checkout
+export function checkout() { //save the shoppinglist and go to the checkout
     localStorage.setItem("shoppingList", JSON.stringify(shoppingList))
     window.location.href = "../checkout/Checkout.html"
 }
 
-async function updateDisplayPrice(productID) { //update the displayed price of the item
+export async function updateDisplayPrice(productID) { //update the displayed price of the item
     subProduct = document.getElementById(`Subproduct of ${productID}`).value
-    subProductRelation = await products.getProductRelation(productID, subProduct)
+    subProductRelation = await itemInfo.products.getProductRelation(productID, subProduct)
     document.getElementById(`price of ${productID}`).innerHTML = `$${subProductRelation["price"]}`
 }
 
-async function createHTML(itemID, extraStyle="") { //create the html for the item
-    let item = await products.getProduct(itemID)
-    let subProducts = await products.getProductRelations(itemID)
+export async function createHTML(itemID, extraStyle="") { //create the html for the item
+    let item = await itemInfo.products.getProduct(itemID)
+    let subProducts = await itemInfo.products.getProductRelations(itemID)
 
 
     let subproductsDropdownHTML = ``
 
-    for(i in subProducts) {
+    for(let i in subProducts) {
         if(subProducts[i]["subProductId"] != 0) {
-            subproduct = await products.getProduct(subProducts[i]["subProductId"])
+            let subproduct = await itemInfo.products.getProduct(subProducts[i]["subProductId"])
             subproductsDropdownHTML += `<option value="${subProducts[i]["subProductId"]}">${subproduct["name"]}</option>`
         }
     }

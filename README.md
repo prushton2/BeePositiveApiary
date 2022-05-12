@@ -6,6 +6,6 @@ Download the [node.js server](https://github.com/prushton2/BeePositiveApiaryNode
 
 Create a config.js file and populate it with the following:
 ```javascript
-export const CONFIG_dburl = "<database URL>"
-export const CONFIG_tax = "<Your area tax, type 0 if it doesnt exist>"
+export const dburl = "<database URL>"
+export const tax = "<Your area tax, type 0 if it doesnt exist>"
 ```
