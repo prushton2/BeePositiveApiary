@@ -1,5 +1,7 @@
 import * as utils from "../utils.js"
 import * as config from "../config.js"
+import * as checkout from "./checkout.js"
+
 export async function buy() {
     let textboxes = ["name", "address", "email", "phoneNumber"] // the textboxes that are required
     let Order = {} 
@@ -28,7 +30,6 @@ export async function buy() {
         localStorage.removeItem("shoppingList") //delete the shoppinglist to prevent duplicate orders
         window.location.href = `orderConfirmed.html?orderId=${response["orderID"]}&viewKey=${response["viewKey"]}` //redirect to the order confirmed page
     }
-    
 }
 
 document.getElementById("PlaceorderButton").addEventListener("click", buy) //when the place order button is clicked, run the buy function

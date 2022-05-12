@@ -15,14 +15,13 @@ export function drawCheckout() {
     document.getElementById("totalCost").innerHTML = `${utils.products.getTaxCalculation(shoppingList["Items"])}<br>Total Cost: ${utils.products.getDisplayCost(shoppingList["Items"])}`
 
     for(let i = 0; i < document.getElementsByName("checkoutItemCount").length; i++) {
-        document.getElementsByName("checkoutItemCount")[i].addEventListener("change", () => {
-            updateShoppingList()
-        })
+        document.getElementsByName("checkoutItemCount")[i].addEventListener("change", updateShoppingList )
     }
 
-    document.getElementById("finalizeButton").addEventListener("click", () => {
-        gotofinalize()
-    })
+    document.getElementById("resetShoppingCart").addEventListener("click", resetShoppingCart )
+    try {
+        document.getElementById("finalizeButton").addEventListener("click", gotofinalize )
+    } catch {}
 }
 
 export function createAllHtml(jsonobject) { //takes in the shoppinglist
