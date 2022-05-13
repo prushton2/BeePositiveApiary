@@ -31,6 +31,6 @@ setTimeout(async() => {
     }
     document.getElementById("CheckoutList").innerHTML = html
 
-    document.getElementById("totalCost").innerHTML = `${await products.getTaxCalculation(orderInfo["response"]["purchases"])}<br>Total: ${await products.getDisplayCost(orderInfo["response"]["purchases"])}`
+    document.getElementById("totalCost").innerHTML = `${utils.products.getTaxCalculation(orderInfo["response"]["purchases"])}<br>Total: ${utils.products.getDisplayCost(orderInfo["response"]["purchases"])}`
 
 }, 0)
