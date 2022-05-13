@@ -1,7 +1,8 @@
-//this script holds basic functions needed for any page to work, also requires the itemInfo.js file
+//this script holds basic functions needed for any page to work
 import * as config from '../config.js';
 
-let dropdown = document.getElementById("cartButton") //Render the shoppinglist in the cart dropdown
+//Render the shoppinglist in the cart dropdown
+let dropdown = document.getElementById("cartButton") 
 let cartContents = document.getElementById("cartButtonContents")
 dropdown.addEventListener("mouseover", async(e) => {
     await products.getProducts()
@@ -15,7 +16,7 @@ dropdown.addEventListener("mouseover", async(e) => {
 })
 
 
-//cleaner http requests with automatic error handling
+//cleaner http requests with automatic error handling (because im lazy)
 export async function httpRequest(url, method, body, makeAlertOnError) {
 
     let response = await fetch(url, {
@@ -35,6 +36,7 @@ export async function httpRequest(url, method, body, makeAlertOnError) {
     }
 }
 
+//Manages the products and relations with subproducts
 class Products {
     constructor() {
         this.MassTax = config.tax
@@ -58,7 +60,7 @@ class Products {
             }
         }
     }
-
+    //Get a products relation with a specific subproduct. Example: Get the price of a .5lb jar of honey
     getProductRelation(productId, subProductId) {
         for(let key in this.productRelations) {
             if(this.productRelations[key]["productId"] == productId && this.productRelations[key]["subProductId"] == subProductId) {
@@ -66,7 +68,7 @@ class Products {
             }
         }
     }
-
+    //get all of a products relations with subproducts
     getProductRelations(productId) {
         let returnObject = []
         for(let key in this.productRelations) {
@@ -76,7 +78,7 @@ class Products {
         }
         return returnObject
     }
-
+    //cost of an item
     getItemCost(productId, subProductId, amount) {
         return (this.getProductRelation(productId, subProductId)["price"] * amount).toFixed(2)
     }
@@ -112,22 +114,23 @@ class Products {
         formatString = formatString.replace("{name}", name).replace("{amount}", amount).replace("{subProductName}", subProductName).replace("{productName}", productName).replace("{price}", price).replace("{totalPrice}", totalPrice)
         return formatString
     }
-
+    //was used to allow people to order stuff in pounds, but now it is deprecated and needs removal
     setItemAmountToIncrement(itemID, amount) { //going to be deprecated
         return amount - amount%1
     }
-
-    getDisplayCost(shoppingList) { // This function gives back a string that looks more like a price to the user ($4.90 instead of 4.9) aswell as the tax calculation
+    // This function gives back a string that looks more like a price to the user ($4.90 instead of 4.9) aswell as the tax calculation
+    getDisplayCost(shoppingList) { 
         let totalCost = this.getTotalCost(shoppingList)
         let taxedCost = totalCost + (this.MassTax * totalCost)
         return `\$${taxedCost.toFixed(2)}`
     }
-
-    getTaxCalculation(shoppingList) { //This returns a display of the tax calculation being done without the total cost
+    //This returns a display of the tax calculation being done without the total cost
+    getTaxCalculation(shoppingList) { 
         let totalCost = this.getTotalCost(shoppingList)
         return `\$${totalCost.toFixed(2)} Subtotal <br>+ ${this.MassTax*100}% Tax`
     }
 }
 
 export let products = new Products()
+//top level awaits are amazing
 await products.getProducts()

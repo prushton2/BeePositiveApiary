@@ -7,7 +7,7 @@ Check out the [node.js server](https://github.com/prushton2/BeePositiveApiaryNod
 ## Frontend Setup
 
 ### This project uses Javascript modules, which are standard in [ECMAScript 6](http://es6-features.org/). 
-If you are using Python's HTTP server to run the site and modules do not work, use ```python run.py [port]``` to run the project instead. This bug is caused by an older version of Python's HTTP server not supporting modules, and this patches in a solution. I recommend updating Python for a permanent fix.<br><br>
+If you are using Python's HTTP server to run the site and modules do not work, use ```python run.py [port]``` to run the project instead. <br><br>
 
 ### Actually setting up the program
 Create a config.js file and populate it with the following:
