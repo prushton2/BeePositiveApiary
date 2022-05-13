@@ -3,7 +3,6 @@ import * as config from "../config.js"
 
 let doc = document.getElementById("sec-214c")
 let password = document.getElementById("pswdinput")
-password.value = "password"
 
 window.markAsComplete = markAsComplete
 window.sendCompletionEmail = sendCompletionEmail
