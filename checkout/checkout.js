@@ -5,23 +5,27 @@ let shoppingList = JSON.parse(localStorage.getItem("shoppingList"))
 export function createHTML(item) { //shoppingList[item], supposed to contain amount and subproductID
     let textbox = `<input style="width: 75px;" type="number" step="any" name="checkoutItemCount" id="Count of ${item["productID"]} ${item["subProductID"]}" value=${item["amount"]}>`
     
-    let htmlString = `<div> <label>{productName}</label> <div style='float:right; text-align: right;'>{price}&nbsp&nbsp&nbspx${textbox}&nbsp (\${totalPrice})</div></div><br>`
+    let htmlString = `<div> <label>{fullName}</label> <div style='float:right; text-align: right;'>{price}&nbsp&nbsp&nbspx${textbox}&nbsp (\${totalPrice})</div></div><br>`
 
-    return utils.products.createItemNameString(item, htmlString)
+    return utils.products.createItemInfoString(item, htmlString)
 }
 
-export function drawCheckout() {
-    document.getElementById("CheckoutList").innerHTML = createAllHtml(shoppingList)//`<div class="u-clearfix u-sheet u-sheet-1">${createAllHtml(shoppingList)}</div>`
-    document.getElementById("totalCost").innerHTML = `${utils.products.getTaxCalculation(shoppingList["Items"])}<br>Total Cost: ${utils.products.getDisplayCost(shoppingList["Items"])}`
-
-    for(let i = 0; i < document.getElementsByName("checkoutItemCount").length; i++) {
-        document.getElementsByName("checkoutItemCount")[i].addEventListener("change", updateShoppingList )
-    }
+export function drawCheckout(checkoutListName, totalCostName) {
 
     document.getElementById("resetShoppingCart").addEventListener("click", resetShoppingCart )
     try {
         document.getElementById("finalizeButton").addEventListener("click", gotofinalize )
     } catch {}
+
+
+    document.getElementById(checkoutListName).innerHTML = createAllHtml(shoppingList)//`<div class="u-clearfix u-sheet u-sheet-1">${createAllHtml(shoppingList)}</div>`
+    document.getElementById(totalCostName).innerHTML = `${utils.products.getTaxCalculation(shoppingList["Items"])}<br>Total Cost: ${utils.products.getDisplayCost(shoppingList["Items"])}`
+}
+
+export function addEventListeners() {
+    for(let i = 0; i < document.getElementsByName("checkoutItemCount").length; i++) {
+        document.getElementsByName("checkoutItemCount")[i].addEventListener("change", updateShoppingList )
+    }
 }
 
 export function createAllHtml(jsonobject) { //takes in the shoppinglist
@@ -68,4 +72,5 @@ export function resetShoppingCart() {
     }
 }
 
-drawCheckout()
+drawCheckout("CheckoutList", "totalCost")
+

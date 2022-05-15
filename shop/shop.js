@@ -15,13 +15,11 @@ try { //this handle cases where the shoppinglist doesnt work. If it doesnt work,
 shoppingList = JSON.parse(shoppingList)
 
 export async function addToCart(item) { //Subproduct is used for something like a jar of honey, where the jar is the subproduct and the honey is the item
-    let amountToAdd = parseFloat(document.getElementById(`Count of ${item}`).value)
-    amountToAdd = await utils.products.setItemAmountToIncrement(item, amountToAdd)
+    let amountToAdd = parseInt(document.getElementById(`Count of ${item}`).value)
     
     let subProduct
     try { //if we have a subproduct, we need to add the subproduct to the shoppinglist and make sure the amount of the subproduct follows the increment of the item
         subProduct = document.getElementById(`Subproduct of ${item}`).value
-        amountToAdd = await utils.products.setItemAmountToIncrement(subProduct, amountToAdd)
     } catch {
         subProduct = 0 //0 is the empty value for subproduct
     }

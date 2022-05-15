@@ -3,16 +3,15 @@ import * as config from '../config.js';
 
 //Render the shoppinglist in the cart dropdown
 let dropdown = document.getElementById("cartButton") 
-let cartContents = document.getElementById("cartButtonContents")
 dropdown.addEventListener("mouseover", async(e) => {
-    await products.getProducts()
     let html = ""
     let shoppingList = JSON.parse(localStorage.getItem("shoppingList"))
     for(let key in shoppingList["Items"]) {
-        let subproduct = shoppingList["Items"][key]["subProductID"] == 0 ? "" : `${(await products.getProduct(shoppingList["Items"][key]["subProductID"]))["name"]} of `
-        html += `<a href="#">${shoppingList["Items"][key]["amount"]}x ${subproduct}${(await products.getProduct(shoppingList["Items"][key]["productID"]))["name"]}`
+
+        html += products.createItemInfoString(shoppingList["Items"][key], `<a href="#">{amount}x {fullName}</a>`)
+        // html += `<a href="#">${shoppingList["Items"][key]["amount"]}x ${subproduct}${(await products.getProduct(shoppingList["Items"][key]["productID"]))["name"]}`
     }
-    cartContents.innerHTML = html
+    document.getElementById("cartButtonContents").innerHTML = html
 })
 
 
@@ -97,27 +96,30 @@ class Products {
         return totalcost
     }
 
-    createItemNameString(item, formatString) { //item is a json object with the following keys: productID, subProductID, amount; where format String is a string that will be used to format how the item name appears
-        // {name}: item name
+    createItemInfoString(item, formatString) { //item is a json object with the following keys: productID, subProductID, amount; where format String is a string that will be used to format how the item name appears
+        // {productName}: name of the product
+        // {subProductName}: name of the subproduct
+        // {fullName}: name of the product and subproduct
         // {amount}: amount of the item
         // {price}: price of one item
         // {totalPrice}: total price of the item (amount * price)
-        // {subProductName}: name of the subproduct
-        // {productName}: name of the product and subproduct
-        let name = this.getProduct(item["productID"])["name"]
-        let amount = item["amount"]
-        let price = this.getItemCost(item["productID"], item["subProductID"], 1)
-        let totalPrice = this.getItemCost(item["productID"], item["subProductID"], item["amount"])
-        let subProductName = this.getProduct(item["subProductID"])["name"]
-        let productName = item["subProductID"] == 0 ? name : `${ this.getProduct(item["subProductID"])["name"]} of ${name}`
+        let productName     = this.getProduct(item["productID"])["name"]
+        let subProductName  = this.getProduct(item["subProductID"])["name"]
+        let fullName        = item["subProductID"] == 0 ? productName : `${ this.getProduct(item["subProductID"])["name"]} of ${productName}`
+        let amount          = item["amount"]
+        let price           = this.getItemCost(item["productID"], item["subProductID"], 1)
+        let totalPrice      = this.getItemCost(item["productID"], item["subProductID"], item["amount"])
 
-        formatString = formatString.replace("{name}", name).replace("{amount}", amount).replace("{subProductName}", subProductName).replace("{productName}", productName).replace("{price}", price).replace("{totalPrice}", totalPrice)
+        formatString = formatString.replace("{productName}",    productName     )
+        formatString = formatString.replace("{subProductName}", subProductName  )
+        formatString = formatString.replace("{fullName}",       fullName        )
+        formatString = formatString.replace("{amount}",         amount          )
+        formatString = formatString.replace("{price}",          price           )
+        formatString = formatString.replace("{totalPrice}",     totalPrice      )
+
         return formatString
     }
-    //was used to allow people to order stuff in pounds, but now it is deprecated and needs removal
-    setItemAmountToIncrement(itemID, amount) { //going to be deprecated
-        return amount - amount%1
-    }
+
     // This function gives back a string that looks more like a price to the user ($4.90 instead of 4.9) aswell as the tax calculation
     getDisplayCost(shoppingList) { 
         let totalCost = this.getTotalCost(shoppingList)
