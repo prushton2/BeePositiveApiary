@@ -6,14 +6,15 @@ export async function buy() {
     let textboxes = ["name", "address", "email", "phoneNumber"] // the textboxes that are required
     let Order = {} 
     
-    textboxes.forEach(element => { //go over each textbox
+    for (let element in textboxes) { //go over each textbox
+        element = textboxes[element]
         if(document.getElementById(element).value) {//if not empty
             Order[element] = document.getElementById(element).value //add it to the order
         } else {
             document.getElementById("response").innerHTML = "Please fill in all the textboxes" //if empty, tell the user to fill in all the textboxes
             return 
         }
-    });
+    }
 
     let shoppingList = JSON.parse(localStorage.getItem("shoppingList")) //get the shoppinglist
 
