@@ -5,31 +5,31 @@ import os
 pages = {
     "shop":{ 
         "page": "shop/Shop.html",
-        "scripts": ["../config.js", "../script.js", "../itemInfo.js", "shop.js", "itemShop.js"]
+        "scripts": ["../config.js", "../utils.js", "shop.js", "itemShop.js"]
     },
     "honey":{
         "page": "shop/Honey.html",
-        "scripts": ["../config.js", "../script.js", "../itemInfo.js", "shop.js", "honeyShop.js"]
+        "scripts": ["../config.js", "../utils.js", "shop.js", "honeyShop.js"]
     },
     "orders":{
         "page": "orders/Orders.html",
-        "scripts": ["../config.js", "../script.js", "../itemInfo.js", "orders.js"]
+        "scripts": ["../config.js", "../utils.js", "orders.js"]
     },
     "home":{
         "page": "home/Home.html",
-        "scripts": ["../config.js", "../script.js"]
+        "scripts": ["../config.js", "../utils.js"]
     },
     "orderconfirmed":{
         "page": "checkout/OrderConfirmed.html",
-        "scripts": ["../config.js", "../script.js", "../itemInfo.js", "orderConfirmed.js"]
+        "scripts": ["../config.js", "../utils.js", "orderConfirmed.js"]
     },
     "finalize":{
         "page": "checkout/Finalize.html",
-        "scripts": ["../config.js", "../script.js", "../itemInfo.js", "finalize.js", "checkout.js"]
+        "scripts": ["../config.js", "../utils.js", "finalize.js", "checkout.js"]
     },
     "checkout":{
         "page": "checkout/Checkout.html",
-        "scripts": ["../config.js", "../script.js", "../itemInfo.js", "checkout.js"]
+        "scripts": ["../config.js", "../utils.js", "checkout.js"]
     }
 }
 
@@ -80,13 +80,21 @@ for pageInfo in pages:
 
                 newPage[index] = f"<button onClick=\"{function}\" class=\"{css}\">{buttonText}</button>"
 
+            if('SETID:' in element):
+                css = element.split('"')[3]
+                function = re.split("(SETID:)|(\" class)", element)[3]
+                buttonText = re.split("<|>", element)[-3]
+
+                newPage[index] = f"<button id=\"{function}\" class=\"{css}\">{buttonText}</button>"
+
+
             # Delete footer and insert script tags
             if("<footer class=" in element):
                 newPage = newPage[0:index-2]
 
                 for script in scripts:
                     if(script != ""):
-                        newPage.append(f'<script src=\"{script}\"></script>')
+                        newPage.append(f'<script type="module" src=\"{script}\"></script>')
 
                 newPage.append("</body>\n</html>")
         
