@@ -139,4 +139,8 @@ class Products {
 
 export let products = new Products()
 //top level awaits are amazing
-await products.getProducts()
+try {
+    await products.getProducts()
+} catch {
+    alert("The server is not responding, please try again later")
+}
