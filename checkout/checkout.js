@@ -12,12 +12,6 @@ export function createHTML(item) { //shoppingList[item], supposed to contain amo
 
 export function drawCheckout(checkoutListName, totalCostName) {
 
-    document.getElementById("resetShoppingCart").addEventListener("click", resetShoppingCart )
-    try {
-        document.getElementById("finalizeButton").addEventListener("click", gotofinalize )
-    } catch {}
-
-
     document.getElementById(checkoutListName).innerHTML = createAllHtml(shoppingList)//`<div class="u-clearfix u-sheet u-sheet-1">${createAllHtml(shoppingList)}</div>`
     document.getElementById(totalCostName).innerHTML = `${utils.products.getTaxCalculation(shoppingList["Items"])}<br>Total Cost: ${utils.products.getDisplayCost(shoppingList["Items"])}`
 }
@@ -72,5 +66,11 @@ export function resetShoppingCart() {
     }
 }
 
-drawCheckout("CheckoutList", "totalCost")
+//get the name of the html doc
+
+if(utils.isMain("Checkout.html")) {
+    drawCheckout("CheckoutList", "totalCost")
+    document.getElementById("resetShoppingCart").addEventListener("click", resetShoppingCart )
+    document.getElementById("finalizeButton").addEventListener("click", gotofinalize )
+}
 

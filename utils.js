@@ -1,6 +1,5 @@
 //this script holds basic functions needed for any page to work
 import * as config from '../config.js';
-
 //Render the shoppinglist in the cart dropdown
 let dropdown = document.getElementById("cartButton") 
 dropdown.addEventListener("mouseover", async(e) => {
@@ -13,6 +12,11 @@ dropdown.addEventListener("mouseover", async(e) => {
     }
     document.getElementById("cartButtonContents").innerHTML = html
 })
+
+
+export function isMain(mainFileName) {
+    return window.location.pathname.endsWith(mainFileName)
+}
 
 
 //cleaner http requests with automatic error handling (because im lazy)

@@ -32,4 +32,8 @@ export async function buy() {
     }
 }
 
-document.getElementById("PlaceorderButton").addEventListener("click", buy) //when the place order button is clicked, run the buy function
+if(utils.isMain("Finalize.html")) {
+    document.getElementById("PlaceorderButton").addEventListener("click", buy) //when the place order button is clicked, run the buy function
+    checkout.drawCheckout("CheckoutList", "totalCost")
+    document.getElementById("resetShoppingCart").addEventListener("click", checkout.resetShoppingCart )
+}
