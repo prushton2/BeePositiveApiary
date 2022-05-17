@@ -3,7 +3,7 @@ import * as config from "../config.js"
 import * as checkout from "./checkout.js"
 
 export async function buy() {
-    let textboxes = ["name", "address", "email", "phoneNumber"] // the textboxes that are required
+    let textboxes = ["name", "StateAddress", "CityAddress", "StreetAddress", "email", "phoneNumber"] // the textboxes that are required
     let Order = {} 
     
     for (let element in textboxes) { //go over each textbox
@@ -15,6 +15,14 @@ export async function buy() {
             return 
         }
     }
+
+    Order["address"] = `${Order["StateAddress"]}, ${Order["CityAddress"]}, ${Order["StreetAddress"]}` //combine the address
+    //delete the old address entries
+    delete Order["StateAddress"]
+    delete Order["CityAddress"]
+    delete Order["StreetAddress"]
+
+    console.log(Order)
 
     let shoppingList = JSON.parse(localStorage.getItem("shoppingList")) //get the shoppinglist
 
