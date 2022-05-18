@@ -54,10 +54,11 @@ export function checkout() { //save the shoppinglist and go to the checkout
     window.location.href = "../checkout/Checkout.html"
 }
 
-export async function updateDisplayPrice(productID) { //update the displayed price of the item
+export async function updateDisplay(productID) { //update the displayed price of the item
     let subProduct = document.getElementById(`Subproduct of ${productID}`).value
     let subProductRelation = await utils.products.getProductRelation(productID, subProduct)
     document.getElementById(`price of ${productID}`).innerHTML = `$${subProductRelation["price"]}`
+    document.getElementById(`Image of ${productID}`).src = subProductRelation["imageURL"]
 }
 
 export async function createHTML(itemID, extraStyle="") { //create the html for the item
@@ -84,11 +85,14 @@ export async function createHTML(itemID, extraStyle="") { //create the html for 
         subProductHTML = ""
     }
     item["price"] = subProducts[0]["price"]
+
+    let itemImage = subProducts[0]["imageURL"]
+
     let htmlString = `
     <div style="${extraStyle}">
         <table>
             <tr style="text-align: left;">
-                <td style="width: 180px; height: 180px;"> <img src="${item["imageURL"]}" style="width:170px;"> </td>
+                <td style="width: 180px; height: 180px;"> <img src="${itemImage}" style="width:170px;" id="Image of ${itemID}"> </td>
                 <td> <label>${item["name"]}</label> <br> <label>${item["description"]}</label> </td>
             </tr>
             <tr>
@@ -129,7 +133,7 @@ export function addEventListeners(items) {
             j = items[i][j]
             document.getElementById(`Add to cart ${j}`).addEventListener("click", async() => { await addToCart(j) })
             try {
-                document.getElementById(`Subproduct of ${j}`).addEventListener("change", async() => { await updateDisplayPrice(j) })
+                document.getElementById(`Subproduct of ${j}`).addEventListener("change", async() => { await updateDisplay(j) })
             } catch {}
         }
     }
