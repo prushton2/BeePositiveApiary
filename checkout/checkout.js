@@ -1,17 +1,20 @@
 import * as utils from "../utils.js"
 
 let shoppingList = JSON.parse(localStorage.getItem("shoppingList"))
+let checkoutListName, totalCostName
 
 export function createHTML(item) { //shoppingList[item], supposed to contain amount and subproductID
     let textbox = `<input style="width: 75px;" type="number" step="any" name="checkoutItemCount" id="Count of ${item["productID"]} ${item["subProductID"]}" value=${item["amount"]}>`
     
-    let htmlString = `<div> <label>{fullName}</label> <div style='float:right; text-align: right;'>{price}&nbsp&nbsp&nbspx${textbox}&nbsp (\${totalPrice})</div></div><br>`
+    let htmlString = `<div> <label>{fullName}</label> <div style='float:right; text-align: right;'>\${price}&nbsp&nbsp&nbspx${textbox}&nbsp (\${totalPrice})</div></div><br>`
 
     return utils.products.createItemInfoString(item, htmlString)
 }
 
-export function drawCheckout(checkoutListName, totalCostName) {
+export function drawCheckout(checkoutList, totalCost) {
 
+    checkoutListName = checkoutList
+    totalCostName = totalCost
     document.getElementById(checkoutListName).innerHTML = createAllHtml(shoppingList)//`<div class="u-clearfix u-sheet u-sheet-1">${createAllHtml(shoppingList)}</div>`
     document.getElementById(totalCostName).innerHTML = `${utils.products.getTaxCalculation(shoppingList["Items"])}<br>Total Cost: ${utils.products.getDisplayCost(shoppingList["Items"])}`
 }
@@ -52,7 +55,8 @@ export async function updateShoppingList() {
     }
     
     localStorage.setItem("shoppingList", JSON.stringify(shoppingList))
-    drawCheckout()
+    drawCheckout(checkoutListName, totalCostName)
+    addEventListeners()
 }
 
 export function resetShoppingCart() {
@@ -70,6 +74,7 @@ export function resetShoppingCart() {
 
 if(utils.isMain("Checkout.html")) {
     drawCheckout("CheckoutList", "totalCost")
+    addEventListeners()
     document.getElementById("resetShoppingCart").addEventListener("click", resetShoppingCart )
     document.getElementById("finalizeButton").addEventListener("click", gotofinalize )
 }

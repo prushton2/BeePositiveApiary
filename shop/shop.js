@@ -69,9 +69,9 @@ export async function createHTML(itemID, extraStyle="") { //create the html for 
     let subproductsDropdownHTML = ``
 
     for(let i in subProducts) {
-        if(subProducts[i]["subProductId"] != 0) {
-            let subproduct = await utils.products.getProduct(subProducts[i]["subProductId"])
-            subproductsDropdownHTML += `<option value="${subProducts[i]["subProductId"]}">${subproduct["name"]}</option>`
+        if(subProducts[i]["subProductID"] != 0) {
+            let subproduct = await utils.products.getProduct(subProducts[i]["subProductID"])
+            subproductsDropdownHTML += `<option value="${subProducts[i]["subProductID"]}">${subproduct["name"]}</option>`
         }
     }
     let subProductHTML = `
