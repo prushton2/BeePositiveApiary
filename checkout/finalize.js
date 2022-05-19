@@ -26,7 +26,7 @@ export async function buy() {
 
     let shoppingList = JSON.parse(localStorage.getItem("shoppingList")) //get the shoppinglist
 
-    let response = await utils.httpRequest(`${config.dburl}/add`, "POST", { //send the post request to the database to add the order
+    let response = await utils.httpRequest(`${config.dburl}/orders/add`, "POST", { //send the post request to the database to add the order
         "wantsToReceiveEmails": document.getElementById("sendEmail").checked,
         "Order": Order,
         "Items": shoppingList["Items"]
@@ -44,5 +44,6 @@ export async function buy() {
 if(utils.isMain("Finalize.html")) {
     document.getElementById("PlaceorderButton").addEventListener("click", buy) //when the place order button is clicked, run the buy function
     checkout.drawCheckout("CheckoutList", "totalCost")
+    checkout.addEventListeners()
     document.getElementById("resetShoppingCart").addEventListener("click", checkout.resetShoppingCart )
 }

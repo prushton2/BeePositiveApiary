@@ -49,7 +49,7 @@ class Products {
 
     async getProducts() {
         if(this.products == null || this.productRelations == null) {
-            let response = JSON.parse(await fetch(`${config.dburl}/getProducts`).then((value) => {return value.text()}))
+            let response = JSON.parse(await fetch(`${config.dburl}/db/getProducts`).then((value) => {return value.text()}))
             this.products = response["response"]["products"]
             this.productRelations = response["response"]["productRelations"]
         }
@@ -66,7 +66,7 @@ class Products {
     //Get a products relation with a specific subproduct. Example: Get the price of a .5lb jar of honey
     getProductRelation(productId, subProductId) {
         for(let key in this.productRelations) {
-            if(this.productRelations[key]["productId"] == productId && this.productRelations[key]["subProductId"] == subProductId) {
+            if(this.productRelations[key]["id"] == productId && this.productRelations[key]["subProductID"] == subProductId) {
                 return this.productRelations[key]
             }
         }
@@ -75,7 +75,7 @@ class Products {
     getProductRelations(productId) {
         let returnObject = []
         for(let key in this.productRelations) {
-            if(this.productRelations[key]["productId"] == productId) {
+            if(this.productRelations[key]["id"] == productId) {
                 returnObject.push(this.productRelations[key])
             }
         }

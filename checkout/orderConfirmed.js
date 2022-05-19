@@ -1,5 +1,6 @@
 import * as utils from "../utils.js"
 import * as config from "../config.js"
+window.utils = utils
 
 //get the url parameters
 const urlParams = new URLSearchParams(window.location.search);
@@ -11,10 +12,12 @@ async function createHTML(item) { //shoppingList[item], supposed to contain amou
     return utils.products.createItemInfoString(item, htmlString)
 }
 
-const orderInfo = await utils.httpRequest(`${config.dburl}/getSpecificOrder`, "POST", {
+const orderInfo = await utils.httpRequest(`${config.dburl}/orders/getByKey`, "POST", {
     "orderID": parseInt(orderId),
     "viewKey": viewKey
 }, false)
+
+console.log(orderInfo)
 
 document.getElementById("orderNumber").innerHTML = `Order #${orderInfo["response"]["order"]["id"]}`;
 document.getElementById("name").innerHTML = orderInfo["response"]["order"]["name"];
@@ -31,4 +34,3 @@ for(let key in orderInfo["response"]["purchases"]) {
 document.getElementById("CheckoutList").innerHTML = html
 
 document.getElementById("totalCost").innerHTML = `${utils.products.getTaxCalculation(orderInfo["response"]["purchases"])}<br>Total: ${utils.products.getDisplayCost(orderInfo["response"]["purchases"])}`
-

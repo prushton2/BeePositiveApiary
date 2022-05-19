@@ -52,7 +52,8 @@ export async function updateShoppingList() {
     }
     
     localStorage.setItem("shoppingList", JSON.stringify(shoppingList))
-    drawCheckout()
+    drawCheckout("CheckoutList", "totalCost")
+    addEventListeners()
 }
 
 export function resetShoppingCart() {
@@ -70,6 +71,7 @@ export function resetShoppingCart() {
 
 if(utils.isMain("Checkout.html")) {
     drawCheckout("CheckoutList", "totalCost")
+    addEventListeners()
     document.getElementById("resetShoppingCart").addEventListener("click", resetShoppingCart )
     document.getElementById("finalizeButton").addEventListener("click", gotofinalize )
 }
