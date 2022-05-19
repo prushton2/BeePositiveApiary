@@ -47,8 +47,9 @@ class Products {
         this.productRelations = null
     }
 
-    async getProducts() {
-        if(this.products == null || this.productRelations == null) {
+    async getProducts(force=false) {
+        if( (this.products == null || this.productRelations == null) || force ) {
+            // console.log("Getting products from database")
             let response = JSON.parse(await fetch(`${config.dburl}/db/getProducts`).then((value) => {return value.text()}))
             this.products = response["response"]["products"]
             this.productRelations = response["response"]["productRelations"]

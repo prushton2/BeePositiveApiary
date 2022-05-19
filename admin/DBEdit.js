@@ -5,8 +5,7 @@ export let loadedDBName = ""
 export let loadedDB
 export let queuedEdits = {}
 
-
-export let password = document.getElementById("pswdinput")
+let password = document.getElementById("pswdinput")
 let uneditableColumns = ["id", "subProductID"]
 
 window.loadDB = loadDB
@@ -14,8 +13,11 @@ window.saveDB = saveDB
 window.queueEdit = queueEdit
 window.getEdits = getEdits
 
-export function loadDB(name) {
+export async function loadDB(name) {
     let primaryKeyColumns
+
+    await utils.products.getProducts(true)
+
     switch(name) {
         case "products":
             loadedDBName = "Products"
@@ -39,7 +41,6 @@ export function loadDB(name) {
 }
 
 export async function saveDB() {
-    let allValuesUpdated = true
     for(let edit in queuedEdits) {
         let column = edit.split("/")[1]
         let primaryKeys = edit.split("/")[0].split(" ")
@@ -54,7 +55,6 @@ export async function saveDB() {
             "value": value
         })
         if(response["response"] != "Product Updated") {
-            allValuesUpdated = false
             alert(`There was an error updating the ${column} column on the ${table} table under the keys ${primaryKeys} to value ${value}:\n ${response["response"]}`)
         } else {
             delete queuedEdits[edit]
@@ -62,8 +62,7 @@ export async function saveDB() {
     }
     //get the current time in HH:MM
     let time = new Date().toLocaleTimeString()
-
-    document.getElementById("response").innerHTML = `${allValuesUpdated ? "All values updated successfully" : "Some values were not updated"} (${time})`
+    document.getElementById("response").innerHTML = `${JSON.stringify(queuedEdits) == "{}" ? "All values updated successfully" : "Some values were not updated"} (${time})`
 }
 
 export function loadEditableDB(db, primaryKeyColumns) {
@@ -94,7 +93,19 @@ export function loadEditableDB(db, primaryKeyColumns) {
 }
 
 export function queueEdit(primary_key, column, entryID) {
-    queuedEdits[`${primary_key}/${column}`] = document.getElementById(`Entry for ${entryID} ${column}`).value
+    let element = document.getElementById(`Entry for ${entryID} ${column}`)
+    let value = element.value
+
+    switch(element.type) {
+        case "number":
+            value = parseInt(value)
+            break
+        case "string":
+            value = value.toString()
+            break
+    }
+
+    queuedEdits[`${primary_key}/${column}`] = value
 }
 
 export function getEdits() {
