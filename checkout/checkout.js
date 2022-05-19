@@ -6,7 +6,7 @@ let checkoutListName, totalCostName
 export function createHTML(item) { //shoppingList[item], supposed to contain amount and subproductID
     let textbox = `<input style="width: 75px;" type="number" step="any" name="checkoutItemCount" id="Count of ${item["productID"]} ${item["subProductID"]}" value=${item["amount"]}>`
     
-    let htmlString = `<div> <label>{fullName}</label> <div style='float:right; text-align: right;'>{price}&nbsp&nbsp&nbspx${textbox}&nbsp (\${totalPrice})</div></div><br>`
+    let htmlString = `<div> <label>{fullName}</label> <div style='float:right; text-align: right;'>\${price}&nbsp&nbsp&nbspx${textbox}&nbsp (\${totalPrice})</div></div><br>`
 
     return utils.products.createItemInfoString(item, htmlString)
 }
