@@ -37,7 +37,7 @@ export async function buy() {
     } else {
         document.getElementById("response").innerHTML = `Order has been placed!` //if the response is valid, tell them the order has been placed
         localStorage.removeItem("shoppingList") //delete the shoppinglist to prevent duplicate orders
-        window.location.href = `orderConfirmed.html?orderId=${response["orderID"]}&viewKey=${response["viewKey"]}` //redirect to the order confirmed page
+        window.location.href = `OrderConfirmed.html?orderId=${response["orderID"]}&viewKey=${response["viewKey"]}` //redirect to the order confirmed page
     }
 }
 
