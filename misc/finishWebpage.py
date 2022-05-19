@@ -11,14 +11,25 @@ pages = {
         "page": "shop/Honey.html",
         "scripts": ["../config.js", "../utils.js", "shop.js", "honeyShop.js"]
     },
+
+    "adminIndex":{
+        "page": "admin/index.html",
+        "scripts": ["../config.js", "../utils.js"]
+    },
     "orders":{
-        "page": "orders/Orders.html",
+        "page": "admin/Orders.html",
         "scripts": ["../config.js", "../utils.js", "orders.js"]
     },
+    "DBEdit":{
+        "page": "admin/DBEdit.html",
+        "scripts": ["../config.js", "../utils.js", "DBEdit.js"]
+    },
+
     "home":{
         "page": "home/Home.html",
         "scripts": ["../config.js", "../utils.js"]
     },
+
     "orderconfirmed":{
         "page": "checkout/OrderConfirmed.html",
         "scripts": ["../config.js", "../utils.js", "orderConfirmed.js"]
@@ -43,10 +54,6 @@ createFiles = {
         "content": "<!DOCTYPE HTML><head></head><body><script>window.location.href='Home.html';</script></body>" 
     },
     2: {
-        "name": "orders/index.html",
-        "content": "<!DOCTYPE HTML><head></head><body><script>window.location.href='Orders.html';</script></body>" 
-    },
-    3: {
         "name": "shop/index.html",
         "content": "<!DOCTYPE HTML><head></head><body><script>window.location.href='Shop.html';</script></body>" 
     }
