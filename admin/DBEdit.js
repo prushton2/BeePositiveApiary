@@ -13,8 +13,6 @@ window.queueEdit = saveEdit
 window.deleteEntry = deleteEntry
 window.newEntry = newEntry
 
-password.value = "password"
-
 export async function loadDB(name) {
 
     let primaryKeyColumns
