@@ -3,7 +3,7 @@ import * as config from "../config.js"
 
 export let loadedDBName = ""
 export let loadedDB
-export let queuedEdits = {}
+export let queuedEdits = {"edits": []}
 
 let password = document.getElementById("pswdinput")
 let uneditableColumns = ["id", "subProductID"]
@@ -37,14 +37,16 @@ export async function loadDB(name) {
 
 
     document.getElementById("databaseEditor").innerHTML = loadEditableDB(loadedDB, primaryKeyColumns)
-    queuedEdits = {}
+    queuedEdits = {"edits": []}
 }
 
 export async function saveDB() {
-    for(let edit in queuedEdits) {
-        let column = edit.split("/")[1]
-        let primaryKeys = edit.split("/")[0].split(" ")
-        let value = queuedEdits[edit]
+    for(let edit in queuedEdits["edits"]) {
+        let index = edit
+        edit = queuedEdits["edits"][edit]
+        let column = edit["column"]
+        let primaryKeys = edit["primaryKeys"]
+        let value = edit["value"]
         let table = loadedDBName
         let response = await utils.httpRequest(`${config.dburl}/db/update`, "PATCH", 
         {
@@ -57,12 +59,13 @@ export async function saveDB() {
         if(response["response"] != "Product Updated") {
             alert(`There was an error updating the ${column} column on the ${table} table under the keys ${primaryKeys} to value ${value}:\n ${response["response"]}`)
         } else {
-            delete queuedEdits[edit]
+            queuedEdits["edits"][index] = null
         }
     }
+    queuedEdits["edits"] = queuedEdits["edits"].filter(value => value != null)
     //get the current time in HH:MM
     let time = new Date().toLocaleTimeString()
-    document.getElementById("response").innerHTML = `${JSON.stringify(queuedEdits) == "{}" ? "All values updated successfully" : "Some values were not updated"} (${time})`
+    document.getElementById("response").innerHTML = `${JSON.stringify(queuedEdits) == '{"edits":[]}' ? "All values updated successfully" : "Some values were not updated"} (${time})`
 }
 
 export function loadEditableDB(db, primaryKeyColumns) {
@@ -80,8 +83,10 @@ export function loadEditableDB(db, primaryKeyColumns) {
             if(uneditableColumns.includes(column)) {
                 html += `<td> <label>${db[entry][column]}</label> </td>`
             } else {
-                let primaryKeys = primaryKeyColumns.map(key => db[entry][key])
-                html += `<td> <input onchange='queueEdit( "${ primaryKeys.join(" ") }" , "${column}", "${entry}")'  id="Entry for ${entry} ${column}" type="${typeof db[entry][column]}" value="${db[entry][column]}"> </td>`
+                let primaryKeys = {}
+                primaryKeyColumns.forEach(key => primaryKeys[key] = db[entry][key])
+                let functionString = `queueEdit( ${ JSON.stringify(primaryKeys) } , \"${column}\", \"${entry}\")`
+                html += `<td> <input onchange='${functionString}' id="Entry for ${entry} ${column}" type="${typeof db[entry][column]}" value="${db[entry][column]}"> </td>`
             }
         }
         html += `</tr>`
@@ -92,20 +97,37 @@ export function loadEditableDB(db, primaryKeyColumns) {
     return html
 }
 
-export function queueEdit(primary_key, column, entryID) {
-    let element = document.getElementById(`Entry for ${entryID} ${column}`)
-    let value = element.value
+export function queueEdit(primaryKeys, column, entryID) {
 
-    switch(element.type) {
+    let element = document.getElementById(`Entry for ${entryID} ${column}`) //get the element that was changed
+    let value = element.value //get the new value
+
+    switch(element.type) { //convert to proper type
         case "number":
-            value = parseInt(value)
+            value = parseFloat(value)
             break
         case "string":
             value = value.toString()
             break
     }
 
-    queuedEdits[`${primary_key}/${column}`] = value
+    let editExists = false //check if the edit already exists (if it does, overwrite it)
+    for(let edit in queuedEdits["edits"]) {
+        edit = queuedEdits["edits"][edit]
+        
+        if(JSON.stringify(edit["primaryKeys"]) == JSON.stringify(primaryKeys) && edit["column"] == column) {
+            edit["value"] = value
+            editExists = true
+        }
+    }
+
+    if(!editExists) { //if the edit doesn't exist, add it
+        queuedEdits["edits"].push({
+            "primaryKeys": primaryKeys,
+            "column": column,
+            "value": value
+        })
+    }
 }
 
 export function getEdits() {
