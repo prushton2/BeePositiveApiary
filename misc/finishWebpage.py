@@ -41,6 +41,11 @@ pages = {
     "checkout":{
         "page": "checkout/Checkout.html",
         "scripts": ["../config.js", "../utils.js", "checkout.js"]
+    },
+
+    "loginIndex":{
+        "page": "login/index.html",
+        "scripts": ["../config.js", "../utils.js", "login.js"]
     }
 }
 
