@@ -38,7 +38,6 @@
 }
 
 .u-section-2 .u-custom-html-1 {
-  height: auto;
   min-height: 50px;
   background-image: none;
   width: 200px;
@@ -46,9 +45,18 @@
 }
 
 .u-section-2 .u-custom-html-2 {
-  height: auto;
   min-height: 50px;
   background-image: none;
   width: 200px;
   margin: 50px auto 60px;
+}
+
+@media (max-width: 1199px) {
+  .u-section-2 .u-custom-html-1 {
+    height: auto;
+  }
+
+  .u-section-2 .u-custom-html-2 {
+    height: auto;
+  }
 }

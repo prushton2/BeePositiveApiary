@@ -1,16 +1,23 @@
+import * as config from '../config.js';
 
 let user
 window.handleCredentialResponse = handleCredentialResponse
 window.googleUser = getUser()
 
-export function handleCredentialResponse(googleUser) {
+export async function handleCredentialResponse(googleUser) {
     console.log(googleUser)
-    user = googleUser
-    // var profile = googleUser.getBasicProfile();
-    console.log(`ID: ${googleUser.getId()}`)
-    console.log(`Name: ${googleUser.getName()}`)
-    console.log(`Image URL: ${googleUser.getImageUrl()}`)
-    console.log(`Email: ${googleUser.getEmail()}`)
+    console.log(googleUser["credential"])
+
+    let response = await fetch(`${config.dburl}/auth/login`, {
+        method: "POST",
+        headers: {'Accept': 'application/json','Content-Type': 'application/json'},
+        body: JSON.stringify({
+            "JWT": googleUser["credential"]
+        })
+    })
+    response = await response.text()
+    console.log(response)
+
 }
 
 export function getUser() {
