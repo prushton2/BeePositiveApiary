@@ -3,6 +3,7 @@ import * as config from "../config.js"
 
 let doc = document.getElementById("sec-214c")
 let password = document.getElementById("pswdinput")
+let authToken = JSON.parse(window.localStorage.getItem("auth"))
 
 window.markAsComplete = markAsComplete
 window.sendCompletionEmail = sendCompletionEmail
@@ -15,7 +16,7 @@ async function renderpage() { //this function feels bloated, I want to shrink it
 
     //get all unarchived orders
     let response = await utils.httpRequest(`${config.dburl}/orders/get`, "POST", {
-        password: password.value,
+        "auth": authToken,
         getArchived: false
     }, false)
 
@@ -30,7 +31,7 @@ async function renderpage() { //this function feels bloated, I want to shrink it
 
         //get all items for each order
         let items = await utils.httpRequest(`${config.dburl}/purchases/get`, "POST", {
-            password: password.value,
+            "auth": authToken,
             orderID: orders[order]["id"],
             getArchived: false  
         }, false)
@@ -47,7 +48,7 @@ async function renderpage() { //this function feels bloated, I want to shrink it
 
     //get all archived orders
     response = await utils.httpRequest(`${config.dburl}/orders/get`, "POST", {
-        password: password.value,
+        "auth": authToken,
         getArchived: true,
     }, false)
 
@@ -56,7 +57,7 @@ async function renderpage() { //this function feels bloated, I want to shrink it
     for(var order in orders) {
         //get all items for each archived order
         let items = await utils.httpRequest(`${config.dburl}/purchases/get`, "POST", {
-            password: password.value,
+            "auth": authToken,
             orderID: orders[order]["id"],
             getArchived: true
         }, false)
@@ -102,7 +103,7 @@ async function markAsComplete(i, complete) {
         method: "PATCH", headers: {"Accept": "applcation/json", "Content-Type": "application/json"},
         body: JSON.stringify(
             {
-                "password": password.value,
+                "auth": authToken,
                 "orderID": i,
                 "completeStatus": complete
             }
@@ -116,8 +117,8 @@ async function sendCompletionEmail(orderID, name) {
         let response = await fetch(`${config.dburl}/email/completionEmail`, {
             method: "POST", headers: {"Accept": "applcation/json", "Content-Type": "application/json"},
             body: JSON.stringify({    
-                password: password.value,
-                orderID: orderID
+                "auth": authToken,
+                "orderID": orderID
             })
         })
         response = JSON.parse(await response.text())
@@ -132,7 +133,7 @@ async function archiveItem(id, name) {
         await fetch(`${config.dburl}/orders/archive`, {
             method: "POST", headers: {"Accept": "application/json", "Content-Type": "application/json"},
             body: JSON.stringify({
-                "password": password.value,
+                "auth": authToken,
                 "orderID": id
             })
         })
