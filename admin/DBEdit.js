@@ -4,8 +4,6 @@ import * as config from "../config.js"
 export let loadedDBName = ""
 export let loadedDB
 
-let password = document.getElementById("pswdinput")
-let uneditableColumns = ["id", "subProductID"]
 let authToken = JSON.parse(window.localStorage.getItem("auth"))
 
 window.loadDB = loadDB
@@ -19,6 +17,9 @@ export async function loadDB(name) {
     let primaryKeyColumns
 
     await utils.products.getProducts(true)
+    let Users = (await utils.httpRequest(`${config.dburl}/auth/getUsers`, "POST", {"auth": authToken}, true))["response"]
+
+    console.log(Users)
 
     switch(name) {
         case "Products":
@@ -30,6 +31,11 @@ export async function loadDB(name) {
             loadedDBName = "ProductRelations"
             loadedDB = utils.products.productRelations
             primaryKeyColumns = ["id", "subProductID"]
+            break
+        case "Users":
+            loadedDBName = "Users"
+            loadedDB = Users
+            primaryKeyColumns = ["ID"]
             break
         default:
             console.log("Error: No database with name " + name + " found")
