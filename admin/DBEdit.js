@@ -17,9 +17,6 @@ export async function loadDB(name) {
     let primaryKeyColumns
 
     await utils.products.getProducts(true)
-    let Users = (await utils.httpRequest(`${config.dburl}/auth/getUsers`, "POST", {"auth": authToken}, true))["response"]
-
-    console.log(Users)
 
     switch(name) {
         case "Products":
@@ -34,7 +31,19 @@ export async function loadDB(name) {
             break
         case "Users":
             loadedDBName = "Users"
-            loadedDB = Users
+
+            let db = await fetch(`${config.dburl}/auth/getUsers`, { method: "POST",
+            headers: {"Content-Type": "application/json","Accept": "application/json"},
+                body: JSON.stringify({
+                    "auth": authToken
+                })
+            })
+            if(db.status != 200) {
+                alert("Error loading users")
+                return
+            }
+            loadedDB = JSON.parse(await db.text())["response"]
+
             primaryKeyColumns = ["ID"]
             break
         default:
@@ -50,7 +59,7 @@ export async function loadDB(name) {
 export async function loadEditableDB(db, primaryKeyColumns) {
     await utils.products.getProducts(true)
     let html = "<style> table { border-collapse:collapse; border:1px solid #000000; }\n table td {border:1px solid #000000;} </style>"
-    html += `<table>`
+    html += `<table style="margin: auto;">`
     //create column headers
     let columns = db[0]
     for(let column in columns) {
