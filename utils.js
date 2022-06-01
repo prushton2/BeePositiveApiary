@@ -3,6 +3,8 @@ import * as config from '../config.js';
 
 window.goto = goto
 
+
+
 // -------------------------------------------------- PAGE SETUP --------------------------------------------------
 
 //Render the shoppinglist in the cart dropdown
@@ -11,7 +13,7 @@ dropdown.addEventListener("mouseover", async(e) => {
     let html = ""
     let shoppingList = JSON.parse(localStorage.getItem("shoppingList"))
     for(let key in shoppingList["Items"]) {
-
+        
         html += products.createItemInfoString(shoppingList["Items"][key], `<a href="#">{amount}x {fullName}</a>`)
         // html += `<a href="#">${shoppingList["Items"][key]["amount"]}x ${subproduct}${(await products.getProduct(shoppingList["Items"][key]["productID"]))["name"]}`
     }
@@ -19,7 +21,18 @@ dropdown.addEventListener("mouseover", async(e) => {
 })
 
 //render the users pfp in the navbar
-let profileDiv = document.getElementById("profileDiv")
+if(localStorage.getItem("auth")) {
+    let response = await fetch(`${config.dburl}/auth/getUser`, {
+        method: "POST",
+        headers: {'Accept': 'application/json','Content-Type': 'application/json'},
+        body: JSON.stringify({
+            "auth": JSON.parse(localStorage.getItem("auth"))
+        })
+    })
+    response = JSON.parse(await response.text())
+    let profileDiv = document.getElementById("profileDiv")
+    profileDiv.innerHTML = `<img src="${response["response"]["pfpURL"]}" alt="profile pic", style="width: 70px; height: 70px;">`
+}
 
 
 
