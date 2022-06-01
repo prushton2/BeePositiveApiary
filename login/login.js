@@ -4,8 +4,6 @@ window.handleCredentialResponse = handleCredentialResponse
 window.signOut = signOut
 
 export async function handleCredentialResponse(googleUser) {
-    console.log(googleUser)
-    console.log(googleUser["credential"])
 
     let response = await fetch(`${config.dburl}/auth/login`, {
         method: "POST",
@@ -16,11 +14,9 @@ export async function handleCredentialResponse(googleUser) {
         })
     })
     response = JSON.parse(await response.text())
-    console.log(response)
 
     let authToken = response["response"]["authToken"]
     
-    console.log(authToken)
     window.localStorage.setItem("auth", JSON.stringify(authToken))
 }
 
