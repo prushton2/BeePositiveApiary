@@ -21,8 +21,7 @@ export async function handleCredentialResponse(googleUser) {
 }
 
 export async function signOut() {
-    console.log("Signing out")
-
+    document.cookie = "g_state=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     let response = await fetch(`${config.dburl}/auth/logout`, {
         method: "POST",
         headers: {'Accept': 'application/json','Content-Type': 'application/json'},
@@ -31,5 +30,4 @@ export async function signOut() {
         })
     })
     response = JSON.parse(await response.text())
-    console.log(response)
 }
