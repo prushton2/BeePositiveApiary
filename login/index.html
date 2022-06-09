@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="index.css" media="screen">
     <script class="u-script" type="text/javascript" src="../jquery.js" defer=""></script>
     <script class="u-script" type="text/javascript" src="../nicepage.js" defer=""></script>
-    <meta name="generator" content="Nicepage 4.11.3, nicepage.com">
+    <meta name="generator" content="Nicepage 4.12.14, nicepage.com">
     <script src="https://accounts.google.com/gsi/client" async="async" defer="defer"></script>
     <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
     
@@ -127,15 +127,8 @@
           <div id="g_id_onload" data-client_id="521335006932-7p7d097e7urevemv8v04djf67jj75atk.apps.googleusercontent.com" data-callback="handleCredentialResponse"></div>
           <div class="g_id_signin" data-type="standard"></div>
         </div>
-        <div class="u-clearfix u-custom-html u-grey-10 u-custom-html-2">
-          <a href="#" onclick="signOut();">Sign out</a>
-          <script> function signOut() {
-    var auth2 = gapi.auth2.getAuthInstance();
-    auth2.signOut().then(function () {
-      console.log('User signed out.');
-    });
-  } </script>
-        </div>
+<button onClick="signOut()" class="u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-50 u-btn-1">logout</button>
+        </a>
       </div>
     </section>
 <script type="module" src="../config.js"></script>

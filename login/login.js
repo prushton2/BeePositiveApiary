@@ -5,15 +5,25 @@ window.signOut = signOut
 
 export async function handleCredentialResponse(googleUser) {
 
-    let response = await fetch(`${config.dburl}/auth/login`, {
+    let oldSession
+    try {
+        oldSession = JSON.parse(localStorage.getItem("auth"))
+    } catch(e) {
+        oldSession = null
+    }
+
+    let response = await fetch(`${config.dburl}/auth/google/login`, {
         method: "POST",
         headers: {'Accept': 'application/json','Content-Type': 'application/json'},
         body: JSON.stringify({
             "JWT": googleUser["credential"],
-            "oldSession": JSON.parse(window.localStorage.getItem("auth"))
+            "oldSession": oldSession
         })
     })
-    response = JSON.parse(await response.text())
+    response = await response.text()
+    console.log(response)
+    response = JSON.parse(response)
+
 
     let authToken = response["response"]["authToken"]
     

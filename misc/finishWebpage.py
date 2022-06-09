@@ -65,8 +65,8 @@ createFiles = {
 }
 
 deleteFiles = [
-    "templates/password",
-    "Page-Password-Template.css"
+    # "templates/password",
+    # "Page-Password-Template.css"
 ]
 
 indexSettings = {
