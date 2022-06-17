@@ -18,15 +18,15 @@ dropdown.addEventListener("mouseover", async(e) => {
 })
 
 //render the users pfp in the navbar
-if(localStorage.getItem("auth")) {
+if(getCookie("auth")) {
     let response = await fetch(`${config.dburl}/auth/getUser`, {
-        method: "POST",
-        headers: {'Accept': 'application/json','Content-Type': 'application/json'},
-        body: JSON.stringify({
-            "auth": JSON.parse(localStorage.getItem("auth"))
-        })
+        credentials: "include",
+        mode: "cors",
+        method: "GET",
+        headers: {'Accept': 'application/json','Content-Type': 'application/json'}
     })
     response = JSON.parse(await response.text())
+    console.log(response)
     let profileDiv = document.getElementById("profileDiv")
     profileDiv.innerHTML = `<img src="${response["response"]["pfpURL"]}" alt="profile pic", style="width: 70px; height: 70px;">`
 }
@@ -35,6 +35,12 @@ if(localStorage.getItem("auth")) {
 
 
 // -------------------------------------------------- FUNCTIONS --------------------------------------------------
+
+export function getCookie(name) {
+	let value = `; ${document.cookie}`;
+	let parts = value.split(`; ${name}=`);
+	if (parts.length === 2) return parts.pop().split(';').shift();
+}
 
 export function isMain(mainFileName) {
     return window.location.pathname.endsWith(mainFileName)
@@ -59,10 +65,10 @@ export async function httpRequest(url, method, body, makeAlertOnError=false) {
         let text = await response.text()
         return JSON.parse(text)
     } else {
-        if(makeAlertOnError) {
-            alert("There was an error making your request")
-        }
         let text = await response.text()
+        if(makeAlertOnError) {
+            alert("There was an error making your request:\n"+text)
+        }
         return JSON.parse(text)
     }
 }

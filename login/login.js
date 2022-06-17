@@ -1,53 +1,35 @@
 import * as config from '../config.js';
+import * as utils from '../utils.js';
 
 window.handleCredentialResponse = handleCredentialResponse
+window.callback = callback
 window.signOut = signOut
-window.debug = debug
 
-async function debug() {
-    // Cookie.set('debug', 'false')
-    document.cookie = "debug=true;HttpOnly"
-    //`auth=${authString};HttpOnly;SameSite=Strict;secure`
-}
-export async function handleCredentialResponse(googleUser) {
 
-    let oldSession
-    try {
-        oldSession = JSON.parse(localStorage.getItem("auth"))
-    } catch(e) {
-        oldSession = null
-    }
-
-    let response = await fetch(`${config.dburl}/auth/google/login`, {
-        method: "POST",
-        headers: {'Accept': 'application/json','Content-Type': 'application/json'},
-        body: JSON.stringify({
-            "JWT": googleUser["credential"],
-            "oldSession": oldSession
-        })
-    })
-    response = await response.text()
+// globalThis.handleCredentialResponse = handleCredentialResponse
+async function callback(response) {
     console.log(response)
-    response = JSON.parse(response)
+}
 
+async function handleCredentialResponse(googleUser) {
+    console.log("sending credentials to server")
 
+    let response = await utils.httpRequest(`${config.dburl}/auth/google/login`, "POST", 
+    {
+        "JWT": googleUser["credential"],
+    }, false)
+    
     let authToken = response["response"]["authToken"]
     let authString = authToken["userID"] + ":" + authToken["sessionID"]
 
-    document.cookie = `auth=${authString}; SameSite=Strict; secure; path=/`
-    // window.localStorage.setItem("auth", JSON.stringify(authToken))
+    document.cookie = `auth=${authString}; SameSite=Strict; path=/` + (config.env == "development" ? "" : "; secure")
     window.location.reload()
 }
 
 export async function signOut() {
-    document.cookie = "g_state=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    await fetch(`${config.dburl}/auth/logout`, {
-        method: "POST",
-        headers: {'Accept': 'application/json','Content-Type': 'application/json'},
-        body: JSON.stringify({
-            "auth": JSON.parse(window.localStorage.getItem("auth"))
-        })
-    })
-    window.localStorage.removeItem("auth")
+
+    let response = await utils.httpRequest(`${config.dburl}/auth/logout`, "POST", {}, true)
+            
+    document.cookie = "auth= ; expires = Thu, 01 Jan 1970 00:00:00 GMT"
     window.location.reload()
-}
+    }

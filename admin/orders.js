@@ -100,8 +100,6 @@ async function markAsComplete(i, complete) {
         "orderID": i,
         "isComplete": complete
     }, false)
-
-
     await renderpage()
 }
 
@@ -111,13 +109,6 @@ async function sendCompletionEmail(orderID, name) {
         {
             "orderID": orderID
         }, false)
-        // let response = await fetch(`${config.dburl}/email/completionEmail`, {
-        //     method: "POST", headers: {"Accept": "applcation/json", "Content-Type": "application/json"},
-        //     body: JSON.stringify({    
-        //         "orderID": orderID
-        //     })
-        // })
-        // response = JSON.parse(await response.text())
         alert(response["response"])
         await renderpage()
     }
