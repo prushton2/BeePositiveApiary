@@ -32,19 +32,11 @@ export async function loadDB(name) {
         case "Users":
             loadedDBName = "Users"
 
-            let db = await fetch(`${config.dburl}/auth/getUsers`, { method: "POST",
-            headers: {"Content-Type": "application/json","Accept": "application/json"},
-                body: JSON.stringify({
-                    "auth": authToken
-                })
-            })
-            if(db.status != 200) {
-                alert("Error loading users")
-                return
-            }
-            loadedDB = JSON.parse(await db.text())["response"]
+            let db = await utils.httpRequest(`${config.dburl}/auth/getUsers`, "POST", {}, true)
 
+            loadedDB = db["response"]
             primaryKeyColumns = ["ID"]
+            
             break
         default:
             console.log("Error: No database with name " + name + " found")
@@ -116,7 +108,7 @@ export async function newEntry(length) {
 
     let response = await utils.httpRequest(`${config.dburl}/db/newEntry`, "POST",
     {
-        "auth": authToken,
+        // "auth": authToken,
         "table": loadedDBName,
         "values": table
     }, false)
@@ -140,7 +132,7 @@ export async function saveEdit(primaryKeys, column, entryID) {
 
     let response = await utils.httpRequest(`${config.dburl}/db/update`, "PATCH",
     {
-        "auth": authToken,
+        // "auth": authToken,
         "table": loadedDBName,
         "primaryKeys": primaryKeys,
         "column": column,
@@ -155,7 +147,7 @@ export async function deleteEntry(primaryKeys) {
     if(confirm(`Are you sure you want to delete this entry?\n${JSON.stringify(primaryKeys)}`)) {
         let response = await utils.httpRequest(`${config.dburl}/db/deleteEntry`, "DELETE",
         {
-            "auth": authToken,
+            // "auth": authToken,
             "table": loadedDBName,
             "primaryKeys": primaryKeys
         })

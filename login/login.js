@@ -2,7 +2,13 @@ import * as config from '../config.js';
 
 window.handleCredentialResponse = handleCredentialResponse
 window.signOut = signOut
+window.debug = debug
 
+async function debug() {
+    // Cookie.set('debug', 'false')
+    document.cookie = "debug=true;HttpOnly"
+    //`auth=${authString};HttpOnly;SameSite=Strict;secure`
+}
 export async function handleCredentialResponse(googleUser) {
 
     let oldSession
@@ -26,8 +32,10 @@ export async function handleCredentialResponse(googleUser) {
 
 
     let authToken = response["response"]["authToken"]
-    
-    window.localStorage.setItem("auth", JSON.stringify(authToken))
+    let authString = authToken["userID"] + ":" + authToken["sessionID"]
+
+    document.cookie = `auth=${authString}; SameSite=Strict; secure; path=/`
+    // window.localStorage.setItem("auth", JSON.stringify(authToken))
     window.location.reload()
 }
 

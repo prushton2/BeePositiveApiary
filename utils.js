@@ -2,9 +2,6 @@
 import * as config from '../config.js';
 
 window.goto = goto
-
-
-
 // -------------------------------------------------- PAGE SETUP --------------------------------------------------
 
 //Render the shoppinglist in the cart dropdown
@@ -48,10 +45,13 @@ export function goto(page) {
 }
 
 //cleaner http requests with automatic error handling (because im lazy)
-export async function httpRequest(url, method, body, makeAlertOnError) {
+export async function httpRequest(url, method, body, makeAlertOnError=false) {
 
     let response = await fetch(url, {
-        method: method, headers: {'Accept': 'application/json','Content-Type': 'application/json'},
+        method: method, 
+        credentials: 'include',
+        mode: 'cors',
+        headers: {'Accept': 'application/json','Content-Type': 'application/json'},
         body: JSON.stringify(body)
     })
     
