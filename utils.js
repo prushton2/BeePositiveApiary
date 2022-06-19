@@ -18,19 +18,18 @@ dropdown.addEventListener("mouseover", async(e) => {
 })
 
 //render the users pfp in the navbar
-if(getCookie("auth")) {
-    let response = await fetch(`${config.dburl}/auth/getUser`, {
-        credentials: "include",
-        mode: "cors",
-        method: "GET",
-        headers: {'Accept': 'application/json','Content-Type': 'application/json'}
-    })
+
+let response = await fetch(`${config.dburl}/auth/getUser`, {
+    credentials: "include",
+    mode: "cors",
+    method: "GET",
+    headers: {'Accept': 'application/json','Content-Type': 'application/json'}
+})
+if(response.status == 200) {
     response = JSON.parse(await response.text())
-    console.log(response)
     let profileDiv = document.getElementById("profileDiv")
     profileDiv.innerHTML = `<img src="${response["response"]["pfpURL"]}" alt="profile pic", style="width: 70px; height: 70px;">`
 }
-
 
 
 
