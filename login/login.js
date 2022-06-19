@@ -24,7 +24,6 @@ async function loginWithGoogle(googleUser) {
 
 export async function signOut() {
 
-    let response = await utils.httpRequest(`${config.dburl}/auth/logout`, "POST", {}, true)
-    console.log(await response.text())
+    await utils.httpRequest(`${config.dburl}/auth/logout`, "POST", {}, true)
     window.location.reload()
 }
