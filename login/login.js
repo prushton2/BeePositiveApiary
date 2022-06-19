@@ -14,15 +14,11 @@ async function callback(response) {
 async function handleCredentialResponse(googleUser) {
     console.log("sending credentials to server")
 
-    let response = await utils.httpRequest(`${config.dburl}/auth/google/login`, "POST", 
+    await utils.httpRequest(`${config.dburl}/auth/google/login`, "POST", 
     {
         "JWT": googleUser["credential"],
     }, false)
     
-    let authToken = response["response"]["authToken"]
-    let authString = authToken["userID"] + ":" + authToken["sessionID"]
-
-    document.cookie = `auth=${authString}; SameSite=Strict; path=/` + (config.env == "development" ? "" : "; secure")
     window.location.reload()
 }
 

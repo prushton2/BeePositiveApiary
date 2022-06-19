@@ -2,7 +2,6 @@ import * as utils from "../utils.js"
 import * as config from "../config.js"
 
 let doc = document.getElementById("sec-214c")
-let password = document.getElementById("pswdinput")
 
 window.markAsComplete = markAsComplete
 window.sendCompletionEmail = sendCompletionEmail
