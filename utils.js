@@ -29,6 +29,7 @@ if(response.status == 200) {
     response = JSON.parse(await response.text())
     let profileDiv = document.getElementById("profileDiv")
     profileDiv.innerHTML = `<img src="${response["response"]["pfpURL"]}" alt="profile pic", style="width: 70px; height: 70px;">`
+    profileDiv.addEventListener("click", () => {window.location.href = `${config.thisURL}/account`})
 }
 
 
