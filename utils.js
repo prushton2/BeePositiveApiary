@@ -50,26 +50,39 @@ export function goto(page) {
 }
 
 //cleaner http requests with automatic error handling (because im lazy)
-export async function httpRequest(url, method, body, makeAlertOnError=false) {
+export async function httpRequest(url, method, body, makeAlertOnError=false, getFullInfo=false) {
 
-    let response = await fetch(url, {
-        method: method, 
-        credentials: 'include',
-        mode: 'cors',
+    let fetchPreoptions = {
+        method: method,
         headers: {'Accept': 'application/json','Content-Type': 'application/json'},
-        body: JSON.stringify(body)
-    })
-    
+        credentials: "include",
+        mode: "cors",
+    }
+
+    if(body != null) {
+        fetchPreoptions["body"] = JSON.stringify(body)
+    }
+
+    let response = await fetch(url, fetchPreoptions)
+
+    let text
     if(response.status >= 200 && response.status < 300) {
-        let text = await response.text()
-        return JSON.parse(text)
+        text = await response.text()
     } else {
-        let text = await response.text()
+        text = await response.text()
         if(makeAlertOnError) {
             alert("There was an error making your request:\n"+text)
         }
-        return JSON.parse(text)
     }
+
+    if(getFullInfo) {
+        return {
+            "text": JSON.parse(text),
+            "response": response
+        }
+    }
+    return JSON.parse(text)
+
 }
 
 //Manages the products and relations with subproducts

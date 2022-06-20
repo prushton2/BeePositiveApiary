@@ -46,6 +46,11 @@ pages = {
     "loginIndex":{
         "page": "login/index.html",
         "scripts": ["../config.js", "../utils.js", "login.js"]
+    },
+    
+    "accountIndex":{
+        "page": "account/index.html",
+        "scripts": ["../config.js", "../utils.js", "account.js"]
     }
 }
 

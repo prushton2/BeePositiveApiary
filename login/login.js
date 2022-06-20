@@ -2,14 +2,8 @@ import * as config from '../config.js';
 import * as utils from '../utils.js';
 
 window.loginWithGoogle = loginWithGoogle
-window.callback = callback
 window.signOut = signOut
 
-
-// globalThis.handleCredentialResponse = handleCredentialResponse
-async function callback(response) {
-    console.log(response)
-}
 
 async function loginWithGoogle(googleUser) {
     console.log("sending credentials to server")
@@ -23,7 +17,6 @@ async function loginWithGoogle(googleUser) {
 }
 
 export async function signOut() {
-
     await utils.httpRequest(`${config.dburl}/auth/logout`, "POST", {}, true)
     window.location.reload()
 }
