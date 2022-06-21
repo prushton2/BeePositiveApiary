@@ -2,6 +2,7 @@ import * as config from "../config.js";
 import * as utils from "../utils.js"
 
 window.signOut = signOut
+window.deleteAccount = deleteAccount
 
 //redirect to login if the user doesnt have a token
 
@@ -22,4 +23,17 @@ document.getElementById("accountType").innerHTML =    ` ${user.text.response.per
 export async function signOut() {
     await utils.httpRequest(`${config.dburl}/auth/logout`, "POST", null, true)
     window.location.reload()
+}
+
+async function deleteAccount() {
+    if(!confirm("Are you sure you want to delete your account?")) {
+        return
+    }
+    let response = await utils.httpRequest(`${config.dburl}/auth/deleteAccount`, "POST", null, false, true)
+    if(response.response.status == 301) {
+        alert("Please sign in again and try again.")
+    } else {
+        alert("Account deleted.")
+    }
+    utils.goto("login")
 }
