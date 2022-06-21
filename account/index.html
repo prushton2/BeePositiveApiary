@@ -3,7 +3,7 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="INTUITIVE">
+    <meta name="keywords" content="">
     <meta name="description" content="">
     <title>index</title>
     <link rel="stylesheet" href="../nicepage.css" media="screen">
@@ -11,8 +11,7 @@
     <script class="u-script" type="text/javascript" src="../jquery.js" defer=""></script>
     <script class="u-script" type="text/javascript" src="../nicepage.js" defer=""></script>
     <meta name="generator" content="Nicepage 4.12.21, nicepage.com">
-    <script src="https://accounts.google.com/gsi/client" async="async" defer="defer"></script>
-    <script>document.title="Login"</script>
+    <script>document.title="Account"</script>
     <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
     
     
@@ -117,26 +116,31 @@
           </div>
         </div>
       </div></header>
-    <section class="u-align-center u-clearfix u-image u-shading u-section-1" src="" data-image-width="2600" data-image-height="1300" id="sec-3fd9">
+    <section class="u-align-center u-clearfix u-image u-shading u-section-1" src="" data-image-width="2600" data-image-height="1300" id="sec-7124">
       <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
-        <h1 class="u-text u-text-default u-title u-text-1">Login</h1>
+        <h1 class="u-text u-text-default u-title u-text-1">Your Account</h1>
       </div>
     </section>
-    <section class="u-clearfix u-section-2" id="sec-214c">
-      <div class="u-align-left u-clearfix u-sheet u-sheet-1">
-        <div class="u-clearfix u-custom-html u-grey-10 u-custom-html-1">
-          <div id="g_id_onload" data-client_id="521335006932-7p7d097e7urevemv8v04djf67jj75atk.apps.googleusercontent.com" data-callback="handleCredentialResponse"></div>
-          <div class="g_id_signin" data-type="standard"></div>
-          <script> async function handleCredentialResponse(t) {
-		loginWithGoogle(t)
-	} </script>
+    <section class="u-clearfix u-section-2" id="sec-c428">
+      <div class="u-clearfix u-sheet u-sheet-1">
+        <div class="u-container-style u-grey-10 u-group u-group-1">
+          <div class="u-container-layout u-container-layout-1">
+            <h3 class="u-text u-text-default u-text-1">Your Account</h3>
+            <div class="u-clearfix u-custom-html u-custom-html-1">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<label id="name"></label>
+              <br> Email&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<label id="email"></label>
+              <br> Authentication&nbsp;|<label id="authentication"></label>
+              <br> Account Level&nbsp;&nbsp;&nbsp;|<label id="accountType"></label>
+              <br>
+            </div>
+            <h3 class="u-text u-text-default u-text-2">Account Actions</h3>
+<button onClick="signOut()" class="u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-50 u-btn-1">log out</button>
+<button onClick="deleteAccount()" class="u-border-none u-btn u-btn-round u-button-style u-hover-palette-2-light-1 u-palette-2-base u-radius-50 u-btn-2">delete account</button>
+          </div>
         </div>
-<button onClick="signOut()" class="u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-50 u-btn-1">logout</button>
-        </a>
       </div>
     </section>
 <script type="module" src="../config.js"></script>
 <script type="module" src="../utils.js"></script>
-<script type="module" src="login.js"></script>
+<script type="module" src="account.js"></script>
 </body>
 </html>
