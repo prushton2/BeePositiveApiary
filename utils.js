@@ -12,7 +12,6 @@ dropdown.addEventListener("mouseover", async(e) => {
     for(let key in shoppingList["Items"]) {
         
         html += products.createItemInfoString(shoppingList["Items"][key], `<a href="#">{amount}x {fullName}</a>`)
-        // html += `<a href="#">${shoppingList["Items"][key]["amount"]}x ${subproduct}${(await products.getProduct(shoppingList["Items"][key]["productID"]))["name"]}`
     }
     document.getElementById("cartButtonContents").innerHTML = html
 })
@@ -25,11 +24,18 @@ let response = await fetch(`${config.dburl}/auth/getUser`, {
     method: "GET",
     headers: {'Accept': 'application/json','Content-Type': 'application/json'}
 })
+
 if(response.status == 200) {
+
     response = JSON.parse(await response.text())
+    //load pfp
     let profileDiv = document.getElementById("profileDiv")
     profileDiv.innerHTML = `<img src="${response["response"]["pfpURL"]}" alt="profile pic", style="width: 70px; height: 70px;">`
     profileDiv.addEventListener("click", () => {window.location.href = `${config.thisURL}/account`})
+    //load options
+    let optionsDiv = document.getElementById("extraOptions")
+    optionsDiv.innerHTML = response.extraMenuItems.join("")
+
 }
 
 
