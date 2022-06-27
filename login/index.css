@@ -34,7 +34,14 @@
     min-height: 41px;
   }
 }.u-section-2 .u-sheet-1 {
-  min-height: 89px;
+  min-height: 500px;
+}
+
+.u-section-2 .u-custom-html-1 {
+  min-height: 25px;
+  background-image: none;
+  width: 200px;
+  margin: 50px auto 0;
 }
 
 .u-section-2 .u-btn-1 {
@@ -43,7 +50,11 @@
   text-transform: uppercase;
   font-size: 0.875rem;
   letter-spacing: 1px;
-  margin: 0 0 47px auto;
-}.u-section-3 .u-sheet-1 {
-  min-height: 500px;
+  margin: 50px auto 60px;
+}
+
+@media (max-width: 1199px) {
+  .u-section-2 .u-custom-html-1 {
+    height: auto;
+  }
 }

@@ -41,6 +41,16 @@ pages = {
     "checkout":{
         "page": "checkout/Checkout.html",
         "scripts": ["../config.js", "../utils.js", "checkout.js"]
+    },
+
+    "loginIndex":{
+        "page": "login/index.html",
+        "scripts": ["../config.js", "../utils.js", "login.js"]
+    },
+    
+    "accountIndex":{
+        "page": "account/index.html",
+        "scripts": ["../config.js", "../utils.js", "account.js"]
     }
 }
 
@@ -60,8 +70,8 @@ createFiles = {
 }
 
 deleteFiles = [
-    "templates/password",
-    "Page-Password-Template.css"
+    # "templates/password",
+    # "Page-Password-Template.css"
 ]
 
 indexSettings = {

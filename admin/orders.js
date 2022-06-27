@@ -2,7 +2,6 @@ import * as utils from "../utils.js"
 import * as config from "../config.js"
 
 let doc = document.getElementById("sec-214c")
-let password = document.getElementById("pswdinput")
 
 window.markAsComplete = markAsComplete
 window.sendCompletionEmail = sendCompletionEmail
@@ -15,7 +14,6 @@ async function renderpage() { //this function feels bloated, I want to shrink it
 
     //get all unarchived orders
     let response = await utils.httpRequest(`${config.dburl}/orders/get`, "POST", {
-        password: password.value,
         getArchived: false
     }, false)
 
@@ -30,7 +28,6 @@ async function renderpage() { //this function feels bloated, I want to shrink it
 
         //get all items for each order
         let items = await utils.httpRequest(`${config.dburl}/purchases/get`, "POST", {
-            password: password.value,
             orderID: orders[order]["id"],
             getArchived: false  
         }, false)
@@ -47,7 +44,6 @@ async function renderpage() { //this function feels bloated, I want to shrink it
 
     //get all archived orders
     response = await utils.httpRequest(`${config.dburl}/orders/get`, "POST", {
-        password: password.value,
         getArchived: true,
     }, false)
 
@@ -56,7 +52,6 @@ async function renderpage() { //this function feels bloated, I want to shrink it
     for(var order in orders) {
         //get all items for each archived order
         let items = await utils.httpRequest(`${config.dburl}/purchases/get`, "POST", {
-            password: password.value,
             orderID: orders[order]["id"],
             getArchived: true
         }, false)
@@ -98,29 +93,21 @@ async function createItemHTML(order, items, isArchived) {
 
 
 async function markAsComplete(i, complete) {
-    let response = await fetch(`${config.dburl}/orders/complete`, {
-        method: "PATCH", headers: {"Accept": "applcation/json", "Content-Type": "application/json"},
-        body: JSON.stringify(
-            {
-                "password": password.value,
-                "orderID": i,
-                "completeStatus": complete
-            }
-        )
-    })
+
+    let response = await utils.httpRequest(`${config.dburl}/orders/complete`, "PATCH", 
+    {
+        "orderID": i,
+        "isComplete": complete
+    }, false)
     await renderpage()
 }
 
 async function sendCompletionEmail(orderID, name) {
     if(confirm(`Are you sure you want to send a completion email to ${name}?`)) {
-        let response = await fetch(`${config.dburl}/email/completionEmail`, {
-            method: "POST", headers: {"Accept": "applcation/json", "Content-Type": "application/json"},
-            body: JSON.stringify({    
-                password: password.value,
-                orderID: orderID
-            })
-        })
-        response = JSON.parse(await response.text())
+        let response = await utils.httpRequest(`${config.dburl}/email/completionEmail`, "POST", 
+        {
+            "orderID": orderID
+        }, false)
         alert(response["response"])
         await renderpage()
     }
@@ -129,22 +116,14 @@ async function sendCompletionEmail(orderID, name) {
 async function archiveItem(id, name) {
     let text = `Are you sure you would like to archive ${name}'s order?\n (ID: ${id})`;
     if (confirm(text)) {
-        await fetch(`${config.dburl}/orders/archive`, {
-            method: "POST", headers: {"Accept": "application/json", "Content-Type": "application/json"},
-            body: JSON.stringify({
-                "password": password.value,
-                "orderID": id
-            })
-        })
+
+        await utils.httpRequest(`${config.dburl}/orders/archive`, "POST",
+        {
+            "orderID": id
+        }, true)
         alert(`${name}'s order has been archived`)
     }
     await renderpage()
 }
-
-document.getElementById("pswdinput").addEventListener("keyup", async(e) => {
-    if(e.key == "Enter") {
-        renderpage()
-    }
-})
 
 document.getElementById("renderPageButton").addEventListener("click", renderpage)

@@ -4,8 +4,7 @@ import * as config from "../config.js"
 export let loadedDBName = ""
 export let loadedDB
 
-let password = document.getElementById("pswdinput")
-let uneditableColumns = ["id", "subProductID"]
+let authToken = JSON.parse(window.localStorage.getItem("auth"))
 
 window.loadDB = loadDB
 window.saveEdit = saveEdit
@@ -30,6 +29,15 @@ export async function loadDB(name) {
             loadedDB = utils.products.productRelations
             primaryKeyColumns = ["id", "subProductID"]
             break
+        case "Users":
+            loadedDBName = "Users"
+
+            let db = await utils.httpRequest(`${config.dburl}/auth/getUsers`, "POST", {}, true)
+
+            loadedDB = db["response"]
+            primaryKeyColumns = ["ID"]
+            
+            break
         default:
             console.log("Error: No database with name " + name + " found")
             break
@@ -43,7 +51,7 @@ export async function loadDB(name) {
 export async function loadEditableDB(db, primaryKeyColumns) {
     await utils.products.getProducts(true)
     let html = "<style> table { border-collapse:collapse; border:1px solid #000000; }\n table td {border:1px solid #000000;} </style>"
-    html += `<table>`
+    html += `<table style="margin: auto;">`
     //create column headers
     let columns = db[0]
     for(let column in columns) {
@@ -100,11 +108,12 @@ export async function newEntry(length) {
 
     let response = await utils.httpRequest(`${config.dburl}/db/newEntry`, "POST",
     {
-        "password": password.value,
+        // "auth": authToken,
         "table": loadedDBName,
         "values": table
     }, false)
     await loadDB(loadedDBName)
+    console.log(response)
 }
 
 export async function saveEdit(primaryKeys, column, entryID) {
@@ -123,12 +132,14 @@ export async function saveEdit(primaryKeys, column, entryID) {
 
     let response = await utils.httpRequest(`${config.dburl}/db/update`, "PATCH",
     {
-        "password": password.value,
+        // "auth": authToken,
         "table": loadedDBName,
         "primaryKeys": primaryKeys,
         "column": column,
         "value": value  
     }, true)
+
+    console.log(response)
 }
 
 
@@ -136,11 +147,11 @@ export async function deleteEntry(primaryKeys) {
     if(confirm(`Are you sure you want to delete this entry?\n${JSON.stringify(primaryKeys)}`)) {
         let response = await utils.httpRequest(`${config.dburl}/db/deleteEntry`, "DELETE",
         {
-            "password": password.value,
+            // "auth": authToken,
             "table": loadedDBName,
             "primaryKeys": primaryKeys
         })
-        if(response["response"] != "Entry Deleted") {
+        if(response["response"] != "Entry deleted") {
             alert(`There was an error deleting the entry under the keys ${JSON.stringify(primaryKeys)}:\n ${response["response"]}`)
         } else {
             alert("Entry deleted")

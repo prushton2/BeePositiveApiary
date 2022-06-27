@@ -1,42 +1,95 @@
 //this script holds basic functions needed for any page to work
 import * as config from '../config.js';
+
+window.goto = goto
+// -------------------------------------------------- PAGE SETUP --------------------------------------------------
+
 //Render the shoppinglist in the cart dropdown
 let dropdown = document.getElementById("cartButton") 
 dropdown.addEventListener("mouseover", async(e) => {
     let html = ""
     let shoppingList = JSON.parse(localStorage.getItem("shoppingList"))
     for(let key in shoppingList["Items"]) {
-
+        
         html += products.createItemInfoString(shoppingList["Items"][key], `<a href="#">{amount}x {fullName}</a>`)
-        // html += `<a href="#">${shoppingList["Items"][key]["amount"]}x ${subproduct}${(await products.getProduct(shoppingList["Items"][key]["productID"]))["name"]}`
     }
     document.getElementById("cartButtonContents").innerHTML = html
 })
 
+//render the users pfp in the navbar
+
+let response = await fetch(`${config.dburl}/auth/getUser`, {
+    credentials: "include",
+    mode: "cors",
+    method: "GET",
+    headers: {'Accept': 'application/json','Content-Type': 'application/json'}
+})
+
+if(response.status == 200) {
+
+    response = JSON.parse(await response.text())
+    //load pfp
+    let profileDiv = document.getElementById("profileDiv")
+    profileDiv.innerHTML = `<img src="${response["response"]["pfpURL"]}" alt="profile pic", style="width: 70px; height: 70px;">`
+    profileDiv.addEventListener("click", () => {window.location.href = `${config.thisURL}/account`})
+    //load options
+    let optionsDiv = document.getElementById("extraOptions")
+    optionsDiv.innerHTML = response.extraMenuItems.join("")
+
+}
+
+
+
+// -------------------------------------------------- FUNCTIONS --------------------------------------------------
+
+export function getCookie(name) {
+	let value = `; ${document.cookie}`;
+	let parts = value.split(`; ${name}=`);
+	if (parts.length === 2) return parts.pop().split(';').shift();
+}
 
 export function isMain(mainFileName) {
     return window.location.pathname.endsWith(mainFileName)
 }
 
+export function goto(page) {
+    window.location.href = `${config.thisURL}/${page}`
+}
 
 //cleaner http requests with automatic error handling (because im lazy)
-export async function httpRequest(url, method, body, makeAlertOnError) {
+export async function httpRequest(url, method, body, makeAlertOnError=false, getFullInfo=false) {
 
-    let response = await fetch(url, {
-        method: method, headers: {'Accept': 'application/json','Content-Type': 'application/json'},
-        body: JSON.stringify(body)
-    })
-    
-    if(response.status >= 200 && response.status < 300) {
-        let text = await response.text()
-        return JSON.parse(text)
-    } else {
-        if(makeAlertOnError) {
-            alert("There was an error making your request")
-        }
-        let text = await response.text()
-        return JSON.parse(text)
+    let fetchPreoptions = {
+        method: method,
+        headers: {'Accept': 'application/json','Content-Type': 'application/json'},
+        credentials: "include",
+        mode: "cors",
     }
+
+    if(body != null) {
+        fetchPreoptions["body"] = JSON.stringify(body)
+    }
+
+    let response = await fetch(url, fetchPreoptions)
+
+    let text
+    if(response.status >= 200 && response.status < 300) {
+        text = await response.text()
+    } else {
+        text = await response.text()
+        if(makeAlertOnError) {
+            alert("There was an error making your request:\n"+text)
+        }
+    }
+
+    if(getFullInfo) {
+        return {
+            "text": JSON.parse(text),
+            "response": response
+        }
+    }
+    return JSON.parse(text)
+
 }
 
 //Manages the products and relations with subproducts

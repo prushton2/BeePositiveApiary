@@ -5,12 +5,14 @@
     <meta charset="utf-8">
     <meta name="keywords" content="INTUITIVE">
     <meta name="description" content="">
-    <title>OrderConfirmed</title>
+    <title>index</title>
     <link rel="stylesheet" href="../nicepage.css" media="screen">
-<link rel="stylesheet" href="OrderConfirmed.css" media="screen">
+<link rel="stylesheet" href="index.css" media="screen">
     <script class="u-script" type="text/javascript" src="../jquery.js" defer=""></script>
     <script class="u-script" type="text/javascript" src="../nicepage.js" defer=""></script>
     <meta name="generator" content="Nicepage 4.12.21, nicepage.com">
+    <script src="https://accounts.google.com/gsi/client" async="async" defer="defer"></script>
+    <script>document.title="Login"</script>
     <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
     
     
@@ -21,7 +23,7 @@
 		"name": "BeePositiveApiary"
 }</script>
     <meta name="theme-color" content="#478ac9">
-    <meta property="og:title" content="OrderConfirmed">
+    <meta property="og:title" content="index">
     <meta property="og:description" content="">
     <meta property="og:type" content="website">
   </head>
@@ -117,87 +119,24 @@
       </div></header>
     <section class="u-align-center u-clearfix u-image u-shading u-section-1" src="" data-image-width="2600" data-image-height="1300" id="sec-3fd9">
       <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
-        <h1 class="u-text u-text-default u-title u-text-1">Your Order</h1>
+        <h1 class="u-text u-text-default u-title u-text-1">Login</h1>
       </div>
     </section>
-    <section class="u-clearfix u-section-2" id="sec-32b2">
-      <div class="u-clearfix u-sheet u-sheet-1">
-        <h3 class="u-text u-text-default u-text-1">Your Order Has Been Placed!<br>
-        </h3>
-        <div class="u-clearfix u-custom-html u-expanded-width u-custom-html-1">
-          <p style="text-align: center;" id="orderNumber">Order #</p>
+    <section class="u-clearfix u-section-2" id="sec-214c">
+      <div class="u-align-left u-clearfix u-sheet u-sheet-1">
+        <div class="u-clearfix u-custom-html u-grey-10 u-custom-html-1">
+          <div id="g_id_onload" data-client_id="521335006932-7p7d097e7urevemv8v04djf67jj75atk.apps.googleusercontent.com" data-callback="handleCredentialResponse"></div>
+          <div class="g_id_signin" data-type="standard"></div>
+          <script> async function handleCredentialResponse(t) {
+		loginWithGoogle(t)
+	} </script>
         </div>
-        <h3 class="u-text u-text-default u-text-2">
-          <span style="font-size: 1rem;">We will contact you when your order is ready for pickup</span>
-          <br>
-        </h3>
-        <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
-          <div class="u-layout">
-            <div class="u-layout-row">
-              <div class="u-container-style u-layout-cell u-size-30 u-layout-cell-1">
-                <div class="u-container-layout u-container-layout-1">
-                  <h3 class="u-text u-text-default u-text-3">Your Order:</h3>
-                  <div class="u-container-style u-expanded-width u-group u-palette-5-base u-group-1">
-                    <div class="u-container-layout u-container-layout-2">
-                      <div class="u-clearfix u-custom-html u-custom-html-2">
-                        <p style="width: 100%; height: 100%" id="CheckoutList">Your items will appear here when they have been added to the cart!</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="u-align-center u-clearfix u-custom-html u-custom-html-3">
-                    <p style="text-align: center;" id="totalCost">Total Cost</p>
-                  </div>
-                  <p class="u-text u-text-default u-text-4">
-                    <span style="font-size: 1rem;">You will pay for your order when you receive the order.</span>
-                    <br>
-                    <br>
-                  </p>
-                </div>
-              </div>
-              <div class="u-container-style u-layout-cell u-size-30 u-layout-cell-2">
-                <div class="u-container-layout u-container-layout-3">
-                  <h3 class="u-text u-text-default u-text-5">Contact Information:</h3>
-                  <div class="u-container-style u-grey-10 u-group u-group-2">
-                    <div class="u-container-layout u-valign-middle u-container-layout-4">
-                      <div class="u-container-style u-grey-10 u-group u-group-3">
-                        <div class="u-container-layout u-container-layout-5">
-                          <div class="u-clearfix u-custom-html u-preserve-proportions u-custom-html-4">
-                            <p style="text-align: right;">Name: <label id="name" style="display: inline-block; width: 250px;"></label>
-                            </p>
-                          </div>
-                          <div class="u-clearfix u-custom-html u-preserve-proportions u-custom-html-5">
-                            <p style="text-align: right;">Address: <label id="address" style="display: inline-block; width: 250px;"></label>
-                            </p>
-                          </div>
-                          <div class="u-clearfix u-custom-html u-preserve-proportions u-custom-html-6">
-                            <p style="text-align: right;">Phone: <label id="phoneNumber" style="display: inline-block; width: 250px;"></label>
-                            </p>
-                          </div>
-                          <div class="u-clearfix u-custom-html u-custom-html-7">
-                            <p style="text-align: right;">Email: <label id="email" style="display: inline-block; width: 250px;"></label>
-                            </p>
-                          </div>
-                          <div class="u-clearfix u-custom-html u-custom-html-8">
-                            <p style="text-align: right;">Status: <label id="status" style="display: inline-block; width: 250px;"></label>
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="u-clearfix u-custom-html u-custom-html-9">
-                    <label style="color: #333;">Is any of this information incorrect? Contact <label style="color: blue;">support@beepositiveapiary.com</label> with your order number to get it resolved.
-                    </label>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+<button onClick="signOut()" class="u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-50 u-btn-1">logout</button>
+        </a>
       </div>
     </section>
 <script type="module" src="../config.js"></script>
 <script type="module" src="../utils.js"></script>
-<script type="module" src="orderConfirmed.js"></script>
+<script type="module" src="login.js"></script>
 </body>
 </html>
