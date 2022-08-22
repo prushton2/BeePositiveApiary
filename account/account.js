@@ -21,7 +21,7 @@ document.getElementById("accountType").innerHTML =    ` ${user.text.response.per
 
 
 export async function signOut() {
-    await utils.httpRequest(`${config.dburl}/auth/logout`, "POST", null, true)
+    await utils.httpRequest(`${config.dburl}/auth/logout`, "GET", undefined, true)
     window.location.reload()
 }
 
