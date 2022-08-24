@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html style="font-size: 16px;">
-  <head>
+<html style="font-size: 16px;"><head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <meta name="keywords" content="">
@@ -10,7 +9,7 @@
 <link rel="stylesheet" href="index.css" media="screen">
     <script class="u-script" type="text/javascript" src="../jquery.js" defer=""></script>
     <script class="u-script" type="text/javascript" src="../nicepage.js" defer=""></script>
-    <meta name="generator" content="Nicepage 4.12.21, nicepage.com">
+    <meta name="generator" content="Nicepage 4.13.4, nicepage.com">
     <script>document.title="Account"</script>
     <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
     
@@ -123,18 +122,42 @@
     </section>
     <section class="u-clearfix u-section-2" id="sec-c428">
       <div class="u-clearfix u-sheet u-sheet-1">
-        <div class="u-container-style u-grey-10 u-group u-group-1">
-          <div class="u-container-layout u-container-layout-1">
-            <h3 class="u-text u-text-default u-text-1">Your Account</h3>
-            <div class="u-clearfix u-custom-html u-custom-html-1">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<label id="name"></label>
-              <br> Email&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<label id="email"></label>
-              <br> Authentication&nbsp;|<label id="authentication"></label>
-              <br> Account Level&nbsp;&nbsp;&nbsp;|<label id="accountType"></label>
-              <br>
-            </div>
-            <h3 class="u-text u-text-default u-text-2">Account Actions</h3>
+        <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
+          <div class="u-layout">
+            <div class="u-layout-row">
+              <div class="u-container-style u-layout-cell u-size-30 u-layout-cell-1">
+                <div class="u-container-layout u-container-layout-1">
+                  <div class="u-container-style u-grey-10 u-group u-group-1">
+                    <div class="u-container-layout u-container-layout-2">
+                      <h3 class="u-text u-text-default u-text-1">Your Account</h3>
+                      <div class="u-clearfix u-custom-html u-custom-html-1">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<label id="name"></label>
+                        <br> Email&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<label id="email"></label>
+                        <br> Authentication&nbsp;|<label id="authentication"></label>
+                        <br> Account Level&nbsp;&nbsp;&nbsp;|<label id="accountType"></label>
+                        <br>
+                      </div>
+                      <h3 class="u-text u-text-default u-text-2">Account Actions</h3>
 <button onClick="signOut()" class="u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-50 u-btn-1">log out</button>
 <button onClick="deleteAccount()" class="u-border-none u-btn u-btn-round u-button-style u-hover-palette-2-light-1 u-palette-2-base u-radius-50 u-btn-2">delete account</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="u-container-style u-layout-cell u-size-30 u-layout-cell-2">
+                <div class="u-container-layout u-container-layout-3">
+                  <div class="u-container-style u-expanded-width u-grey-10 u-group u-group-2">
+                    <div class="u-container-layout u-container-layout-4">
+                      <h3 class="u-text u-text-default u-text-3">Your Orders<br>
+                      </h3>
+                      <div class="u-clearfix u-custom-html u-custom-html-2">
+                        <style></style>
+                        <p id="orderListBox">...</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
