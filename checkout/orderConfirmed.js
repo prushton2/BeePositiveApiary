@@ -17,7 +17,6 @@ const orderInfo = await utils.httpRequest(`${config.dburl}/orders/getByKey`, "PO
     "viewKey": viewKey
 }, false)
 
-console.log(orderInfo)
 
 document.getElementById("orderNumber").innerHTML = `Order #${orderInfo["response"]["order"]["id"]}`;
 document.getElementById("name").innerHTML = orderInfo["response"]["order"]["name"];
