@@ -3,19 +3,16 @@ import * as config from "../config.js"
 window.utils = utils
 
 //get the url parameters
-const urlParams = new URLSearchParams(window.location.search);
-const orderId = urlParams.get('orderId');
-const viewKey = urlParams.get('viewKey');
+// const urlParams = new URLSearchParams(window.location.search);
+// const orderId = urlParams.get('orderId');
+// const viewKey = urlParams.get('viewKey');
 
 async function createHTML(item) { //shoppingList[item], supposed to contain amount and subproductID
     let htmlString = `<div> <label>{fullName}</label><div style='float:right; text-align: right;'>{price}&nbsp&nbsp&nbspx{amount} &nbsp&nbsp&nbsp (\${totalPrice})</div></div><br>`
     return utils.products.createItemInfoString(item, htmlString)
 }
-
-const orderInfo = await utils.httpRequest(`${config.dburl}/orders/getByKey`, "POST", {
-    "orderID": parseInt(orderId),
-    "viewKey": viewKey
-}, false)
+console.log(`${config.dburl}/orders/getByKey${window.location.search}`)
+const orderInfo = await utils.httpRequest(`${config.dburl}/orders/getByKey${window.location.search}`, "GET", null, false)
 
 
 document.getElementById("orderNumber").innerHTML = `Order #${orderInfo["response"]["order"]["id"]}`;
