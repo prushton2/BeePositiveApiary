@@ -32,7 +32,7 @@ orders["active"] = orders["active"].map(element => createOrderItemString(element
 orders["completed"] = orders["completed"].map(element => createOrderItemString(element))
 
 
-document.getElementById("orderListBox").innerHTML = `${orders["active"]}<br><b>Past Orders</b><br>${orders["completed"]}`
+document.getElementById("orderListBox").innerHTML = `<b>Active Orders</b><br>${orders["active"]}<br><b>Past Orders</b><br>${orders["completed"]}`
 
 
 //------------------------
