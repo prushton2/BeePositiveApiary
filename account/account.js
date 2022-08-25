@@ -19,7 +19,11 @@ document.getElementById("email").innerHTML =          ` ${user.text.response.ema
 document.getElementById("authentication").innerHTML = ` ${user.text.response.authType}`
 document.getElementById("accountType").innerHTML =    ` ${user.text.response.permissions}`
 
+//load the user's orders
+let orders = await utils.httpRequest(`${config.dburl}/orders/getPlacedOrders`, "GET", null, false)
+console.log(orders)
 
+//------------------------
 export async function signOut() {
     await utils.httpRequest(`${config.dburl}/auth/logout`, "GET", undefined, true)
     window.location.reload()
