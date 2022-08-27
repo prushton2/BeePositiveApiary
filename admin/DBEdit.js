@@ -132,7 +132,6 @@ export async function saveEdit(primaryKeys, column, entryID) {
 
     let response = await utils.httpRequest(`${config.dburl}/db/update`, "PATCH",
     {
-        // "auth": authToken,
         "table": loadedDBName,
         "primaryKeys": primaryKeys,
         "column": column,
