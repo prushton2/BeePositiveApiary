@@ -32,10 +32,6 @@ if(response.status == 200) {
     let profileDiv = document.getElementById("profileDiv")
     profileDiv.innerHTML = `<img src="${response["response"]["pfpURL"]}" alt="profile pic", style="width: 70px; height: 70px;">`
     profileDiv.addEventListener("click", () => {window.location.href = `${config.thisURL}/account`})
-    //load options
-    let optionsDiv = document.getElementById("extraOptions")
-    optionsDiv.innerHTML = response.extraMenuItems.join("")
-
 }
 
 
@@ -93,6 +89,8 @@ export async function httpRequest(url, method, body, makeAlertOnError=false, get
 }
 
 //Manages the products and relations with subproducts
+
+
 class Products {
     constructor() {
         this.MassTax = config.tax
