@@ -53,3 +53,5 @@ async function deleteAccount() {
     }
     utils.goto("login")
 }
+
+document.getElementById("extraOptionsBox").innerHTML = `<a href="${user.text.extraMenuItems[0][0]}" class="u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-50 u-btn-1">${user.text.extraMenuItems[0][1]}</button>`
