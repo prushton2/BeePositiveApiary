@@ -105,7 +105,7 @@ export async function createHTML(itemID, extraStyle="") { //create the html for 
                 <td style="text-align: right;"> <input id="Count of ${itemID}" style="width: 75px;" value="1" type="number" step="1"> Quantity </td>
             </tr>
             <tr>
-                <td> ${item["stock"] <= 5 ? `Only ${item["stock"]} left` : ""} </td>
+                <td> ${item["stock"] <= 5 && item["stock"] > 0 ? `Only ${item["stock"]} left` : ""} </td>
                 <td style="vertical-align: top; text-align: right;"></b><button id="Add to cart ${itemID}"  class="u-btn-round u-button-style u-custom-item u-hover-palette-1-light-1 u-palette-1-base u-radius-6 u-btn-2" style="padding: 10px 20px;" ><b>Add to Cart</b></button></td>
             </tr>
         </table>
