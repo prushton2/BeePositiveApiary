@@ -116,15 +116,14 @@ export async function createHTML(itemID, extraStyle="") { //create the html for 
 }
 
 export async function createAllHTML(items) {
-    let allHTML = ""
-    let halfwidth = document.documentElement.clientWidth/2
-    for (let j in items) {
-        let i = items[j]
-        allHTML += await createHTML(i[0], `position: absolute; left:  ${halfwidth-550}px; margin-top: ${50 + (j*450)}px;`)
-        allHTML += await createHTML(i[1], `position: absolute; right: ${halfwidth-550}px; margin-top: ${50 + (j*450)}px;`)
-        allHTML += "<br>"
+    let allHTML = "";
+    let halfwidth = document.documentElement.clientWidth/2;
+    for (let i = 0; i<items.length; i++) {
+		let side = i%2 == 0 ? "left" : "right";
+		allHTML += await createHTML(items[i], `position: absolute; ${side}: ${halfwidth-550}px; margin-top: ${50 + (Math.floor(i/2) * 450)}px;`);
+        allHTML += i%2 == 0 ? "" : "<br>";
     }
-    return allHTML
+    return allHTML;
 }
 
 export function addEventListeners(items) {
