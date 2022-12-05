@@ -88,6 +88,7 @@ export async function httpRequest(url, method, body, makeAlertOnError=false, get
 
 }
 
+//--------------------------------------------------------PRODUCTS--------------------------------------------------------
 //Manages the products and relations with subproducts
 
 
@@ -138,6 +139,17 @@ class Products {
         return (this.getProductRelation(productId, subProductId)["price"] * amount).toFixed(2)
     }
 
+	getProductsByLocation(location) {
+		let productsInLocation = [];
+		for(let i in this.products) {
+			if(this.products[i]["location"] == location) {
+				productsInLocation.push(this.products[i]["id"]);
+			}
+		}
+		return productsInLocation;
+	}
+
+	//Get the full cost of a shoppinglist
     getTotalCost(shoppingList) { // This function returns the precise int of the cost of the given shoppinglist as well as the tax
         let totalcost = 0;
                 
