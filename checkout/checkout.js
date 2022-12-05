@@ -5,7 +5,7 @@ import * as utils from "../utils.js"
 let shoppingList = JSON.parse(localStorage.getItem("shoppingList"))
 let checkoutListName, totalCostName
 
-export function createHTML(item) { //shoppingList[item], supposed to contain amount and subproductID
+export function createHTML(item) { //shoppingList[item] | item = {"productID": x, "subProductID": x, "amount": x}
     let textbox = `<input style="width: 75px;" type="number" step="any" name="checkoutItemCount" id="Count of ${item["productID"]} ${item["subProductID"]}" value=${item["amount"]}>`
     
     let htmlString = `<div> <label>{fullName}</label> <div style='float:right; text-align: right;'>\${price}&nbsp&nbsp&nbspx${textbox}&nbsp (\${totalPrice})</div></div><br>`
@@ -27,7 +27,7 @@ export function addEventListeners() {
     }
 }
 
-export function createAllHtml(jsonobject) { //takes in the shoppinglist
+export function createAllHtml(jsonobject) { //takes in the shoppinglist | jsonobject = {"Items": [ {"productID": x, "subProductID": x, "amount": x} ]}
     let html = ""
     for(let key in jsonobject["Items"]) {
         html += createHTML(jsonobject["Items"][key])
