@@ -1,5 +1,7 @@
 import * as utils from "../utils.js"
 
+// Renders and updates the menu that allows you to change your order in checkout
+
 let shoppingList = JSON.parse(localStorage.getItem("shoppingList"))
 let checkoutListName, totalCostName
 

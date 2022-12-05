@@ -71,7 +71,7 @@ export async function createHTML(itemID, extraStyle="") { //create the html for 
     for(let i in subProducts) {
         if(subProducts[i]["subProductID"] != 0) {
             let subproduct = await utils.products.getProduct(subProducts[i]["subProductID"])
-            subproductsDropdownHTML += `<option value="${subProducts[i]["subProductID"]}">${subproduct["name"]}</option>`
+            subproductsDropdownHTML += `<option value="${subProducts[i]["subProductID"]}">${subproduct["name"]}${subproduct["stock"] == 0 ? " (OUT OF STOCK)" : ""}</option>`
         }
     }
     let subProductHTML = `
@@ -96,7 +96,7 @@ export async function createHTML(itemID, extraStyle="") { //create the html for 
                 <td> <label>${item["name"]}</label> <br> <label>${item["description"]}</label> </td>
             </tr>
             <tr>
-                <td> <label id="price of ${itemID}">$${item["price"]}</label> <br><br></td>
+                <td> <label id="price of ${itemID}">$${item["price"]}</label> <br> ${item["stock"] == 0 ? "<label style='color: Tomato'>OUT OF STOCK</label>" : ""} <br></td>
             </tr>
             <tr style="vertical-align: bottom;">
                 <td> 
@@ -105,7 +105,7 @@ export async function createHTML(itemID, extraStyle="") { //create the html for 
                 <td style="text-align: right;"> <input id="Count of ${itemID}" style="width: 75px;" value="1" type="number" step="1"> Quantity </td>
             </tr>
             <tr>
-                <td> </td>
+                <td>  </td>
                 <td style="vertical-align: top; text-align: right;"></b><button id="Add to cart ${itemID}"  class="u-btn-round u-button-style u-custom-item u-hover-palette-1-light-1 u-palette-1-base u-radius-6 u-btn-2" style="padding: 10px 20px;" ><b>Add to Cart</b></button></td>
             </tr>
         </table>
