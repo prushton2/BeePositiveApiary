@@ -11,6 +11,7 @@ window.saveEdit = saveEdit
 window.queueEdit = saveEdit
 window.deleteEntry = deleteEntry
 window.newEntry = newEntry
+window.getJson = getJson
 
 export async function loadDB(name) {
 
@@ -157,4 +158,11 @@ export async function deleteEntry(primaryKeys) {
         }
     }
     await loadDB(loadedDBName)
+}
+
+
+export async function getJson() {
+	let response = await utils.httpRequest(`${config.dburl}/db/getJson`, "POST", {"table": loadedDBName});
+	console.log(response["response"]);
+	console.log(JSON.stringify(response["response"]));
 }
