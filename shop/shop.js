@@ -128,12 +128,11 @@ export async function createAllHTML(items) {
 
 export function addEventListeners(items) {
     for (let i in items) {
-        for (let j in items[i]) {
-            j = items[i][j]
-            document.getElementById(`Add to cart ${j}`).addEventListener("click", async() => { await addToCart(j) })
-            try {
-                document.getElementById(`Subproduct of ${j}`).addEventListener("change", async() => { await updateDisplay(j) })
-            } catch {}
-        }
+		i = items[i];
+		document.getElementById(`Add to cart ${i}`).addEventListener("click", async() => { await addToCart(i) })
+		try {
+			document.getElementById(`Subproduct of ${i}`).addEventListener("change", async() => { await updateDisplay(i) })
+		} catch {}
+        
     }
 }
