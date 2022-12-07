@@ -61,7 +61,7 @@ export async function updateDisplay(productID) { //update the displayed price of
     document.getElementById(`Image of ${productID}`).src = subProductRelation["imageURL"]
 }
 
-export async function createHTML(itemID, extraStyle="") { //create the html for the item
+export async function createHTML(itemID, side, topMargin) { //create the html for the item
     let item = await utils.products.getProduct(itemID)
     let subProducts = await utils.products.getProductRelations(itemID)
 
@@ -89,38 +89,36 @@ export async function createHTML(itemID, extraStyle="") { //create the html for 
     let itemImage = subProducts[0]["imageURL"]
 
     let htmlString = `
-    <div style="${extraStyle}">
-        <table>
-            <tr style="text-align: left;">
-                <td style="width: 180px; height: 180px;"> <img src="${itemImage}" style="width:170px;" id="Image of ${itemID}"> </td>
-                <td> <label>${item["name"]}</label> <br> <label>${item["description"]}</label> </td>
-            </tr>
-            <tr>
-                <td> <label id="price of ${itemID}">$${item["price"]}</label> <br> ${item["stock"] == 0 ? "<label style='color: Tomato'>OUT OF STOCK</label>" : ""} <br></td>
-            </tr>
-            <tr style="vertical-align: bottom;">
-                <td> 
-                    ${subProductHTML} 
-                </td>
-                <td style="text-align: right;"> <input id="Count of ${itemID}" style="width: 75px;" value="1" type="number" step="1"> Quantity </td>
-            </tr>
-            <tr>
-                <td> ${item["stock"] <= 5 && item["stock"] > 0 ? `Only ${item["stock"]} left` : ""} </td>
-                <td style="vertical-align: top; text-align: right;"></b><button id="Add to cart ${itemID}"  class="u-btn-round u-button-style u-custom-item u-hover-palette-1-light-1 u-palette-1-base u-radius-6 u-btn-2" style="padding: 10px 20px;" ><b>Add to Cart</b></button></td>
-            </tr>
-        </table>
-    </div>`
+		<table style="position: absolute; left: 50%; transform: translate(${side}, 0%); top: ${topMargin}px">
+			<tr style="text-align: left;">
+				<td style="width: 180px; height: 180px;"> <img src="${itemImage}" style="width:170px;" id="Image of ${itemID}"> </td>
+				<td> <label>${item["name"]}</label> <br> <label>${item["description"]}</label> </td>
+			</tr>
+			<tr>
+				<td> <label id="price of ${itemID}">$${item["price"]}</label> <br> ${item["stock"] == 0 ? "<label style='color: Tomato'>OUT OF STOCK</label>" : ""} <br></td>
+			</tr>
+			<tr style="vertical-align: bottom;">
+				<td> 
+					${subProductHTML} 
+				</td>
+				<td style="text-align: right;"> <input id="Count of ${itemID}" style="width: 75px;" value="1" type="number" step="1"> Quantity </td>
+			</tr>
+			<tr>
+				<td> ${item["stock"] <= 5 && item["stock"] > 0 ? `Only ${item["stock"]} left` : ""} </td>
+				<td style="vertical-align: top; text-align: right;"></b><button id="Add to cart ${itemID}"  class="u-btn-round u-button-style u-custom-item u-hover-palette-1-light-1 u-palette-1-base u-radius-6 u-btn-2" style="padding: 10px 20px;" ><b>Add to Cart</b></button></td>
+			</tr>
+		</table>`
 
     return htmlString
 
 }
 
 export async function createAllHTML(items) {
-    let allHTML = "";
+    let allHTML = "<br><br>";
     let halfwidth = document.documentElement.clientWidth/2;
     for (let i = 0; i<items.length; i++) {
-		let side = i%2 == 0 ? "left" : "right";
-		allHTML += await createHTML(items[i], `position: absolute; ${side}: ${halfwidth-550}px; margin-top: ${50 + (Math.floor(i/2) * 450)}px;`);
+		let side = i%2 == 0 ? "10%" : "-110%";
+		allHTML += await createHTML(items[i], side, 50 + (Math.floor(i/2) * 450));//`position: absolute; ${side}: ${halfwidth-550}px; margin-top: ${50 + (Math.floor(i/2) * 450)}px;`);
         allHTML += i%2 == 0 ? "" : "<br>";
     }
     return allHTML;
