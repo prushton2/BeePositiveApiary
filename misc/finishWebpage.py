@@ -104,10 +104,15 @@ for pageInfo in pages:
 
                 newPage[index] = f"<button id=\"{function}\" class=\"{css}\">{buttonText}</button>"
 
-
-            # Delete footer and insert script tags
             if("<footer class=" in element):
                 newPage = newPage[0:index-2]
+                newPage.append("</body>")
+                newPage.append("</html>")
+
+
+            # insert script tags
+            if("</body>" in element):
+                newPage = newPage[0:index-1]
 
                 for script in scripts:
                     if(script != ""):
