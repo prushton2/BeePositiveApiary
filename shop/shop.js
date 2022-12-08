@@ -1,4 +1,3 @@
-// Requires itemInfo.js
 import * as utils from "../utils.js"
 
 //initialize the shopping list
@@ -89,7 +88,7 @@ export async function createHTML(itemID, side, topMargin) { //create the html fo
     let itemImage = subProducts[0]["imageURL"]
 
     let htmlString = `
-		<table style="position: absolute; left: 50%; transform: translate(${side}, 0%); top: ${topMargin}px">
+		<table style="position: absolute; left: 50%; transform: translate(${side}, 0%); top: ${topMargin}px;">
 			<tr style="text-align: left;">
 				<td style="width: 180px; height: 180px;"> <img src="${itemImage}" style="width:170px;" id="Image of ${itemID}"> </td>
 				<td> <label>${item["name"]}</label> <br> <label>${item["description"]}</label> </td>
@@ -115,13 +114,12 @@ export async function createHTML(itemID, side, topMargin) { //create the html fo
 
 export async function createAllHTML(items) {
     let allHTML = "<br><br>";
-    let halfwidth = document.documentElement.clientWidth/2;
     for (let i = 0; i<items.length; i++) {
-		let side = i%2 == 0 ? "10%" : "-110%";
-		allHTML += await createHTML(items[i], side, 50 + (Math.floor(i/2) * 450));//`position: absolute; ${side}: ${halfwidth-550}px; margin-top: ${50 + (Math.floor(i/2) * 450)}px;`);
+		let side = i%2 == 0 ? "-110%" : "10%";
+		allHTML += await createHTML(items[i], side, 50 + (Math.floor(i/2) * 450));
         allHTML += i%2 == 0 ? "" : "<br>";
     }
-    return allHTML;
+    return allHTML + "<br><br>";
 }
 
 export function addEventListeners(items) {
